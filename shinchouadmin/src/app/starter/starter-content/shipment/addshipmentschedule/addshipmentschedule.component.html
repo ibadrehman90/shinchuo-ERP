@@ -1,0 +1,189 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Shipment Schedule &nbsp;&nbsp;
+              <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+          </h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Vessels</b> <button class="btn btn-danger" (click)="senttovessel()">Add Vessel</button></p>
+              <hr/>
+              <input type="text" id="filtervessel" class="form-control" (keyup)="filterVessel($event)" placeholder="Filter Vessel"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Vessel</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of vessel; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.vesselname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addvessel($event, vl.ys_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next2" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Voyages</b> <button class="btn btn-danger" (click)="senttovoyage()">Add Voyage</button></p>
+              <hr/>
+              <input type="text" id="filtervoyage" class="form-control" (keyup)="filterVoyage($event)" placeholder="Filter Voyage"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Voyage</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of voyage; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.voyage}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addvoyage($event, vl.v_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next3" class="nextgroup">
+
+              <div class="col-xs-12">
+                <h3>Route # 1</h3>
+                <hr/>
+              </div>
+    
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Origin Port</label>
+    
+                <div class="col-sm-8">
+                  <select class="form-control" id="origin1" (change) = "ChangeSelect()">
+                    <option value="">Select Port</option>
+                    <option *ngFor="let pt of ports" value="{{pt.port_id}}">{{pt.port}}</option>
+                  </select>
+                </div>
+              </div>
+    
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">ETD</label>
+    
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="etd1" (change) = "ChangeSelect()" name="bto" type="text" class="form-control pull-right" placeholder="ETD">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Destination Port</label>
+    
+                <div class="col-sm-8">
+                  <select class="form-control" id="dest1"  (change) = "ChangeSelect()">
+                    <option value="">Select Port</option>
+                    <option *ngFor="let pt of ports" value="{{pt.port_id}}">{{pt.port}}</option>
+                  </select>
+                </div>
+              </div>
+    
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">ETA</label>
+    
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="eta1" name="bto" type="text" class="form-control pull-right" placeholder="ETA">
+                  </div>
+                </div>
+              </div>
+    
+              
+          </div>
+  
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-3">
+            <button *ngIf="divId == 3" class="btn btn-danger" (click) = "Addroute()">Add Route</button>  
+          </div>
+          <div class="col-xs-9 text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Vessel</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.selectedVessel}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Voyage</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.selectedVoyage}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Routes</label>
+
+              <div id="represent" class="col-sm-12">
+              
+              </div>
+            </div>
+            
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

@@ -1,0 +1,82 @@
+<section class="content">
+
+  <div class="row">
+
+
+      <div class="col-md-12 form-group">
+
+          <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Yard Services Registration  &nbsp;&nbsp;
+                    <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+                </h3>
+                <hr/>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+
+                  <div class="col-xs-6">
+                      <label class="col-sm-12 control-label">Registered Services</label>
+                      <div class="tablecontainer1 col-sm-12">
+                      <table id="example1" class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.No.</th>
+                            <th>Yard Service</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pt of yardservice; let ind = index">
+                            <td>{{ind + 1}}</td>
+                            <td>{{pt.servicename}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+
+                  <div class="form-group col-xs-12 topdivspace">
+                    <label class="col-sm-12 control-label">Yard Service</label>
+
+                    <div class="col-sm-12">
+                      <input name="servicename" [(ngModel)] = "model.servicename" type="text" class="form-control" placeholder="Enter Yard Service">
+                    </div>
+
+                   
+                    <div class="col-sm-12 text-right topspace">
+                      <button class="btn btn-danger" (click)="addservice()">Save</button>
+                    </div>
+
+                  </div>
+                  </div>
+                
+              <div class="col-xs-6">
+                  <label class="col-sm-12 control-label">Yard Services - Pending Approval</label>
+                  <div class="tablecontainer1 col-sm-12">
+                  <table id="example1" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Yard Service</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let pt of pendingservices; let ind = index">
+                        <td>{{ind + 1}}</td>
+                        <td>{{pt.servicename}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+              </div>
+
+                
+                          
+              </div>
+              <!-- /.box-body -->
+            </div>
+      </div>
+
+
+    
+    </div>
+</section>

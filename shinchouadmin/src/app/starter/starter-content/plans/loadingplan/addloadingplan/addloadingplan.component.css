@@ -1,0 +1,52 @@
+.control-label
+{
+    text-align: left;
+}
+
+.btn
+{
+    border-radius: 0px;
+    padding:5px 10px;
+    margin:10px;
+}
+
+label
+{
+    padding-top:10px;
+}
+
+.nextgroup
+{
+    display:none;
+}
+
+.tabcontainer
+{
+    height:250px;
+    overflow: scroll;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+
+.btnself
+{
+    border:none;
+    outline: 0px;
+    padding:5px 10px;
+}
+
+#filteryard, #filter, #filterdyard, #filteragency, #filtervehicles
+{
+    margin-bottom:10px;
+}
+
+#summarybox .form-group
+{
+    margin-bottom: 0px;
+}
+
+.morespace div
+{
+    padding:1px;
+    margin:0px;
+}

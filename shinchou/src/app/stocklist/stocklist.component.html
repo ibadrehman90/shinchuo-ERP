@@ -1,0 +1,41 @@
+
+<div class="container">
+  <div class="row col-md-9 custyle">
+      <h3><i class="fa fa-bell fa-fw"></i>Stock List</h3>
+  <table class="table table-responsive text-center">
+  <thead>
+      <tr>
+          <th>S.No.</th>
+          <th>Sheet</th>
+          <th>Images</th>
+          <th>Model & Year</th>
+          <th *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">Chassis Frame</th>
+          <th *ngIf="statArray.enginecc == 1 || statArray.equipment == 1 || userrole == 'salesuser'"><span *ngIf="statArray.enginecc == 1 || userrole == 'salesuser'">Engine CC</span> <span *ngIf="statArray.equipment == 1 || userrole == 'salesuser'">& Equipment</span></th>
+          <th *ngIf="statArray.mileage == 1 || statArray.color == 1 || userrole == 'salesuser'"><span *ngIf="statArray.mileage == 1 || userrole == 'salesuser'">Mileage</span> <span *ngIf="statArray.color == 1 || userrole == 'salesuser'">& Color</span></th>
+          <th>Price</th>
+      </tr>
+  </thead>
+          <tr *ngFor="let list of myStock;let cnt = index">
+              <td>{{cnt + 1}}</td>
+              <td><a [href]="getImagelink(list.images,0)" [attr.data-lightbox]="getlabel(list.s_id)" data-title="{{list.make}} - {{list.model}}">
+                <img class="img-responsive" [src]="getImagelink(list.images,0)">
+              </a>
+                <div *ngIf="list.newsheet != null && list.newsheet != undefined && list.newsheet != '' && list.newsheet != 'null'">
+                <a style="display: none;" *ngFor="let imggs of getImagelink(list.newsheet, -1)" [href]="imggs" [attr.data-lightbox]="getlabel(list.s_id)" data-title="{{list.make}} - {{list.model}}">
+                    <img class="img-responsive" [src]="imggs">
+                </a>
+                </div>
+            </td>
+              <td><a *ngFor="let imggs of getImagelink(list.cimages,-1) | slice:1; let ent = index" [href]="imggs" [attr.data-lightbox]="getlabel(list.s_id)" data-title="{{list.make}} - {{list.model}}">
+                <img *ngIf="ent == 0" class="img-responsive" [src]="imggs">
+              </a></td>
+              <td>{{list.make}} - {{list.model}} <br/> {{list.year}}</td>
+              <td *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">{{list.prefix}}</td>
+              <td *ngIf="statArray.enginecc == 1 || statArray.equipment == 1 || userrole == 'salesuser'"><span *ngIf="statArray.enginecc == 1 || userrole == 'salesuser'">{{list.enginecc}} cc</span> <span *ngIf="statArray.equipment == 1 || userrole == 'salesuser'">& {{list.transmission}}</span></td>
+              <td *ngIf="statArray.mileage == 1 || statArray.color == 1 || userrole == 'salesuser'"><span *ngIf="statArray.mileage == 1 || userrole == 'salesuser'">{{list.mileage}} km</span> <br/> <span *ngIf="statArray.color == 1 || userrole == 'salesuser'">{{list.color}}</span></td>
+              <td *ngIf="list.showsellprice == '1' && list.sellingprice != null">$ {{FormatCurr(list.sellingprice)}}</td>
+              <td *ngIf="list.showsellprice == '0'">N/A</td>
+          </tr>         
+  </table>
+  </div>
+</div>

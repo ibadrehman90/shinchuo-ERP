@@ -1,0 +1,101 @@
+<section class="content">
+
+  <div class="row">
+  <div class="col-md-12 form-group">
+    <div class="col-md-2">
+        <label class="form-control">Select Sales User</label>
+    </div>
+    <div class="col-md-4">      
+      <select class="form-control" (change) = "SelectSalesUser($event)" id="saleuser">
+        <option value="">Select Sales User</option>
+        <option *ngFor="let user of Users" value="{{user.username}}">{{user.username}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+  <div class="row">
+    
+  <div class="col-xs-12">
+  <div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Stock Sold List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>S.NO</th>
+        <th>Sheet</th>
+        <th>Images</th>
+        <th>USER</th>
+        <th>LOT</th>
+        <th>AUCTION</th>
+        <th>DATE</th>  
+        <th>MODEL</th>
+        <th>YEAR</th>      
+        <th>PREFIX</th>
+        <th>LANDED VALUE</th>
+        <th>PURCHASE AMOUNT</th>
+        <th>REMARKS</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of purchased; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td><a [href]="getImagelink(p.images,0)" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+        <img class="img-responsive" [src]="getImagelink(p.images,0)">
+      </a>
+      <div *ngIf="p.newsheet != null && p.newsheet != undefined && p.newsheet != '' && p.newsheet != 'null'">
+        <a style="display: none;" *ngFor="let imggs of getImagelink(p.newsheet, -1)" [href]="imggs" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+            <img class="img-responsive" [src]="imggs">
+        </a>
+      </div>
+      </td>
+      <td><a *ngFor="let imggs of getImagelink(p.cimages, -1) | slice:1; let ent = index" [href]="imggs" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+          <img *ngIf="ent == 0" class="img-responsive" [src]="imggs">
+        </a></td>
+        <td>
+          <p>{{p.client}}</p>
+        </td>
+        <td>
+          <p>{{p.lot}}</p>
+        </td>
+        <td>
+          <p>{{p.auction}}</p>
+        </td>
+        <td>
+          <p>{{p.adate | slice:0:10}}</p>
+        </td>
+        <td>
+          <p>{{p.make}} - {{p.model}}</p>
+        </td>
+        <td>
+          <p>{{p.year}}</p>
+        </td>
+        <td>
+          <p>{{p.prefix}}</p>
+        </td>
+        <td>
+          <p>NZ$ {{FormatCurr(p.landedvalue)}}</p>
+        </td>
+        <td>
+          <p>¥ {{FormatCurr(p.bidprice)}}</p>
+        </td> 
+        <td>
+          <p>{{p.remark}}</p>
+        </td>        
+      </tr>               
+      </tbody>       
+    </table>
+  
+  </div>
+  <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>

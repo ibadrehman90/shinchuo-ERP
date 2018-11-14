@@ -1,0 +1,101 @@
+<div class="modal modal-success fade" id="modal-success">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Send Reminder</h4>
+        </div>
+        <div class="modal-body">
+          <div class="box-body">
+            
+              <table class="table text-center">
+                <tr>
+                  <th>Model</th>
+                  <th>Service Name</th>
+                  <th>Inspection</th>
+                  <th>Yard</th>
+                </tr>
+                <tr>
+                  <td>{{model.make}} - {{model.model}}</td>
+                  <td>{{model.servicename}}</td>
+                  <td>{{model.inspection}}</td>
+                  <td>{{model.yardname}}</td>
+                </tr>
+              </table> 
+              <br/>
+              <div class="form-group col-xs-12">        
+                <input type="email" name="emails" multiple [(ngModel)] = "model.emails" placeholder="Enter Emails" class="form-control" />   
+                <p class="italinote">Enter Multiple Emails with Comma Seperation (e.g. abc@abc.com, abc1@abc.com)</p>
+             </div>
+             <div class="form-group col-xs-12">
+                <textarea name="remarks" [(ngModel)] = "model.remarks" placeholder="Enter Remarks" class="form-control"></textarea>
+             </div> 
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "RemindOrder()">Send Email</button>
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<section class="content">
+  <div class="row">
+
+    <div class="col-xs-12">
+  <div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Inspection Orders&nbsp;</h3>
+    <button class="btn btn-danger" (click) = "neworder()">Create New Order</button>
+  </div>
+  <!-- /.box-header -->
+  <div id="scheduleship" class="box-body">
+
+      <table id="example1" class="display table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>Sno</th>
+            <th>Chassis</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>  
+            <th>Inspection</th>        
+            <th>Service</th>
+            <th>Yard</th>
+            <th>Requested On</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let bs of inspectionorders; let ind = index">
+            <td>{{ind + 1}}</td>
+            <td>{{bs.prefix}}</td>
+            <td>{{bs.make}}</td>       
+            <td>{{bs.model}}</td>       
+            <td>{{bs.year}}</td>
+            <td>{{bs.inspection}}</td>
+            <td>{{bs.servicename}}</td>
+            <td>{{bs.yardname}}</td>
+            <td>{{bs.reqon}}</td>
+            <td>{{bs.status == 1 ? 'Completed' : 'Pending'}}</td>
+            <td>
+              <button class="btn btn-danger" (click) = "DetailOrder(bs.inso_id)">View</button>
+              <button class="btn btn-black" data-toggle="modal" data-target="#modal-success" (click) = "SelectInspectID(bs.inso_id)">Send/Remind</button>
+            </td>
+            </tr>               
+          </tbody>       
+        </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

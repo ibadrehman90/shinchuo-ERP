@@ -1,0 +1,119 @@
+<section class="content">
+  <div class="row">
+
+      <div class="col-xs-12">
+          <div class="box box-default box-solid collapsed-box">
+              <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                  </button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body" style="display: none;">   
+                    <div class="form-group col-xs-4">
+                        <input name="orderno" [(ngModel)] = "model.orderno" type="text" class="form-control" placeholder="Order No">
+                    </div>
+                   <div class="form-group col-xs-4">
+                      <div class="input-group date">
+                          <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                          </div>
+                          <input name="ofrom" type="text" class="form-control pull-right" id="datepicker" placeholder="Order From">
+                      </div>
+                   </div>
+                   <div class="form-group col-xs-4">
+                      <div class="input-group date">
+                          <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                          </div>
+                          <input name="oto" type="text" class="form-control pull-right" id="datepicker1" placeholder="Order Until">
+                      </div>
+                   </div>
+                   <div class="form-group col-xs-4">
+                     <select id="trans" class="form-control">
+                      <option value="">Select Transporter</option>
+                      <option *ngFor="let tc of transporters" value="{{tc.sname}}">{{tc.sname}}</option>
+                    </select>
+                   </div>   
+                   <div class="form-group col-xs-4">
+                      <select id="pick" class="form-control">
+                       <option value="">Select Pickup Locations</option>
+                       <option *ngFor="let tc of auctions" value="{{tc.aname}}">{{tc.aname}}</option>
+                     </select>
+                    </div>
+                    <div class="form-group col-xs-4">
+                     <select id="drop" class="form-control">
+                      <option value="">Select Dropoff Location</option>
+                      <option *ngFor="let tc of yards" value="{{tc.name}}">{{tc.name}}</option>
+                    </select>
+                   </div>                           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer text-center">
+                  <button class="btn btn-danger" (click) = "SearchOrder()">Search</button>
+                  <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                </div>
+            </div>
+      </div>
+
+<div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Transport Orders List &nbsp;</h3>
+    <button class="btn btn-danger" (click) = "neworder()">Create New Order</button>
+    <br/><br/>
+    <button class="btn btn-black" disabled>Active Orders</button>
+    <button class="btn btn-danger" (click) = "pastorder()">Past Orders</button>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Order No</th>
+        <th>Order Date</th>
+        <th>Transport Company</th>
+        <th>Transport Telephone</th>  
+        <th>Pickup Location</th>      
+        <th>Dropoff Location</th>
+        <th>Order Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of Orders; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{order.orderno}}</td>
+        <td>{{order.orderdate}}</td>
+        <td>{{order.sname}}</td>
+        <td>{{order.tel}}</td>
+        <td>{{order.aucname}}</td>
+        <td>{{order.yname}}</td> 
+        <td>
+          <p (dblclick) = "editable($event)" [innerHTML] = "order.ostatus == 1 ? 'Completed' : 'Pending'"></p>
+          <select value="{{order.ostatus}}" (blur) = "editselectremove($event,'ostatus',order.orderno)" class="invsbleitem">
+            <option value="0">Pending</option>
+            <option value="1">Completed</option>
+          </select>          
+        <td>
+          <button class="btn btn-danger" (click) = "UpdateOrders(order.orderno)">Detail</button>
+          <a href="http://admin.shinchuo-test2.com/orderreport/{{order.orderno}}?out=XLS" target="_blank"><button class="btn btn-warning">XLS</button></a>
+          <a href="http://admin.shinchuo-test2.com/orderreport/{{order.orderno}}?out=PDF"  target="_blank"><button class="btn btn-black">PDF</button></a>
+        </td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

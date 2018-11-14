@@ -1,0 +1,165 @@
+#content_body {
+    display: block;
+    transition: all .3s cubic-bezier(.55,0,.1,1);
+}
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+    border-bottom: none;
+    background-color: black;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+}
+
+.panel-primary>.panel-heading{
+    background-color: black;
+}
+
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+    color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+	color: #fff;
+	background-color: #ed3338;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+	color: #285363;
+	background-color: #fff;
+	border-color: #285363;
+	border-bottom-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
+    background-color: #285363;
+    border-color: #285363;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: #fff;   
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: #285363;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    background-color: #285363;
+}
+
+.topspace
+{
+margin-bottom:20px;
+}
+.shadowbox
+{
+    box-shadow: 0 2px 3px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding:0px;
+}
+.carlistbox .img-responsive
+{
+    width:80%;
+    height:106px;
+}
+.carlistbox .clbox{
+    margin:0px;
+    padding:0px;
+}
+
+#viewbtn{
+    width:100px;
+    background-color:black;
+    border:black;
+    margin-bottom:10px;
+    float: right;
+}
+
+#viewbtn:hover{
+    background-color:#ed3338;
+}
+.carlistbox .mainprice
+{
+    background:#ed3338;
+    padding:10px;
+    width:100px;
+    right:0px;
+    color:white;
+}
+
+.featurebox .table td:first-child
+{
+    color:#666;
+}
+
+.featurebox .table td
+{
+    border-top:none;
+    border-bottom:1px solid #ccc;
+    padding-bottom:20px;
+    padding-left:0px;
+}
+
+.auctVenu{
+    font-size: small;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+
+.detailHeadin{
+    font-size: small;
+    white-space: nowrap;
+}
+
+#errormsga{
+ display: none;
+}
+#errormsgb{
+    display: none;
+   }
+   #errormsgc{
+    display: none;
+   }
+   #errormsgd{
+    display: none;
+   }
+   .wishlist
+{
+    margin:0px;
+    margin-bottom:6px;
+}
+
+.wishbadge
+{
+border:1px solid #ed3338; 
+background:white;
+color:black;
+font-size:10px;
+}
+
+.carlistbox .wishlist
+{
+    margin-top:0px;
+    margin-bottom: 2px;
+}
+
+h3{
+    margin:5px;
+    margin-bottom:20px;
+}
+.panel-body
+{
+    height:400px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

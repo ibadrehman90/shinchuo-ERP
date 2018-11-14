@@ -1,0 +1,211 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Booking Agency &nbsp;&nbsp;
+              <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+          </h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Name</label>
+  
+              <div class="col-sm-8">
+                <input name="bagencyname" [(ngModel)] = "model.bagencyname" type="text" class="form-control" placeholder="Enter Booking Agency Name">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Branch</label>
+  
+              <div class="col-sm-8">
+                <input name="branch" [(ngModel)] = "model.branch" type="text" class="form-control" placeholder="Enter Branch">
+              </div>
+            </div>
+          </div>
+  
+          <div id="next2" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Address</label>
+  
+              <div class="col-sm-8">
+                <input name="address" [(ngModel)] = "model.address" type="text" class="form-control" placeholder="Enter Address">
+              </div>
+            </div>         
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Telephone</label>
+  
+              <div class="col-sm-8">
+                <input name="tel" [(ngModel)] = "model.tel" type="text" class="form-control" placeholder="Enter Telephone">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Fax</label>
+  
+              <div class="col-sm-8">
+                <input name="fax" [(ngModel)] = "model.fax" type="text" class="form-control" placeholder="Enter Fax">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Email</label>
+  
+              <div class="col-sm-8">
+                <input name="email" [(ngModel)] = "model.email" type="text" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div>
+  
+          <div id="next3" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <h3>Representative # 1</h3>
+              <hr/>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Representative</label>
+  
+              <div class="col-sm-8">
+                <input id="rep1" name="rep1" [(ngModel)] = "model.rep1" type="text" class="form-control" placeholder="Enter Representative">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Mobile</label>
+  
+              <div class="col-sm-8">
+                <input id="mob1" name="mob1" [(ngModel)] = "model.mob1" type="text" class="form-control" placeholder="Enter Mobile">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Email</label>
+  
+              <div class="col-sm-8">
+                <input id="remail1" name="remail1" [(ngModel)] = "model.remail1" type="text" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div>
+  
+          <div id="next4" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Booking Agency Services</b> <button class="btnself btn-danger" (click)="senttobagencyservices()">Add Service</button></p>
+              <hr/>
+              <input type="text" id="filterbagencyservice" class="form-control" (keyup)="filterBAgencyService($event)" placeholder="Filter Services"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Service</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pt of bagencyservice; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{pt.servicename}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addservice($event, pt.ys_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-3">
+           <button *ngIf="divId == 3" class="btn btn-danger" (click) = "Addrep()">Add Rep</button>  
+          </div>
+          <div class="col-xs-9 text-right">
+              <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+              <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button>      
+            
+              <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+              <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>               
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Name</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.bagencyname}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Branch</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.branch}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Address</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.address}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Contact</label>
+  
+              <div class="col-sm-12">
+                <p>Tel : {{model.tel}} &nbsp;&nbsp;&nbsp;&nbsp;
+                Fax : {{model.fax}}</p>
+                <p>{{model.email}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Representative</label>
+  
+              <div id="represent" class="col-sm-12">
+              
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Booking Agency Services</label>
+  
+              <div id="yardservicesum" class="col-sm-12">
+                
+              </div>
+            </div>
+            
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

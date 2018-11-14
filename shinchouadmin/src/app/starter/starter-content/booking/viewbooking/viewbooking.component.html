@@ -1,0 +1,85 @@
+<section class="content">
+    <div class="row">
+  
+      <div class="col-xs-12">
+          <div class="box box-default box-solid collapsed-box">
+              <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                  </button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body" style="display: none;">                   
+                   <div class="form-group col-xs-4">
+                      <input type="text" name="bookingno" [(ngModel)] = "model.bookingno" placeholder="Booking No" class="form-control" />
+                   </div>
+                   <div class="form-group col-xs-4">
+                      <input type="text" name="yardname" [(ngModel)] = "model.yardname" placeholder="Yard" class="form-control" />
+                   </div>
+                   <div class="form-group col-xs-4">
+                      <input type="text" name="vesselname" [(ngModel)] = "model.vesselname" placeholder="Vessel" class="form-control" />
+                   </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer text-center">
+                  <button class="btn btn-danger" (click) = "SearchForm()">Search</button>
+                  <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                </div>
+            </div>
+      </div>
+  
+  
+      <div class="col-xs-12">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Bookings List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      
+      <table id="example1" class="display table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Sno</th>
+          <th>Booking #</th>
+          <th>Yard</th>
+          <th>Booking Agency</th>
+          <th>Vessel</th>        
+          <th>Voyage</th>
+          <th>Type</th>
+          <th>Reserved</th>
+          <th>Cut Off Date</th>
+          <th>Discharge Port</th>
+          <th>ETA</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let bagency of Bookings; let ind = index">
+          <td>{{ind + 1}}</td>
+          <td>{{bagency.bookingno}}</td>
+          <td>{{bagency.yard}}</td>
+          <td>{{bagency.bagency}}</td>
+          <td>{{bagency.vessel}}</td>
+          <td>{{bagency.voyage}}</td>
+          <td>{{bagency.shipmentype}}</td>
+          <td>{{bagency.qty}}</td>
+          <td>{{bagency.dco}}</td>
+          <td>{{bagency.dest}}</td>
+          <td>{{bagency.eta}}</td>
+          <td><button class="btn btn-black" (click) = "UpdateBooking(bagency.b_no)">Detail/Edit</button></td>
+        </tr>               
+        </tbody>       
+      </table>
+   
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>

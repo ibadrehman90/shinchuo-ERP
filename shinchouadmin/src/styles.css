@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+body
+{
+    margin:0px;
+    padding:0px;
+}  
+
+
+.datepicker
+{
+    z-index:9999 !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even)
+{
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd)
+{
+    background-color: rgba(140, 184, 255, 0.6) !important;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
+{
+    border:0.1px solid rgba(0,0,0, 0.2) !important;
+}
+
+.btn-red
+{
+    background: #ed3338;
+    color:white;
+}
+
+.btn-red:hover
+{
+    color:white !important;
+}
+
+.btn-black
+{
+    background:black;
+    color:white;
+}
+
+.btn-black:hover{
+    background: rgba(26, 25, 25, 0.8);
+    color:white !important;
+}
+
+.btn-black:focus{
+    color:white !important;
+}
+
+input:checked + .slider {
+    background-color: #ed3338 !important;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #ed3338 !important;
+}
+
+/*table tbody, table thead
+{
+    display: block;
+}
+
+table th, table td
+{
+    width:75px;
+}*/
+

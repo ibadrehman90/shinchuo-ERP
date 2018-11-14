@@ -1,0 +1,16 @@
+.sortable {
+    background: #eee;
+    border-radius: 0.25rem;
+    min-height: 40px;
+  }
+
+  .sortable:hover
+  {
+    cursor:move;
+  }
+
+  .btn-black
+  {
+    background: black !important;
+    color:white;
+  }

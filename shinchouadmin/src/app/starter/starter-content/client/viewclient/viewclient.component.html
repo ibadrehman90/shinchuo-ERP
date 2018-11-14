@@ -1,0 +1,114 @@
+<div class="modal modal-info fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Change Password for User "{{passuser}}"</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <div class="form-group col-xs-12">
+                <input type="password" name="pass" [(ngModel)] = "model.pass" placeholder="New Password" class="form-control" />
+             </div>
+             <div class="form-group col-xs-12">
+                <input type="password" name="cpass" [(ngModel)] = "model.cpass" placeholder="Confirm Password" class="form-control" />
+             </div>         
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline" (click) = "ChangePassword()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<section class="content">
+  <div class="row">
+
+    <div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Clients List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Mobile No.</th>
+        <th>Address</th>          
+        <th>Country/City</th>
+        <th>Port</th>
+        <th>Company</th>
+        <th>DOR</th>
+        <th *ngIf="userrole == 'salesuser'">Last Logged In</th>
+        <th *ngIf="userrole == 'admin'">Calculator</th>
+        <th *ngIf="userrole == 'admin'">Sales User</th>
+        <th *ngIf="userrole == 'admin'">Bid Currency</th>
+        <th>Show LCC</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cl of Clients; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{cl.username}}</td>
+        <td>{{cl.bname}}</td>
+        <td>{{cl.email}}</td>       
+        <td>{{cl.mob}}</td>       
+        <td>{{cl.address}}</td>
+        <td>{{cl.country}}/{{cl.city}}</td>
+        <td>{{cl.port}}</td>
+        <td>{{cl.company}}</td>
+        <td>{{cl.dor}}</td>
+        <td *ngIf="userrole == 'salesuser'">{{cl.llogin}}</td>
+        <td *ngIf="userrole == 'admin'">
+          <select class="form-control" (change) = "UpdateSelect($event,cl.username, 'calculator')">
+            <option *ngFor="let c of Calculator" value="{{c.cname}}" [selected]="c.cname == cl.calculator">{{c.cname}}</option>
+          </select>
+        </td>
+        <td *ngIf="userrole == 'admin'">
+          <select class="form-control" (change) = "UpdateSelect($event,cl.username, 'salesuser')">
+            <option value="">No Sales User</option>
+            <option *ngFor="let s of SalesUser" value="{{s.username}}" [selected]="s.username == cl.salesuser">{{s.username}} ({{s.email}})</option>
+          </select>
+        </td>
+        <td *ngIf="userrole == 'admin'"><select class="form-control" (change) = "UpdateSelect($event,cl.username, 'currency')">
+          <option [selected]="cl.currency == 'JPY'">JPY</option>
+          <option [selected]="cl.currency == 'NZD'">NZD</option>
+        </select></td>
+        <td><label class="switch">
+          <input type="checkbox" [attr.checked]="cl.showlcc == '1' ? 'checked' : null" (change) = "UpdateStatus($event,cl.username)">
+          <span class="slider round"></span>
+        </label></td>
+        <td><label class="switch">
+          <input type="checkbox" [attr.checked]="cl.status == '1' ? 'checked' : null" (change) = "UpdateActiveStatus($event,cl.username)">
+          <span class="slider round"></span>
+        </label></td>
+        <td>
+          <button *ngIf="userrole == 'admin'" class="btn btn-black" (click) = "Detail(cl.username)">Detail</button>&nbsp;
+          <button class="btn btn-danger" (click) = "UpdateClients(cl.username)">Edit</button>&nbsp;
+          <button *ngIf="userrole == 'salesuser'" class="btn btn-warning">Send Email</button>&nbsp;
+          <button *ngIf="userrole == 'salesuser'" class="btn btn-black" data-toggle="modal" data-target="#modal-info" (click) = "SelectUser(cl.username)">Reset Pwd</button>
+        </td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

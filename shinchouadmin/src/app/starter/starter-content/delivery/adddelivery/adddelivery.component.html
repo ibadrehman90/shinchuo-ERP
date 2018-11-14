@@ -1,0 +1,312 @@
+<div class="modal modal-warning fade" id="modal-warning">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Select Vehicles</h4>
+      </div>
+      <div class="modal-body">
+          <section class="content">
+              <div class="row">
+            
+                <div class="col-xs-12">
+                    <div class="box box-default box-solid collapsed-box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+            
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                          <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">                  
+                             
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="serial" [(ngModel)] = "model.serial" placeholder="Chassis" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <select class="form-control" id="auctioncombo">
+                                  <option value="">Select Auction</option>
+                                  <option *ngFor="let auction of Auctions" value="{{auction.aname}}">{{auction.aname}}</option>
+                                </select>
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <select class="form-control" id="yardcombo">
+                                    <option value="">Select Yard</option>
+                                    <option *ngFor="let yard of yards" value="{{yard.name}}">{{yard.name}}</option>
+                                </select>
+                             </div>                                               
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <button class="btn btn-danger" (click) = "SearchPurchased()">Search</button>
+                            <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                          </div>
+                      </div>
+                </div>
+            
+            
+                <div class="col-xs-12">
+                  <div class="box">
+                  <div class="box-header">
+                    <h3 class="box-title">Yard Vehicles List</h3>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    
+                    <table id="example1" class="table">
+                      <thead>
+                      <tr>
+                        <th></th>
+                        <th>Sno</th>
+                        <th>S-Code</th>
+                        <th>Chassis No</th>
+                        <th>Auction Date</th>
+                        <th>Auction Name</th>
+                        <th>DAI</th>
+                        <th>Lot</th>
+                        <th>Plate Serial</th>
+                        <th>Client</th>        
+                        <th>Destination</th>
+                        <th>Yard</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let vehicle of VehicleList; let ind = index">
+                        <td>
+                            <label class="containerf">
+                              <input type="checkbox" class="checkmarkS" (change) = "SelectList($event,vehicle.p_id)">
+                              <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>{{ind + 1}}</td>
+                        <td>{{vehicle.s_code}}</td>
+                        <td>{{vehicle.serial}}</td>
+                        <td>{{vehicle.adate | slice:0:10}}</td>
+                        <td>{{vehicle.auction}}</td>
+                        <td>{{vehicle.dai}}</td>
+                        <td>{{vehicle.lot}}</td>    
+                        <td>{{vehicle.plateserial}}</td>    
+                        <td>{{vehicle.client}}</td>
+                        <td>{{vehicle.port}}</td>
+                        <td>{{vehicle.yardname}}</td>              
+                      </tr>               
+                      </tbody>       
+                    </table>
+                
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
+            </div>
+            </section>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" (click) = "AddOrder()">Apply</button>
+          <button class="btn btn-black" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
+<section class="content">
+<div class="row">
+  <div class="col-xs-12">
+
+<div class="box box-info">
+<div class="box-header with-border">
+  <h3 class="box-title">Add New Delivery</h3>
+</div>
+
+<form class="form-horizontal">
+  <div class="box-body">
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Delivery No.</label>
+
+      <div class="col-sm-8">
+        <input name="orderno" [(ngModel)] = "model.orderno" type="text" class="form-control" placeholder="Order No." disabled>
+      </div>
+    </div>
+    <div class="form-group col-xs-6">
+        <label class="col-sm-4 control-label">Tracking No.</label>
+  
+        <div class="col-sm-8">
+          <input name="trackingno" [(ngModel)] = "model.trackingno" type="text" class="form-control" placeholder="Tracking No.">
+        </div>
+      </div>
+
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Delivery Date</label>
+
+      <div class="col-sm-8">
+          <div class="input-group date">
+              <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+              </div>
+              <input name="bto" type="text" class="form-control pull-right" id="datepicker" placeholder="Order Date">
+          </div>
+      </div>  
+    </div> 
+
+    <div class="form-group col-xs-6">
+        <label class="col-sm-4 control-label">Time Slot</label>
+  
+        <div class="col-sm-8">
+          <input name="timeslot" [(ngModel)] = "model.timeslot" type="text" class="form-control" placeholder="Time Slot">
+        </div>
+    </div>
+    
+    <div class="form-group col-xs-6">
+        <label class="col-sm-4 control-label">From</label>
+
+        <div class="col-sm-8">
+          <select class="form-control" id="aucentry">
+            <option value="">Select Auction</option>
+            <option *ngFor="let auction of Auctions" value="{{auction.a_id}}">{{auction.aname}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group col-xs-6">
+        <label class="col-sm-4 control-label">Delivery Company</label>
+
+        <div class="col-sm-8">
+          <select class="form-control" id="tcompentry">
+            <option value="">Select Transport Company</option>
+            <option *ngFor="let tc of tcompany" value="{{tc.s_id}}">{{tc.sname}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Remarks</label>
+    
+          <div class="col-sm-8">
+            <input type="text" name="remarks" [(ngModel)] = "model.remarks" class="form-control" placeholder="Remarks"/>
+          </div>
+      </div>
+  </div>
+ 
+  <div class="box-footer text-center">
+    <!--<button class="btn btn-danger" (click) = "NewOrder()">New Order</button>-->
+    <button id="ordlist" class="btn btn-black" data-toggle="modal" data-target="#modal-warning" (click) = "LoadVehicles()">Select Vehicles</button>     
+  </div>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<section class="content container-fluid" id="orderLists">
+<div class="row">
+  <div class="col-xs-12">
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Delivery Vehicle List</h3>
+          </div>
+
+    <table id="example2" class="table">
+        <thead>
+        <tr>
+          <th>Sno</th>
+          <th>S-Code</th>
+          <th>Chassis No</th>
+          <th>Auction Date</th>
+          <th>Auction Name</th>
+          <th>DAI</th>
+          <th>Lot</th>
+          <th>Plate Serial</th>
+          <th>Client</th>        
+          <th>Destination</th>
+          <th>Yard</th>
+          <th>Items</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let vehicle of orderlists; let ind = index">
+          <td>{{ind + 1}}</td>
+          <td>{{vehicle.s_code}}</td>
+          <td>{{vehicle.serial}}</td>
+          <td>{{vehicle.adate | slice:0:10}}</td>
+          <td>{{vehicle.auction}}</td>
+          <td>{{vehicle.dai}}</td>
+          <td>{{vehicle.lot}}</td>    
+          <td>{{vehicle.plateserial}}</td>    
+          <td>{{vehicle.client}}</td>
+          <td>{{vehicle.port}}</td>
+          <td>{{vehicle.yardname}}</td> 
+          <td>
+
+            <label>
+              <input id="noplatecheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)"/> No Plate
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="bookcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Book
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="navicdcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Navi Cd
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="naviremotecheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Navi Remote
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="nutlockcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Nut Lock
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="knobcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Knob
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="othercheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Other
+            </label>
+            <br/>
+            
+            <label>
+              <input id="tohoncheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Tohon
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="keyscheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Keys
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="carremotekeycheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Car Remote Key
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="sdcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> SD
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="mnotecheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> M Note
+            </label>
+            &nbsp;&nbsp;
+            <label>
+              <input id="monitorcheck{{vehicle.d_id}}" type="checkbox" (change) = "ResetUpdate(vehicle.d_id)" /> Monitor
+            </label>
+          </td>
+          <td>
+          <button id="updatebtn{{vehicle.d_id}}" class="btn btn-danger" (click) = "UpdateList($event, vehicle.d_id)">Update</button>
+          <button class="btn btn-black" (click) = "DeleteList(vehicle.d_id, vehicle.p_id)">Delete</button>
+          </td>             
+        </tr>               
+        </tbody>       
+      </table>
+  </div>
+  </div>
+</div>
+</section>

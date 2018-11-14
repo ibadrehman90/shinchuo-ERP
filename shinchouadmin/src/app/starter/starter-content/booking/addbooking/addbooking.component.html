@@ -1,0 +1,666 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Booking</h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Yards</b> <button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filteryard" class="form-control" (keyup)="filterYard($event)" placeholder="Filter Yards"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of yards; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.name}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectYard($event, vl.y_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next2" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Select Yard (Drayage Service)</b> <button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filterdyard" class="form-control" (keyup)="filterdYard($event)" placeholder="Filter Yards"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of drainageyards; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.yardname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectDrainageYard($event, vl.y_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next3" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Select Booking Agency</b> <button class="btn btn-danger" (click)="senttobookingagency()">Add Agency</button></p>
+              <hr/>
+              <input type="text" id="filteragency" class="form-control" (keyup)="filterBookingAgency($event)" placeholder="Filter Booking Agency"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Agency</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of bagency; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.name}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectBookingAgency($event, vl.s_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next4" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Select Shipment Schedule</b> <button class="btn btn-danger" (click)="senttoshipment()">Add Schedule</button></p>
+              <hr/>
+              <input type="text" id="filterschedule" class="form-control" (keyup)="filterSchedule($event)" placeholder="Filter Schedule"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Vessel</th>
+                <th>Voyage</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of shipschedule; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.vessel}}</td>
+                <td>{{vl.voyage}}</td>
+                <td>{{vl.originport}}<br/>{{vl.etd}}</td>
+                <td>{{vl.destport}}<br/>{{vl.eta}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectRoute($event, vl.r_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next5" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Booking No</label>
+
+              <div class="col-sm-8">
+                <input name="bookingno" [(ngModel)] = "model.bookingno" type="text" class="form-control" placeholder="Enter Booking No.">
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Booking Confirmed On</label>
+
+              <div class="col-sm-8">
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                    </div>
+                    <input id="bco" name="bco" type="text" class="form-control pull-right" placeholder="Booking Confirmed On">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Shipment Type</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="shiptype"  (change) = "ChangeShipType($event)">
+                  <option value="">Select Type</option>
+                  <option value="CONTAINER">CONTAINER</option>
+                  <option value="RORO">RORO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="next6" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Container Type</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="contype" (change) = "SelectContainerType($event)">
+                  <option value="">Select Type</option>
+                  <option value="40FTHQ">40FTHQ</option>
+                  <option value="20FTHQ">20FTHQ</option>
+                  <option value="40FT">40FT</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <label class="col-sm-12 control-label">Booking Cargo Type</label>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Action</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Vehicle</td>
+                    <td>
+                        <button class="btnself btn-danger" (click) = "SelectCargo($event, 'Vehicle')">Select</button>      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Machinery</td>
+                    <td>
+                        <button class="btnself btn-danger" (click) = "SelectCargo($event, 'Machinery')">Select</button>      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-xs-12">
+                <label class="col-sm-12 control-label">Condition</label>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Action</th>                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>New</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectCondition($event, 'New')">Select</button>      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Used</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectCondition($event, 'Used')">Select</button>      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dismantle</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectCondition($event, 'Dismantle')">Select</button>      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mixed</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectCondition($event, 'Mixed')">Select</button>      
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+
+          <div id="next7" class="nextgroup">
+              <div class="form-group col-xs-12">
+                <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-4 control-label">Qty</label>
+                <label *ngIf="ShipType == 'RORO'" class="col-sm-4 control-label">Vessel Lots Reserved</label>
+  
+                <div class="col-sm-8">
+                  <input name="qty" [(ngModel)] = "model.qty" type="number" class="form-control" placeholder="Enter Qty">
+                </div>
+              </div>
+  
+              <div id="cyodiv" class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Container Yard Opens</label>
+  
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="yopen" name="yopen" type="text" class="form-control pull-right" placeholder="Container Yard Opens">
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group col-xs-12">
+                <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-4 control-label">Container Yard Address</label>
+                <label *ngIf="ShipType == 'RORO'" class="col-sm-4 control-label">Final Destination</label>
+  
+                <div class="col-sm-8">
+                  <input name="address" [(ngModel)] = "model.address" type="text" class="form-control" placeholder="Enter Address">
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Document Cut Off</label>
+  
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="dco" name="dco" type="text" class="form-control pull-right" placeholder="Document Cut Off">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-4 control-label">Container Yard Cut Off</label>
+                <label *ngIf="ShipType == 'RORO'" class="col-sm-4 control-label">Entry Cut Off</label>
+  
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="co" name="co" type="text" class="form-control pull-right" placeholder="Cut Off">
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div id="next8" class="nextgroup">
+              <div id="confrieghtdiv" *ngIf="ShipType == 'CONTAINER'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Container Booking Freight Rate</label>
+  
+                <div class="col-sm-12">
+                  <div class="col-xs-4">
+                    <input name="freight1" id="freight1" type="text" class="form-control" placeholder="Freight">
+                  </div>
+                  <div class="col-xs-4">
+                    <input name="txt1" id="txt1" type="text" placeholder="Unit" class="form-control">
+                  </div>
+                  <div class="col-xs-4">
+                    <input name="curr1" id="curr1" type="text" placeholder="Currency" class="form-control">
+                  </div>
+                  <br/><br/>
+                </div>     
+              </div>
+              
+              <div id="rorofrieghtdiv" *ngIf="ShipType == 'RORO'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">RORO Booking Freight Rate</label>
+  
+                <div class="morespace">
+                  <div class="col-sm-12">
+                    <div class="col-xs-2">
+                      <input name="freight1" id="freight1" type="text" class="form-control" placeholder="Freight">
+                    </div>
+                    <div class="col-xs-2">
+                      <select class="form-control" id="txt1">
+                        <option value="m3">m3</option>
+                        <option value="unit">unit</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-2">
+                      <select class="form-control" id="curr1">
+                        <option value="JPY">JPY</option>
+                        <option value="NZD">NZD</option>
+                        <option value="USD">USD</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-1">
+                      <span></span>
+                    </div>
+                    <div class="col-xs-2">
+                      <input name="rangeu1" id="rangeu1" type="text" class="form-control" placeholder="m3 Range - From">
+                    </div>
+                    <div class="col-xs-1 text-center">
+                      <p>TO</p>
+                    </div>
+                    <div class="col-xs-2">
+                      <input name="ranged1" id="ranged1" type="text" class="form-control" placeholder="m3 Range - To">
+                    </div>
+                  </div>
+                </div>     
+              </div>         
+          </div>
+
+          <div id="next9" class="nextgroup">
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="col-xs-12">
+              <p><b>Container Booking Payment Terms</b><button class="btn btn-danger" (click)="senttoconcharge()">Add Charges</button></p>
+            </div>
+
+            <div *ngIf="ShipType == 'RORO'" class="col-xs-12">
+              <p><b>RORO Booking Payment Terms</b><button class="btn btn-danger" (click)="senttororocharge()">Add Charges</button></p>
+            </div>
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="col-xs-12">
+              <div *ngFor="let item of containercharges; let ind = index;" class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">{{item.charge}}</label>
+    
+                <div class="col-sm-8">
+                  <select class="form-control" id="concharge{{item.c_id}}">
+                    <option value="N/A">N/A</option>
+                    <option value="Collect">Collect</option>
+                    <option value="Prepaid">Prepaid</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'RORO'" class="col-xs-12">
+              <div *ngFor="let item of rorocharges; let ind = index;" class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">{{item.charge}}</label>
+    
+                <div class="col-sm-8">
+                  <select class="form-control" id="rorocharge{{item.c_id}}">
+                    <option value="N/A">N/A</option>
+                    <option value="Collect">Collect</option>
+                    <option value="Prepaid">Prepaid</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="next10" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Booking Confirmation Reciept</label>
+
+              <div class="col-sm-8">
+                  <input id="fileInput" type="file" (change)="UploadFile($event)" placeholder="Upload file">
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Detention Free Time @ Destination Port</label>
+
+              <div class="col-sm-8">
+                <input name="dft" [(ngModel)] = "model.dft" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Demurrage Free Time @ Destination Port</label>
+
+              <div class="col-sm-8">
+                <input name="dmft" [(ngModel)] = "model.dmft" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Required Inspection</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="inspect" (change) = "ChangeInspection($event)">
+                  <option *ngFor="let item of inspections" value="{{item.ins_id}}">{{item.iname}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'RORO'" class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Penalty Free Ammendment</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="pfa" (change) = "ChangePFA($event)">
+                  <option value="N/A">N/A</option>
+                  <option value="Untill Arrival">Until Arrival</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          
+  
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-3">
+            <button *ngIf="divId == 8 && ShipType == 'CONTAINER'" class="btn btn-danger" (click) = "AddConFreight()">Add Rate</button>  
+            <button *ngIf="divId == 8 && ShipType == 'RORO'" class="btn btn-danger" (click) = "AddRoroFreight()">Add Rate</button>  
+          </div>
+          <div class="col-xs-9 text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Yard</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.yard}}</p>
+              </div>
+            </div>
+  
+            <div *ngIf="selectedDrainageyards > 0" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Drayage Service</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.drainageyard}}</p>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Booking Agency</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.bagency}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Routes</label>
+
+              <div id="represent" class="col-sm-12">
+                <div *ngFor="let item of model.route">
+                  <p>{{item.vessel}} &nbsp;&nbsp; {{item.voyage}} &nbsp;&nbsp; {{item.originport}} &nbsp;&nbsp; {{item.etd}} &nbsp;&nbsp; {{item.destport}} &nbsp;&nbsp; {{item.eta}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Booking No.</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.bookingno}}</p>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Confirmed On</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.bco}}</p>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Shipment Type</label>
+  
+              <div class="col-sm-12">
+                <p>{{ShipType}}</p>                
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Container Type</label>
+  
+              <div class="col-sm-12">
+                <p>{{SelectedContainerType}}</p>                
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Cargo Type</label>
+  
+              <div class="col-sm-12">
+                <span *ngFor="let item of SelectedCargo">{{item}}, </span>
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Condition Type</label>
+  
+              <div class="col-sm-12">
+                <span *ngFor="let item of SelectedCondition">{{item}}, </span>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-12 control-label">Qty</label>
+              <label *ngIf="ShipType == 'RORO'" class="col-sm-12 control-label">Vessel Lots Reserved</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.qty}}</p>                
+              </div>
+            </div>
+
+            <div *ngIf="ShipType == 'CONTAINER'" class="form-group col-xs-6">
+              <label  class="col-sm-12 control-label">Yard Opens</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.yopen}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-12 control-label">Container Yard Address</label>
+              <label *ngIf="ShipType == 'RORO'" class="col-sm-12 control-label">Final Destination</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.address}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Document Cut Off</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.dco}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <label *ngIf="ShipType == 'CONTAINER'" class="col-sm-12 control-label">Yard Cut Off</label>
+              <label *ngIf="ShipType == 'RORO'" class="col-sm-12 control-label">Entry Cut Off</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.co}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Booking Freight Rate</label>
+  
+              <div id="freightcontainer" class="col-sm-12">
+                                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Booking Payment Terms</label>
+  
+              <div id="paymentcontainer" class="col-sm-12">
+                                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Detention Free Time @ Dest Port</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.dft}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Demurrage Free Time @ Dest Port</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.dmft}}</p>                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Required Inspection</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.ins}}</p>                
+              </div>
+            </div>
+
+            <div  *ngIf="ShipType == 'RORO'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Penalty Free Ammendment</label>
+  
+              <div class="col-sm-12">
+                <p>{{selectedPFA}}</p>                
+              </div>
+            </div>
+
+            
+            
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

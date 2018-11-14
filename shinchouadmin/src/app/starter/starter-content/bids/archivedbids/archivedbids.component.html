@@ -1,0 +1,334 @@
+<div class="modal modal-danger fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cancel Bid</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <p>Are you sure you want to cancel this Bid?</p>      
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "UpdateStatus(SelectedBid,2)">Yes</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-success fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Win Bid</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <table class="table text-center">
+              <tr>
+                <th>Model</th>
+                <th>Auction</th>
+                <th>Lot #</th>
+                <th>Bid Amount</th>
+              </tr>
+              <tr>
+                <td>{{SelectedMake}} - {{SelectedModel}}</td>
+                <td>{{SelectedAuction}}</td>
+                <td>{{SelectedLot}}</td>
+                <td>¥ {{FormatCurr(SelectedBidAmount)}}</td>
+              </tr>
+            </table>  
+            <br/>
+            <div class="form-group col-xs-12">
+              <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input type="text" (keyup) = "FormatAmount($event)" name="pamount" [(ngModel)] = "model.pamount" placeholder="Purchased Amount" class="form-control" />
+              </div>
+           </div>
+           <div class="form-group col-xs-12">
+              <textarea name="cmment" [(ngModel)] = "model.cmment" placeholder="Comment" class="form-control"></textarea>
+           </div> 
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "BidWin(SelectedProd,SelectedBid)">Win</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-warning fade" id="modal-warning">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Sold Bid</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <table class="table text-center">
+              <tr>
+                <th>Model</th>
+                <th>Auction</th>
+                <th>Lot #</th>
+                <th>Bid Amount</th>
+              </tr>
+              <tr>
+                <td>{{SelectedMake}} - {{SelectedModel}}</td>
+                <td>{{SelectedAuction}}</td>
+                <td>{{SelectedLot}}</td>
+                <td>¥ {{FormatCurr(SelectedBidAmount)}}</td>
+              </tr>
+            </table>  
+            <br/>
+            <div class="form-group col-xs-12">
+              <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input type="text" (keyup) = "FormatAmount($event)" name="samount" [(ngModel)] = "model.samount" placeholder="Sold Amount" class="form-control" />
+              </div>
+           </div>
+           <div class="form-group col-xs-12">
+              <textarea name="cmment" [(ngModel)] = "model.cmment" placeholder="Comment" class="form-control"></textarea>
+           </div> 
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "BidSold(SelectedProd,SelectedBid)">Sold</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-info fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{SelectedProddata.make}} - {{SelectedProddata.model}} (¥ {{FormatCurr(SelectedProddata.start)}})</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+           <div class="col-md-6 text-center">
+            <a href="{{getImagelink[0]}}" data-lightbox="image" data-title="{{SelectedProddata.make}} - {{SelectedProddata.model}}">
+              <img class="img-responsive" src="{{getImagelink[0]}}">
+            </a>
+             
+             <div class="col-md-3 imgpacks" *ngFor="let imgs of getImagelink | slice:1">
+              <a href="{{imgs}}" data-lightbox="image" data-title="{{SelectedProddata.make}} - {{SelectedProddata.model}}">
+                <img class="img-responsive" src="{{imgs}}">
+              </a>
+             </div>
+           </div>           
+           <div class="col-md-6">
+             <table class="table">
+               <tr>
+                 <th>Lot #</th>
+                 <td>{{SelectedProddata.lot}}</td>
+               </tr>
+               <tr>
+                 <th>Auction</th>
+                 <td>{{SelectedProddata.auction}}</td>
+               </tr>
+               <tr>
+                 <th>Auction Date</th>
+                 <td>{{SelectedProddata.auctiondate}}</td>
+               </tr>
+               <tr>
+                 <th>Chassis</th>
+                 <td>{{SelectedProddata.chassis}}</td>
+               </tr>
+               <tr>
+                 <th>Year</th>
+                 <td>{{SelectedProddata.year}}</td>
+               </tr>
+               <tr>
+                 <th>Transmission</th>
+                 <td>{{SelectedProddata.transmission}}</td>
+               </tr>
+               <tr>
+                 <th>Grade</th>
+                 <td>{{SelectedProddata.rate}}</td>
+               </tr>
+             </table>
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<section class="content">
+  <div class="row">
+
+    <div class="col-xs-12">
+        <div class="box box-default box-solid collapsed-box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: none;">   
+                 <div class="col-xs-12" id="cmbox" *ngIf="userrole == 'buyer'">
+                 <div class="form-group col-xs-2" *ngFor="let item of buyerAuc">
+                  <label class="containerf">{{item.auction}}
+                    <input type="checkbox" class="checkmarkS" (change) = "SelectAucs($event,item.auction)">
+                    <span class="checkmark"></span>
+                  </label>
+                 </div>
+                </div>
+
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="lot" [(ngModel)] = "model.lot" placeholder="Lot #" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="bfrom" type="text" class="form-control pull-right" id="datepicker" placeholder="From">
+                    </div>
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="bto" type="text" class="form-control pull-right" id="datepicker1" placeholder="To">
+                    </div>
+                 </div>                 
+                                    
+                 <div class="form-group col-xs-4">
+                  <select class="form-control" id="makeselect">
+                    <option value="">Select Make</option>
+                    <option *ngFor="let m of Make" value = "{{m.MARKA_NAME}}">{{m.MARKA_NAME}}</option>                     
+                  </select>
+                 </div> 
+                 <div class="form-group col-xs-4">
+                  <select class="form-control" id="modelselect">
+                      <option value="">Select Model</option>
+                      <option *ngFor="let m of Model" value = "{{m}}">{{m}}</option>
+                  </select>
+                 </div>
+                 <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <select class="form-control" id="auctionselect">
+                      <option value="">Select Auction</option>
+                      <option *ngFor="let m of Auctions" value = "{{m.AUCTION}}">{{m.AUCTION}}</option>
+                  </select>
+                 </div>
+                 <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <select class="form-control" id="salesselect">
+                      <option value="">Select Sales Users</option>
+                      <option *ngFor="let m of SalesUsers" value = "{{m.username}}">{{m.username}}</option>
+                  </select>
+                 </div>                
+                 <div class="form-group col-xs-4">
+                  <select class="form-control" id="chassisselect">
+                      <option value="">Select Chassis</option>
+                      <option *ngFor="let m of Chassis" value = "{{m.KUZOV}}">{{m.KUZOV}}</option>
+                  </select>
+                 </div>
+                 <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <select class="form-control" id="clientselect">
+                      <option value="">Select Clients</option>
+                      <option *ngFor="let m of Clients" value="{{m.username}}">{{m.username}}</option>
+                  </select>
+                 </div>
+                 <div class="form-group col-xs-4" *ngIf="userrole == 'salesuser'">
+                  <select class="form-control" id="clientSselect">
+                      <option value="">Select Clients</option>
+                      <option *ngFor="let m of salesClient" value="{{m.user}}">{{m.user}}</option>
+                  </select>
+                 </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <button class="btn btn-red" (click) = "SaveForm()">Search</button>
+                <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+              </div>
+          </div>
+    </div>
+
+
+    <div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Old Bids List</h3>
+    <div class="text-right">
+      <button (click)='Export({ filename: "bidlist.csv" });' class="btn btn-red">Export</button>        
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>User</th>
+        <th>Auction Date</th>
+        <th>Model - Make</th>
+        <th>Auction</th>
+        <th>Lot #</th>
+        <th>Bid Amt.</th>          
+        <th>Chassis</th>
+        <th>Year</th>
+        <th>Bid Text</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bid of Bids; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{bid.user_id}}</td>
+        <td>{{bid.auctiondate | slice:0:10}}</td>
+        <td>{{bid.make}}<br/>{{bid.model}}</td>
+        <td>{{bid.auction}}</td>
+        <td><a class="linkclick" data-toggle="modal" data-target="#modal-info" (click) = "getProductData(bid.prodid)">{{bid.lot}}</a></td>
+        <td>¥ {{FormatCurr(bid.estprice)}}</td>
+        <td>{{bid.chassis}}</td>
+        <td>{{bid.year}}</td>
+        <td>{{bid.bidmsg}}</td>          
+        <td *ngIf="bid.status == 0 || bid.status == 1">
+          <button class="btn btn-black" data-toggle="modal" data-target="#modal-success" (click) = "SelectBidData(bid.prodid, bid.b_id)">Win</button>&nbsp;
+          <button class="btn btn-black" data-toggle="modal" data-target="#modal-warning" (click) = "SelectBidData(bid.prodid, bid.b_id)">Sold</button>&nbsp;
+          <button class="btn btn-black"  data-toggle="modal" data-target="#modal-danger" (click) = "SelectBid(bid.b_id)">Cancel by Auc</button>
+        </td>
+        <td *ngIf="bid.status == 2">Cancelled</td>
+        <td *ngIf="bid.status == 3">Purchased</td>
+        <td *ngIf="bid.status == 4">Sold</td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

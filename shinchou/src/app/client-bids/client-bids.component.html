@@ -1,0 +1,216 @@
+<div class="container-fluid">
+<section id="content_body">
+  <div class="container-fluid">
+  <div class="row">
+      <div class="col-md-12">
+          <h3><i class="fa fa-gavel fa-fw"></i>Bids Placed</h3>
+        </div>
+      <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-primary">
+                    <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab1primary" data-toggle="tab">Current Bids</a></li>
+                                <li><a href="#tab2primary" data-toggle="tab" (click)="fetchExpiredBids()">Archived Bids</a></li>
+                               <!--  <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
+                                        <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
+                                    </ul>
+                                </li> -->
+                            </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1primary">
+                                <h3 id="errormsga">You have no current bids.</h3>
+                                <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myData;let cnt = index">
+                                    <div class="row">
+                                        <div class="col-md-12 topspace shadowbox">
+                                                <div class="carlistbox">
+                                                <a href="#"><div class="col-md-3 clbox">
+                                                    <div class="zoomer">         
+                                                       <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                       </div>
+                                                </div></a>
+                                                <div class="col-md-9 clbox">  
+                                                    <a href="#"><div class="col-md-10">
+                                                        <h4>{{bids.model}}</h4>
+                                                        <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                        <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                    </div> 
+                                                    <div class="col-md-2">
+                                                        <div class="text-center">
+                                                        <h4 class="mainprice">¥ {{bids.bidPrice}}</h4>
+                                                        </div>
+                                                    </div>                            
+                                                   
+                                                    </a>     
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                          
+                                                            <button [routerLink]="['/prodetail', bids.prodid]" type="button" class="btn btn-warning" id="viewbtn">View</button>
+                                                    </div>      
+                                                </div>
+                                            </div>
+                                            <div class="card card-body">
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                                <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;&nbsp;Biding Date</td>
+                                                                <td align="right" class="auctVenu">{{bids.bidDate | slice:3:15}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                                <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fa fa-key fa-fw"></i>&nbsp;&nbsp;&nbsp;Model Year</td>
+                                                                <td align="right" class="auctVenu">{{bids.year}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                                <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                                    <div class="col-md-4 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fas fa-yen-sign"></i>&nbsp;&nbsp;&nbsp;Starting Price</td>
+                                                                <td align="right" class="auctVenu">¥ {{bids.startPrice}}</td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                                    <div class="col-md-12 featurebox">
+                                                            <table class="table">
+                                                              <tr>
+                                                                <td class="detailHeadin"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;Message:&nbsp;&nbsp;&nbsp;<span class="auctVenu">{{bids.bidMsg}}</span></td>
+                                                              </tr>
+                                                            </table>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2primary">
+                              <h3 id="errormsgb">You have no archived bids.</h3>
+                              <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myDatab;let cnt = index">
+                                  <div class="row">
+                                      <div class="col-md-12 topspace shadowbox">
+                                              <div class="carlistbox">
+                                              <a href="#"><div class="col-md-3 clbox">
+                                                  <div class="zoomer">         
+                                                     <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                     </div>
+                                              </div></a>
+                                              <div class="col-md-9 clbox">  
+                                                  <a href="#"><div class="col-md-10">
+                                                      <h4>{{bids.model}}</h4>
+                                                      <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                      <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                  </div> 
+                                                  <div class="col-md-2">
+                                                      <div class="text-center">
+                                                      <h4 class="mainprice">¥ {{bids.bidPrice}}</h4>
+                                                      </div>
+                                                  </div>                            
+                                                 
+                                                  </a>
+                                                  <div class="col-md-1 col-sm-1 col-xs-1">
+                                                          
+                                                  </div>         
+                                                  
+                                              </div>
+                                          </div>
+                                          <div class="card card-body">
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                              <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="far fa-calendar-check"></i>&nbsp;&nbsp;&nbsp;Biding Date</td>
+                                                              <td align="right" class="auctVenu">{{bids.bidDate | slice:3:15}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                              <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fa fa-key fa-fw"></i>&nbsp;&nbsp;&nbsp;Model Year</td>
+                                                              <td align="right" class="auctVenu">{{bids.year}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                              <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                                  <div class="col-md-4 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fas fa-yen-sign"></i>&nbsp;&nbsp;&nbsp;Starting Price</td>
+                                                              <td align="right" class="auctVenu">¥ {{bids.startPrice}}</td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                                  <div class="col-md-12 featurebox">
+                                                          <table class="table">
+                                                            <tr>
+                                                              <td class="detailHeadin"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;Message:&nbsp;&nbsp;&nbsp;<span class="auctVenu">{{bids.bidMsg}}</span></td>
+                                                            </tr>
+                                                          </table>
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      </div>
+  </div>
+  </div>
+ </section>
+</div>

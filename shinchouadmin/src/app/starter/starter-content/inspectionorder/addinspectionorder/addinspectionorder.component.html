@@ -1,0 +1,214 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Inspection Order</h3>
+          </div>
+          
+        <div class="box-body">
+
+          <div id="next1" class="nextgroup">
+            <div class="col-xs-12">
+              <p><b>Yard Vehicles</b></p>
+              <hr/>
+              <input type="text" id="filtervehicles" class="form-control" (keyup)="filterVehicles($event)" placeholder="Enter Chassis"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Chassis</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of VehicleList; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.prefix}}</td>
+                <td>{{item.make}}</td>
+                <td>{{item.model}}</td>
+                <td>{{item.year}}</td>  
+                <td>{{item.yardname}}</td>              
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectVehicles($event, item.p_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+          <div id="next2" class="nextgroup">            
+  
+            <div class="col-xs-12">
+              <p><b>Inspections</b><button class="btn btn-danger" (click) = "senttoinspection()">Add Inspection</button></p>
+              <hr/>
+              <input type="text" id="filterins" class="form-control" (keyup)="filterInspection($event)" placeholder="Filter Inspections"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Inspection</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of inspections; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.iname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectInspection($event, vl.ins_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>   
+
+          <div id="next3" class="nextgroup">
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Service Name</label>
+                  
+                <div class="col-sm-8">
+                  <select class="form-control" [(ngModel)] = "model.servicename">
+                    <option *ngFor="let item of inspectionyard" value="{{item.yardname}}">{{item.yardname}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Requested On</label>
+                  
+                <div class="col-sm-8">
+                  <div class="input-group date">
+                      <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                      </div>
+                      <input id="ro" name="ro" type="text" class="form-control pull-right" placeholder="Requested On">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Email To</label>
+                  
+                <div class="col-sm-8">
+                  <input name="email" [(ngModel)] = "model.email" type="email" multiple class="form-control" placeholder="Enter Email">
+                  <p class="italinote">Enter Multiple Emails with Comma Seperation (e.g. abc@abc.com, abc1@abc.com)</p>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label class="col-sm-4 control-label">Remarks</label>
+                  
+                <div class="col-sm-8">
+                  <textarea name="rem" [(ngModel)] = "model.remark" class="form-control" placeholder="Enter Remarks"></textarea>
+                </div>
+              </div>
+          </div>
+  
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-12 text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+          <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Vehicles to be Inspected</label>
+  
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Chassis</th>
+                      <th>Model</th>
+                      <th>Yard</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{model.chassis}}</td>
+                      <td>{{model.make}} - {{model.model}}<br/>{{model.year}}</td>
+                      <td>{{model.yardname}}</td>
+                    </tr>
+                  </tbody>
+                </table>                
+              </div>
+           </div>
+
+           <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Required Inspection</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.reqinspection}}</p>                
+              </div>
+           </div> 
+           
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Service Name</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.servicename}}</p>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Requested On</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.ro}}</p>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Email To</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.email}}</p>
+              </div>
+            </div>
+            
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Remarks</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.remark}}</p>
+              </div>
+            </div>
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

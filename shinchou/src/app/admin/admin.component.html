@@ -1,0 +1,35 @@
+<div class="topsp">
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a [routerLink]="['']"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                <li class="active"><a [routerLink]="['bids']"><i class="fa fa-gavel fa-fw"></i>My Bids</a></li>
+                <li><a [routerLink]="['savedsearch']"><i class="fa fa-search fa-fw"></i>Saved Searches</a></li>
+                <li><a [routerLink]="['wishlist']"><i class="fa fa-heart fa-fw"></i>Wish List</a></li>
+                <li><a [routerLink]="['purchaselist']"><i class="fa fa-money fa-fw"></i>Purchased List</a></li>
+                <li><a [routerLink]="['notification']"><i class="fa fa-bell fa-fw"></i>Notification</a></li>
+                <li><a [routerLink]="['profile']" ><i class="fa fa-user fa-fw"></i>Profile</a></li>
+                <li><a [routerLink]="['stocklist']" ><i class="fa fa-user fa-fw"></i>Stock List</a></li>
+               <!--  <li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Charts</a></li>
+                <li><a href="#"><i class="fa fa-table fa-fw"></i>Table</a></li>
+                <li><a href="#"><i class="fa fa-tasks fa-fw"></i>Forms</a></li>
+                <li><a href="#"><i class="fa fa-calendar fa-fw"></i>Calender</a></li>
+                <li><a href="#"><i class="fa fa-book fa-fw"></i>Library</a></li>
+                <li><a href="#"><i class="fa fa-pencil fa-fw"></i>Applications</a></li> -->
+                
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="jakmar">
+            <router-outlet></router-outlet>
+            </div>            
+        </div>
+    </div>
+</div>
+
+
+

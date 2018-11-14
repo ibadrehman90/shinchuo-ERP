@@ -1,0 +1,537 @@
+<div class="modal modal-warning fade" id="modal-warning">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Send Email to Client</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <div class="col-md-12">
+              <input type="text" placeholder="Enter Email for testing purpose" name="emailfield" class="form-control" [(ngModel)] = "model.emailfield"/>
+            </div>
+            <div class="listEmail" *ngFor="let itp of datalist; let ind = index">
+              <div class="sublistEmail" *ngFor="let its of itp">
+              <table class="table text-center">
+                <tr>
+                    <th>S.No.</th>
+                    <th style="display:none;"></th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                </tr>
+                <tr>
+                    <td>{{ind + 1}}</td>
+                    <td id="purc{{ind}}" style="display:none;">{{its.s_id}}</td>
+                    <td>{{its.make}}</td>
+                    <td>{{its.model}}</td>
+                    <td>{{its.year}}</td>
+                </tr>
+              </table>
+              <table class="table text-center">                 
+                  <tr>
+                    <th>
+                      Lot #
+                      <br/>
+                      <span>{{its.lot}}</span>
+                    </th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="lotsw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>  -->                
+                    <th>Auction<br/>
+                      <span>{{its.auction}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="auctionsw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                    <th>Auction Schedule<br/>
+                      <span>{{its.adate | slice:0:10}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="aucdatesw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>--> 
+                  </tr>                  
+                  <tr>
+                    <th>Color<br/>
+                      <span>{{its.color}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="colorsw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                    <th>Mileage<br/>
+                      <span>{{its.mileage}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="mileagesw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>   -->               
+                    <th>Engine CC
+                        <br/>
+                        <span>{{its.enginecc}}</span>
+                    </th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="ccsw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                  </tr>
+                  <tr>                
+                    <th>Chassis<br/>
+                      <span>{{its.prefix}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="chassissw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                    <th>Transmission
+                        <br/>
+                        <span>{{its.transmission}}</span>
+                    </th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="transsw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                    <th>Bid Price<br/>
+                      <span>¥ {{FormatCurr(its.bidprice)}}</span></th>
+                    <!--<td>
+                    <label class="switch">
+                      <input id="pricesw{{ind}}" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    </td>-->
+                  </tr>   
+                  <tr>
+                    <th colspan="3" class="form-group"> Enter Price (in NZ$)
+                      <br/>
+                        <div class="input-group form-group">
+                          <span class="input-group-addon">$</span>
+                          <input style="width:100%;" type="text" id="pnz{{ind}}" (keyup) = "FormatAmount($event)" name="pnz" placeholder="Price" class="form-control"/>
+                        </div>                        
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Your Remarks
+                      <br/>
+                      <textarea name="yremark" id="yremark{{ind}}" placeholder="Your Remarks" class="form-control"></textarea>
+                    </th>
+                  </tr>                                                                   
+              </table>
+              <div id="imgcbox{{ind}}" class="col-md-12 imgboxContainer">
+                  <div class="col-md-3 imgbox" *ngFor="let imggs of getCombineImages(its.cimages, its.newsheet); let ent = index">
+                      <div class="zoomer">
+                      <img id="imgsrc{{ind}}-{{ent}}" class="img-responsive imgssmall" [src]="imggs"/>                        
+                      </div>
+                      <div class="text-center">
+                        <!--<label class="switch" style="margin-top:10px;">-->
+                          <input id="img{{ind}}-{{ent}}" type="checkbox">
+                        <!--  <span class="slider round"></span>
+                        </label>-->
+                      </div>
+                  </div>                  
+              </div> 
+              <hr *ngIf="ind < datalist?.length - 1" class="bighr"/>                
+              </div>  
+              
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "SendEmailClient()">Send</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-success fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Sold List</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+           <div class="form-group col-xs-12">
+              <select id="soldclient" class="form-control">
+                <option value="">Select Client</option>
+                <option *ngFor="let cl of salesClient" value="{{cl.user}}">{{cl.name}}  ({{cl.email}})</option>
+              </select>
+           </div> 
+           <div class="form-group col-xs-12">
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input (keyup) = "FormatAmount($event)" type="text" name="samount" [(ngModel)] = "model.samount" placeholder="Sold Amount" class="form-control" />
+              </div>
+           </div>
+           <div class="form-group col-xs-12">
+              <textarea name="cmment" [(ngModel)] = "model.cmment" placeholder="Comment" class="form-control"></textarea>
+           </div> 
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal" (click) = "SoldStock()">Sold</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<section class="content">
+<div class="row">
+
+  <div class="col-xs-12">
+      <div class="box box-default box-solid collapsed-box">
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+              </button>
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body" style="display: none;">                   
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="scode" [(ngModel)] = "model.scode" placeholder="S_CODE" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="client" [(ngModel)] = "model.client" placeholder="User" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="dst" [(ngModel)] = "model.dst" placeholder="DST" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="auction" [(ngModel)] = "model.auction" placeholder="Auction" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="adate" [(ngModel)] = "model.adate" placeholder="Auction Date" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="pos" [(ngModel)] = "model.pos" placeholder="POS" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="dai" [(ngModel)] = "model.dai" placeholder="DAI" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="lot" [(ngModel)] = "model.lot" placeholder="LOT" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="prefix" [(ngModel)] = "model.prefix" placeholder="Prefix" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="serial" [(ngModel)] = "model.serial" placeholder="Serial" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="make" [(ngModel)] = "model.make" placeholder="Make" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="model" [(ngModel)] = "model.model" placeholder="Model" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="year" [(ngModel)] = "model.year" placeholder="Year" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="bidprice" [(ngModel)] = "model.bidprice" placeholder="Bid Price" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="aucfee" [(ngModel)] = "model.aucfee" placeholder="Auc. Fee" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="exportcharge" [(ngModel)] = "model.exportcharge" placeholder="Export Charge" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="noplate" [(ngModel)] = "model.noplate" placeholder="No Plate" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="plateserial" [(ngModel)] = "model.plateserial" placeholder="Plate Serial" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="shaken" [(ngModel)] = "model.shaken" placeholder="Shaken" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="fudosha" [(ngModel)] = "model.fudosha" placeholder="Fudosha" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="transmission" [(ngModel)] = "model.transmission" placeholder="Transmission" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="enginecc" [(ngModel)] = "model.enginecc" placeholder="CC" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="mileage" [(ngModel)] = "model.mileage" placeholder="Mileage" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="color" [(ngModel)] = "model.color" placeholder="Colour" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="colorcode" [(ngModel)] = "model.colorcode" placeholder="Colour Code" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                  <input type="text" name="buyingcom" [(ngModel)] = "model.buyingcom" placeholder="Buying Commission" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="buyer" [(ngModel)] = "model.buyer" placeholder="Buyer" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="remark" [(ngModel)] = "model.remark" placeholder="Remark" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4">
+                  <input type="text" name="landedvalue" [(ngModel)] = "model.landedvalue" placeholder="Landed Value" class="form-control" />
+               </div>
+               <div class="form-group col-xs-4" *ngIf="userrole == 'admin'">
+                <input type="text" name="soldprice" [(ngModel)] = "model.soldprice" placeholder="Sold Price" class="form-control" />
+             </div>                 
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer text-center">
+              <button class="btn btn-danger" (click) = "SaveForm()">Search</button>
+              <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+            </div>
+        </div>
+  </div>
+
+
+  <div class="col-xs-12">
+<div class="box">
+<div class="box-header">
+  <h3 class="box-title">Stock List</h3>
+  <div class="text-right">
+    <button (click)='Export({ filename: "stocklist.csv" });' class="btn btn-danger">Export</button>
+    <button class="btn btn-danger" data-toggle="modal" data-target="#modal-warning">Share</button>
+  </div>
+</div>
+<!-- /.box-header -->
+<div class="box-body">
+  
+  <table id="example1" class="display table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th></th>
+      <th>S.NO</th>
+      <th>Sheet</th>
+      <th>Images</th>
+      <th *ngIf="userrole == 'admin'">S-CODE</th>
+      <th>USER</th>
+      <th *ngIf="userrole == 'admin'">DST</th>
+      <th>AUCTION</th>
+      <th>DATE</th>
+      <th *ngIf="userrole == 'admin'">POS</th>          
+      <th *ngIf="userrole == 'admin'">DAI</th>
+      <th>LOT</th>
+      <th>PREFIX</th>
+      <th *ngIf="userrole == 'admin'">SERIAL</th>
+      <th>MAKE</th>
+      <th>MODEL</th>
+      <th>YEAR</th>
+      <th>BID PRICE</th>
+      <th *ngIf="userrole == 'admin'">AUC. FEE</th>
+      <th *ngIf="userrole == 'admin'">EXPORT CHARGE</th>
+      <th *ngIf="userrole == 'admin'">NO PLATE</th>
+      <th *ngIf="userrole == 'admin'">PLATE SERIAL</th>
+      <th *ngIf="userrole == 'admin'">SHAKEN</th>
+      <th *ngIf="userrole == 'admin'">FUDOSHA</th>
+      <th *ngIf="userrole == 'admin'">TRANSMISSION</th>
+      <th>CC</th>
+      <th>MILEAGE</th>
+      <th>COLOUR</th>
+      <th *ngIf="userrole == 'admin'">COLOUR CODE</th>
+      <th *ngIf="userrole == 'admin'">BUYING COMM</th>
+      <th *ngIf="userrole == 'admin'">BUYER</th>
+      <th>REMARK</th>
+      <th>LANDED VALUE</th>
+      <th *ngIf="userrole == 'admin'">SOLD PRICE</th>
+      <th *ngIf="userrole == 'salesuser'">SELLING PRICE</th>
+      <th *ngIf="userrole == 'salesuser'">SHOW SELLING PRICE</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of purchased; let ind = index">
+      <td>
+        <label class="containerf">
+          <input type="checkbox" class="checkmarkS" (change) = "SelectList($event,p.s_id)">
+          <span class="checkmark"></span>
+        </label>
+      </td>
+      <td>{{ind + 1}}</td>
+      <td><a [href]="getImagelink(p.images,0)" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+        <img class="img-responsive" [src]="getImagelink(p.images,0)">
+      </a>
+      <div *ngIf="p.newsheet != null && p.newsheet != undefined && p.newsheet != '' && p.newsheet != 'null'">
+        <a style="display: none;" *ngFor="let imggs of getImagelink(p.newsheet, -1)" [href]="imggs" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+            <img class="img-responsive" [src]="imggs">
+        </a>
+      </div>
+      </td>
+      <td><a *ngFor="let imggs of getImagelink(p.cimages, -1) | slice:1; let ent = index" [href]="imggs" [attr.data-lightbox]="getlabel(p.s_id)" data-title="{{p.make}} - {{p.model}}">
+          <img *ngIf="ent == 0" class="img-responsive" [src]="imggs">
+        </a></td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.s_code}}</p>
+        <input type="text" value="{{p.s_code}}" (blur) = "editremove($event,'s_code',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.client}}</p>
+        <input type="text" value="{{p.client}}" (blur) = "editremove($event,'client',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.dst}}</p>
+        <input type="text" value="{{p.dst}}" (blur) = "editremove($event,'dst',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.auction}}</p>
+        <input type="text" value="{{p.auction}}" (blur) = "editremove($event,'auction',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.adate}}</p>
+        <input type="text" value="{{p.adate}}" (blur) = "editremove($event,'adate',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.pos}}</p>
+        <input type="text" value="{{p.pos}}" (blur) = "editremove($event,'pos',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.dai}}</p>
+        <input type="text" value="{{p.dai}}" (blur) = "editremove($event,'dai',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.lot}}</p>
+        <input type="text" value="{{p.lot}}" (blur) = "editremove($event,'lot',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.prefix}}</p>
+        <input type="text" value="{{p.prefix}}" (blur) = "editremove($event,'prefix',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p>{{p.serial}}</p>
+        <input type="text" value="{{p.serial}}" (blur) = "editremove($event,'serial',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.make}}</p>
+        <input type="text" value="{{p.make}}" (blur) = "editremove($event,'make',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.model}}</p>
+        <input type="text" value="{{p.model}}" (blur) = "editremove($event,'model',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.year}}</p>
+        <input type="text" value="{{p.year}}" (blur) = "editremove($event,'year',p.s_id)"/>
+      </td>
+      <td>
+        <p (dblclick) = "editable($event)">¥ {{FormatCurr(p.bidprice)}}</p>
+        <input type="text" value="{{p.bidprice}}" (blur) = "editremove($event,'bidprice',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{FormatCurr(p.aucfee)}}</p>
+        <input type="text" value="{{p.aucfee}}" (blur) = "editremove($event,'aucfee',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{FormatCurr(p.exportcharge)}}</p>
+        <input type="text" value="{{p.exportcharge}}" (blur) = "editremove($event,'exportcharge',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.noplate}}</p>
+        <input type="text" value="{{p.noplate}}" (blur) = "editremove($event,'noplate',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.plateserial}}</p>
+        <input type="text" value="{{p.plateserial}}" (blur) = "editremove($event,'plateserial',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.shaken}}</p>
+        <input type="text" value="{{p.shaken}}" (blur) = "editremove($event,'shaken',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.fudosha}}</p>
+        <input type="text" value="{{p.fudosha}}" (blur) = "editremove($event,'fudosha',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p>{{p.transmission}}</p>
+        <input type="text" value="{{p.transmission}}" (blur) = "editremove($event,'transmission',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.enginecc}}</p>
+        <input type="text" value="{{p.enginecc}}" (blur) = "editremove($event,'enginecc',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.mileage}}</p>
+        <input type="text" value="{{p.mileage}}" (blur) = "editremove($event,'mileage',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.color}}</p>
+        <input type="text" value="{{p.color}}" (blur) = "editremove($event,'color',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">{{p.colorcode}}</p>
+        <input type="text" value="{{p.colorcode}}" (blur) = "editremove($event,'colorcode',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">¥ {{p.buyingcom}}</p>
+        <input type="text" value="{{p.buyingcom}}" (blur) = "editremove($event,'buyingcom',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p>{{p.buyer}}</p>
+        <input type="text" value="{{p.buyer}}" (blur) = "editremove($event,'buyer',p.s_id)"/>
+      </td>
+      <td>
+        <p>{{p.remark}}</p>
+        <input type="text" value="{{p.remark}}" (blur) = "editremove($event,'remark',p.s_id)"/>
+      </td>
+      <td>
+        <p>NZ$ {{FormatCurr(p.landedvalue)}}</p>
+        <input type="text" value="{{p.landedvalue}}" (blur) = "editremove($event,'landedvalue',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'admin'">
+        <p (dblclick) = "editable($event)">¥ {{FormatCurr(p.soldprice)}}</p>
+        <input type="text" value="{{p.soldprice}}" (blur) = "editremove($event,'soldprice',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'salesuser'">
+        <p (dblclick) = "editable($event)">$ {{FormatCurr(p.sellingprice)}}</p>
+        <input type="text" value="{{FormatCurr(p.sellingprice)}}" (keyup) = "FormatAmount($event)" (blur) = "editremove($event,'sellingprice',p.s_id)"/>
+      </td>
+      <td *ngIf="userrole == 'salesuser'">
+        <label class="switch">
+            <input type="checkbox" [attr.checked]="p.showsellprice == '1' ? 'checked' : null" (change) = "editremove($event,'showsellprice',p.s_id)">
+            <span class="slider round"></span>
+        </label>
+      </td> 
+      <td *ngIf="p.stocksold == 0">
+        <button class="btn btn-black" data-toggle="modal" data-target="#modal-success" (click) = "SelectPurchasedData(p.s_id)">Sold</button>
+      </td>
+      <td *ngIf="p.stocksold == 1">
+        Sold
+      </td>
+    </tr>               
+    </tbody>       
+  </table>
+
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

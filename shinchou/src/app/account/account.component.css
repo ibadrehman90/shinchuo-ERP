@@ -1,0 +1,123 @@
+.navbar-brand
+{
+    font-size:24px;
+    font-weight: bold;
+}
+
+.navbar-main li a
+{
+    background:white;
+    color:#153e4d;  
+    padding:10px 20px; 
+}
+
+.navbar-main li a:hover
+{
+    background:#153e4d;
+    color:white;
+}
+
+.homebg
+{
+    background:url('./../../assets/2.jpg');
+    background-repeat: no-repeat;
+    height:300px;
+}
+
+.container-narrow
+{
+    padding:20px 30px;
+}
+
+.login
+{
+    background:#333;;
+    padding:15px;
+}
+
+.login label
+{
+    color:white;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+}
+
+.login p
+{
+    color:white;
+    font-family: Helvetica, sans-serif;
+    margin-bottom:20px;
+    margin-top:10px;
+}
+
+.space
+{
+    margin-top:20px;
+}
+
+.login .form-control, .signup .form-control
+{
+    border-radius:0px;
+    height:40px;
+}
+
+.login button
+{
+    background:#ed3338;
+    color:white;
+    border:none;
+}
+
+.login button:hover
+{
+    background:#fff;
+    color:#ed3338;
+}
+
+h2
+{
+    margin:20px 0px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.signup
+{
+    padding:25px 15px;
+    background:white;
+    box-shadow:-1px 1px 2px #999;
+    border-top:4px solid #ed3338;
+}
+
+.signup input[type="submit"]
+{
+    background:#ed3338;
+    color:white;
+    border:none;
+}
+
+.signup input[type="submit"]:hover
+{
+    background:#fff;
+    color:#ed3338;
+    border:1px solid #ed3338;
+}
+
+.signup input, .signup select
+{
+    background:#f0f2f5;
+    color:#666;
+    border:none;    
+}
+
+.signup input:hover
+{
+    border:none;
+    box-shadow: none;
+}
+
+#mesg
+{
+    display:none;
+    margin-top:20px;
+}

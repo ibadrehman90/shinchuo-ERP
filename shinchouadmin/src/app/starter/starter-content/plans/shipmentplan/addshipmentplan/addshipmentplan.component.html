@@ -1,0 +1,381 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Shipment Plan Registration</h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Destinations</b> <button class="btn btn-danger" (click)="senttoport()">Add Port</button></p>
+              <hr/>
+              <input type="text" id="filterports" class="form-control" (keyup)="filterPort($event)" placeholder="Filter Ports"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Port</th>
+                <th>Country</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ports; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.port}}</td>
+                <td>{{item.country}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectPort($event, item.port_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next2" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Yards</b> <button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filteryard" class="form-control" (keyup)="filterYard($event)" placeholder="Filter Yards"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of yards; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.yardname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectYard($event, vl.yardid)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+          
+          <div id="next3" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Bookings</b> <button class="btn btn-danger" (click)="senttobooking()">Add Booking</button></p>
+              <hr/>
+              <input type="text" id="filterbooking" class="form-control" (keyup)="filterBooking($event)" placeholder="Filter Bookings"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Booking Code</th>
+                <th>Shipment Type</th>
+                <th>Reserved</th>
+                <th>Vessel</th>
+                <th>Voyage</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of Bookings; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.bookingno}}</td>
+                <td>{{item.shipmentype}}</td>
+                <td>{{item.qty}}</td>
+                <td>{{item.vessel}}</td>
+                <td>{{item.voyage}}</td>
+                <td>{{item.origin}} <br/> {{item.etd}}</td>
+                <td>{{item.dest}} <br/> {{item.eta}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectBooking($event, item.b_no)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next4" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Select Yards (Packing Service)</b><button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filterpacking" class="form-control" (keyup)="filterPacking($event)" placeholder="Filter Packing Service"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of packingyard; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.yardname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectPacking($event, vl.y_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next5" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Select Yard (Drayage Service)</b> <button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filterdyard" class="form-control" (keyup)="filterdYard($event)" placeholder="Filter Yards"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of drayageyard; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.yardname}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectDrayageYard($event, vl.y_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next6" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Loading Plans</b> <button class="btn btn-danger" (click)="senttoplan()">Add Plan</button></p>
+              <hr/>
+              <input type="text" id="filterloading" class="form-control" (keyup)="filterPlans($event)" placeholder="Filter Loading Plan"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Plan Code</th>
+                <th>Container Type</th>
+                <th>Yard</th>
+                <th>Units</th>
+                <th>Frames</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of loadingplan; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.plancode}}</td>
+                <td>{{item.contype}}</td>
+                <td>{{item.yardname}}</td>
+                <td>{{item.units}}</td>
+                <td>{{item.frames}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectPlan($event, item.plancode)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+
+            <div class="col-xs-12">
+              <p>To use General Packing Plan instead of Loading Plan. Click on <button class="btn btn-danger" (click)="GeneralPlan()">General Plan</button></p>
+            </div>
+          </div>
+
+          <div id="next7" class="nextgroup">
+
+            <div class="col-xs-12">
+              <p><b>Containers List</b></p>
+              <hr/>
+              <div id="contlist">
+
+              </div>
+            </div>
+  
+            <div class="col-xs-12">
+              <br/>
+              <p><b>Add Vehicles in Container {{SelectedContainer}}</b></p>
+              <hr/>
+              <input type="text" id="filtervehicle" class="form-control" (keyup)="filterVehicles($event)" placeholder="Filter Chassis"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                  <th>S.No.</th>
+                  <th>Chassis</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Apx Length</th>
+                  <th>Apx Width</th>
+                  <th>Apx Height</th>
+                  <th>Action</th>                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of vehicles; let ind = index">
+                  <td>{{ind + 1}}</td>
+                  <td>{{item.prefix}}</td>
+                  <td>{{item.make}}</td>
+                  <td>{{item.model}}</td>
+                  <td>{{item.year}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>   
+                  <td>
+                    <button class="btnself btn-danger" (click) = "SelectVehicles($event, item.p_id)">Select</button>      
+                  </td>             
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-12 text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+          <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Destination</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.port}}</p>                
+              </div>
+           </div>
+
+           <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Yard</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.yardname}}</p>                
+              </div>
+           </div> 
+
+           <div *ngIf="Bookings.length > 0" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Booking</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.booking.bookingno}}</p>
+              </div>
+           </div>
+
+           <div *ngIf="Bookings.length > 0" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Shipment Type</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.booking.shipmentype}}</p>
+              </div>
+           </div>
+
+           <div *ngIf="Bookings.length > 0" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Reserved Qty</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.booking.qty}}</p>
+              </div>
+           </div>
+
+           <div *ngIf="Bookings.length > 0" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Route</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.booking.vessel}}&nbsp;&nbsp;{{model.booking.voyage}}&nbsp;&nbsp;{{model.booking.origin}}&nbsp;&nbsp;{{model.booking.etd}}&nbsp;&nbsp;{{model.booking.dest}}&nbsp;&nbsp;{{model.booking.eta}}</p>
+              </div>
+           </div>
+
+            <div *ngIf="shipmenttype == 'CONTAINER'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Packing Service</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.packingyard}}</p>
+              </div>
+            </div>    
+            
+            <div *ngIf="shipmenttype == 'CONTAINER'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Drayage Service</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.drayageyard}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="shipmenttype == 'CONTAINER'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Plan Selected</label>
+  
+              <div class="col-sm-12">
+                <p>{{SelectedP}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="shipmenttype == 'CONTAINER'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Vehicle List
+                <a class="pull-right" (click) = "ClearVehicles()">Clear All</a>
+              </label>
+  
+              <div id="contdivs" class="col-sm-12">
+                
+              </div>
+            </div>
+
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

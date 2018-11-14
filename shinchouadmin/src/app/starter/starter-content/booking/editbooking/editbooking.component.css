@@ -1,0 +1,59 @@
+#summarybox .control-label
+{
+    text-align: left;
+    border-bottom:1px solid #333;
+    padding-bottom:2px;
+}
+
+.control-label
+{
+    text-align: left;
+    padding-top:5px;
+}
+
+.btn
+{
+    border-radius: 0px;
+    width:80px;
+    margin:10px;
+}
+
+.btnself
+{
+    border:none;
+    outline: 0px;
+    padding:5px 10px;
+}
+
+#summarybox .form-group
+{
+    margin-bottom: 0px;
+}
+
+.penciledit:hover
+{
+    cursor: pointer;
+    color: #ed3338;
+}
+
+.nextgroup
+{
+    display:none;
+}
+
+#filteryard, #filteryardservice
+{
+    margin-bottom:10px;
+}
+
+.wtmargin
+{
+    margin-top:0px;
+    padding-top:0px;
+}
+
+.morespace div
+{
+    padding:1px;
+    margin:0px;
+}

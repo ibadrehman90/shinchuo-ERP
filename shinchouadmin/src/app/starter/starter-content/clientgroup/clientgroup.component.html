@@ -1,0 +1,62 @@
+<section class="content">
+    <div class="row">
+  
+      <div class="col-xs-12">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Add Group</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="col-xs-12 groupform">
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Group Name</label>
+  
+          <div class="col-sm-8">
+            <input name="gname" [(ngModel)] = "model.gname" type="text" class="form-control" placeholder="Group Name">
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Clients</label>
+  
+          <div class="col-sm-8">
+            <select id="groupclient" class="form-control select2" multiple="multiple" data-placeholder="None Selected"
+                    style="width: 100%;">
+              <option *ngFor="let cl of Clients" value="{{cl.email}}">{{cl.name}} ({{cl.email}})</option>
+            </select>
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-danger" (click) = "AddGroup()">Submit</button>
+          <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+        </div>
+      </div>
+      <table id="example1" class="display table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Sno</th>
+          <th>Group Name</th>          
+          <th>Client Emails</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rq of Requests; let ind = index">
+          <td>{{ind + 1}}</td>
+          <td>{{rq.gname}}</td>          
+          <td>{{FormatEmails(rq.emails)}}</td>       
+          <td><label class="switch">
+            <input type="checkbox" [attr.checked]="rq.status == '1' ? 'checked' : null" (change) = "UpdateStatus($event,rq.g_id)">
+            <span class="slider round"></span>
+          </label></td>
+        </tr>               
+        </tbody>       
+      </table>
+   
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>

@@ -1,0 +1,308 @@
+<div class="container-fluid">
+    <section id="content_body">
+      <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <h3><i class="fa fa-heart fa-fw"></i>My Wish List</h3>
+            </div>
+          <div class="col-md-12">
+                <div class="panel with-nav-tabs panel-primary">
+                        <div class="panel-heading">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1primary" data-toggle="tab">List</a></li>
+                                   <!--  <li><a href="#tab2primary" data-toggle="tab" (click) = "fetchWishB();">B List</a></li>
+                                    <li><a href="#tab3primary" data-toggle="tab" (click) = "fetchWishC();">C List</a></li>
+                                    <li><a href="#tab4primary" data-toggle="tab" (click) = "fetchWishD();">D List</a></li> -->
+                                   <!--  <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
+                                            <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
+                                        </ul>
+                                    </li> -->
+                                </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab1primary">
+                                    <h3 id="errormsga">Sorry no cars found under this list.</h3>
+                                    <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myDataA;let cnt = index">
+                                        <div class="row">
+                                            <div class="col-md-12 topspace shadowbox">
+                                                    <div class="carlistbox">
+                                                    <a href="#"><div class="col-md-3 clbox">
+                                                        <div class="zoomer">         
+                                                           <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                           </div>
+                                                    </div></a>
+                                                    <div class="col-md-9 clbox">  
+                                                        <div class="col-md-10">
+                                                            <h4>{{bids.model}}</h4>
+                                                            <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.year}}</span>
+                                                            
+                                                        </div> 
+                                                        <div class="col-md-2">
+                                                            <div class="text-center">
+                                                            <h4 class="mainprice">{{bids.startPrice}}</h4>
+                                                            </div>
+                                                        </div>                            
+                                                       
+                                                          
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                              
+                                                                <button [routerLink]="['/prodetail', bids.prodid]" type="button" class="btn btn-warning" id="viewbtn">View</button>
+                                                        </div>      
+                                                    </div>
+                                                </div>
+                                                <div class="card card-body">
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                                    <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                                    <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                                    <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                       
+                                                        <!-- <div class="col-md-12 text-right wishlist">
+                                                            <span class="auctVenu">Move to </span>&nbsp;
+                                                            <span class="badge badge-danger wishbadge " (click)="moveToB(bids.prodid)">B</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToC(bids.prodid)">C</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToD(bids.prodid)">D</span>
+                                                        </div>   -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab2primary">
+                                    <h3 id="errormsgb">Sorry no cars found under this list.</h3>
+                                    <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myDataB;let cnt = index">
+                                        <div class="row">
+                                            <div class="col-md-12 topspace shadowbox">
+                                                    <div class="carlistbox">
+                                                    <a href="#"><div class="col-md-3 clbox">
+                                                        <div class="zoomer">         
+                                                           <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                           </div>
+                                                    </div></a>
+                                                    <div class="col-md-9 clbox">  
+                                                        <a href="#"><div class="col-md-10">
+                                                            <h4>{{bids.model}}</h4>
+                                                            <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.year}}</span>
+                                                        </div> 
+                                                        <div class="col-md-2">
+                                                            <div class="text-center">
+                                                            <h4 class="mainprice">{{bids.startPrice}}</h4>
+                                                            </div>
+                                                        </div>                            
+                                                       
+                                                        </a>     
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                              
+                                                                <button [routerLink]="['/prodetail', bids.prodid]" type="button" class="btn btn-warning" id="viewbtn">View</button>
+                                                        </div>      
+                                                    </div>
+                                                </div>
+                                                <div class="card card-body">
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                                    <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                                    <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                                    <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-12 text-right wishlist">
+                                                            <span class="auctVenu">Move to </span>&nbsp;
+                                                            <span class="badge badge-danger wishbadge " (click)="moveToA(bids.prodid)">A</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToC(bids.prodid)">C</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToD(bids.prodid)">D</span>
+                                                        </div>  
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab3primary">
+                                    <h3 id="errormsgc">Sorry no cars found under this list.</h3>
+                                    <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myDataC;let cnt = index">
+                                        <div class="row">
+                                            <div class="col-md-12 topspace shadowbox">
+                                                    <div class="carlistbox">
+                                                    <a href="#"><div class="col-md-3 clbox">
+                                                        <div class="zoomer">         
+                                                           <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                           </div>
+                                                    </div></a>
+                                                    <div class="col-md-9 clbox">  
+                                                        <a href="#"><div class="col-md-10">
+                                                            <h4>{{bids.model}}</h4>
+                                                            <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.year}}</span>
+                                                        </div> 
+                                                        <div class="col-md-2">
+                                                            <div class="text-center">
+                                                            <h4 class="mainprice">{{bids.startPrice}}</h4>
+                                                            </div>
+                                                        </div>                            
+                                                       
+                                                        </a>     
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                              
+                                                                <button [routerLink]="['/prodetail', bids.prodid]" type="button" class="btn btn-warning" id="viewbtn">View</button>
+                                                        </div>      
+                                                    </div>
+                                                </div>
+                                                <div class="card card-body">
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                                    <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                                    <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                                    <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-12 text-right wishlist">
+                                                            <span class="auctVenu">Move to </span>&nbsp;
+                                                            <span class="badge badge-danger wishbadge " (click)="moveToA(bids.prodid)">A</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToB(bids.prodid)">B</span>
+                                                            <span class="badge badge-danger wishbadge "(click)="moveToD(bids.prodid)">D</span>
+                                                        </div>  
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab4primary">
+                                    <h3 id="errormsgd">Sorry no cars found under this list.</h3>
+                                    <div class="container-fluid" id="csl{{cnt}}" *ngFor="let bids of myDataD;let cnt = index">
+                                        <div class="row">
+                                            <div class="col-md-12 topspace shadowbox">
+                                                    <div class="carlistbox">
+                                                    <a href="#"><div class="col-md-3 clbox">
+                                                        <div class="zoomer">         
+                                                           <img class="img-responsive" [attr.src]="bids.img" onError="this.src='./assets/Nilimage2.jpg';"/>
+                                                           </div>
+                                                    </div></a>
+                                                    <div class="col-md-9 clbox">  
+                                                        <a href="#"><div class="col-md-10">
+                                                            <h4>{{bids.model}}</h4>
+                                                            <span class="badge badge-danger" style="background:#285363;margin-bottom:10px;">Lot# {{bids.lot}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.make}}</span>
+                                                            <span class="badge badge-primary" style="background:#285363;margin-bottom:10px;">{{bids.year}}</span>
+                                                        </div> 
+                                                        <div class="col-md-2">
+                                                            <div class="text-center">
+                                                            <h4 class="mainprice">{{bids.startPrice}}</h4>
+                                                            </div>
+                                                        </div>                            
+                                                       
+                                                        </a>     
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                              
+                                                                <button [routerLink]="['/prodetail', bids.prodid]" type="button" class="btn btn-warning" id="viewbtn">View</button>
+                                                        </div>      
+                                                    </div>
+                                                </div>
+                                                <div class="card card-body">
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-map-marker fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Venue</td>
+                                                                    <td class="auctVenu" align="right">{{bids.auctionVenue}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-calendar-alt fa-fw"></i>&nbsp;&nbsp;&nbsp;Auction Date</td>
+                                                                    <td align="right" class="auctVenu">{{bids.auctiondate | slice:0:11}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                        <div class="col-md-4 featurebox">
+                                                                <table class="table">
+                                                                  <tr>
+                                                                    <td class="detailHeadin"><i class="fa fa-road"></i>&nbsp;&nbsp;&nbsp;Milage</td>
+                                                                    <td align="right" class="auctVenu">{{bids.mileage}}</td>
+                                                                  </tr>
+                                                                </table>
+                                                        </div>
+                                                     
+                                            
+                                                </div>
+                                                <div class="col-md-12 text-right wishlist">
+                                                    <span class="auctVenu">Move to </span>&nbsp;
+                                                    <span class="badge badge-danger wishbadge " (click)="moveToA(bids.prodid)">A</span>
+                                                    <span class="badge badge-danger wishbadge "(click)="moveToB(bids.prodid)">B</span>
+                                                    <span class="badge badge-danger wishbadge "(click)="moveToC(bids.prodid)">C</span>
+                                                </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+      </div>
+      </div>
+     </section>
+    </div>

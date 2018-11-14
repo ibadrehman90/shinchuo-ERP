@@ -1,0 +1,418 @@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Save Search</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" placeholder="Enter name for your search" class="form-control"/>
+          <br/>
+          <button class="btn searchbtn form-control">Save</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<div class="container-fluid">
+        <div class="row toprow">
+
+            <div class="col-md-4">
+
+                <div class="filters">
+                    <div class="col-md-12">
+                    <div class="col-md-4">
+                    <label class="radcontainer"><span>All</span>
+                    <input id="rdAll" type="radio" (change) = "SelectDay($event)" name="radio">
+                    <span class="checkmark"></span>
+                    </label>                                      
+                    </div>
+                    <div class="col-md-4" *ngFor="let item of loaddays; let cnt = index">
+                    <label class="radcontainer"><span id="rad{{cnt}}">{{item}}</span>
+                    <input id="rd{{cnt}}" type="radio" checked="{{item == 'Today' ? 'checked' : ''}}" (change) = "SelectDay($event)" name="radio">
+                    <span class="checkmark"></span>
+                    </label>                                      
+                    </div> 
+                    </div>
+                    
+                    <div class="col-md-6 tspace vleft">
+                    <select id="aucs" class="selectpicker" title="All"> 
+                            <option value="">All</option>
+                            <option *ngFor="let item of Auctions" value="{{item.AUCTION}}">{{item.AUCTION}}</option>                                               
+                    </select>
+                    </div>
+                    <div class="col-md-6 tspace vright" *ngIf="loginCheck != true">
+                    <select id="makes" class="selectpicker" multiple (change) = "SelectMakeArr($event)" title="Make"> 
+                            <option *ngFor="let item of myData" value="{{item.MARKA_NAME}}">{{item.MARKA_NAME}}</option>                                               
+                    </select>
+                    </div> 
+                    <div class="col-md-6 tspace vright" *ngIf="loginCheck == true">
+                    <select id="makes" class="selectpicker" multiple (change) = "SelectMakeArr($event)" title="Make"> 
+                        <div *ngFor="let item of loggedinMake | slice:0:mkelnt">
+                            <option value="{{item}}">{{item}}</option>
+                        </div>
+                        <div *ngIf="mkelnt > 0">
+                            <option disabled>__________________________________</option>
+                        </div>
+                        <div *ngFor="let item of loggedinMake | slice:mkelnt">
+                            <option value="{{item}}">{{item}}</option>
+                        </div>
+                    </select>
+                    </div> 
+                        
+                    <div class="col-md-6 vleft" *ngIf="loginCheck != true">
+                        <select id="models" class="selectpicker" multiple title="Model"> 
+                            <option *ngFor="let item of incomingData">{{item.MODEL_NAME}}</option>                                               
+                        </select>
+                    </div> 
+                    <div class="col-md-6 vleft" *ngIf="loginCheck == true">
+                        <select id="models" class="selectpicker" multiple title="Model"> 
+                            <div *ngFor="let item of loggedinModel | slice:0:mdllnt">
+                                <option value="{{item}}">{{item}}</option>
+                            </div>
+                            <div *ngIf="mdllnt > 0">
+                                <option disabled>__________________________________</option>
+                            </div>
+                            <div *ngFor="let item of loggedinModel | slice:mdllnt">
+                                <option value="{{item}}">{{item}}</option>
+                            </div>
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-6 tspace vright">
+                        <select id="chassiss" class="selectpicker" multiple title="Chassis"> 
+                            <option *ngFor="let item of Chassis" value="{{item.KUZOV}}" [innerHTML] = "item.KUZOV"></option>                                               
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vleft">
+                    <select id="mingrade" class="selectpicker" title="Auction Grade"> 
+                            <option value="">Auction Grade</option>
+                            <option *ngFor="let item of Grade" value="{{item.RATE}}" [innerHTML] = "item.RATE"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vright">
+                    <select id="maxgrade" class="selectpicker" title="Auction Grade"> 
+                            <option value="">Auction Grade</option>
+                            <option *ngFor="let item of Grade" value="{{item.RATE}}" [innerHTML] = "item.RATE"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vleft">
+                    <select id="minmile" class="selectpicker" title="Min Mileage"> 
+                            <option value="">Min Mileage</option>
+                            <option *ngFor="let item of Mileage" value="{{item.MILEAGE}}" [innerHTML] = "item.MILEAGE"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vright">
+                    <select id="maxmile" class="selectpicker"   title="Max Mileage"> 
+                            <option value="">Max Mileage</option>
+                            <option *ngFor="let item of Mileage" value="{{item.MILEAGE}}" [innerHTML] = "item.MILEAGE"></option>                                               
+                    </select>
+                    </div>                    
+
+                    <div class="col-md-6 tspace vleft">
+                    <select id="mincc" class="selectpicker" title="Min CC"> 
+                            <option value="">Min CC</option>
+                            <option *ngFor="let item of CC" value="{{item.ENG_V}}" [innerHTML] = "item.ENG_V"></option>                                               
+                    </select>
+                    </div>
+    
+                    <div class="col-md-6 tspace vright">
+                    <select id="maxcc" class="selectpicker" title="Max CC"> 
+                            <option value="">Max CC</option>
+                            <option *ngFor="let item of CC" value="{{item.ENG_V}}" [innerHTML] = "item.ENG_V"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vleft">
+                    <select id="minyear" class="selectpicker" title="Min Year"> 
+                            <option value="">Min Year</option>
+                            <option *ngFor="let item of Year" value="{{item.YEAR}}" [innerHTML] = "item.YEAR"></option>                                               
+                    </select>
+                    </div>
+    
+                    <div class="col-md-6 tspace vright">
+                    <select id="maxyear" class="selectpicker" title="Max Year"> 
+                            <option value="">Max Year</option>
+                            <option *ngFor="let item of Year" value="{{item.YEAR}}" [innerHTML] = "item.YEAR"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 tspace vleft">
+                    <select id="minprice" class="selectpicker" title="Min Price"> 
+                            <option value="">Min Price</option>
+                            <option *ngFor="let item of Price" value="{{item.START}}" [innerHTML] = "item.START"></option>                                               
+                    </select>
+                    </div>
+    
+                    <div class="col-md-6 tspace vright">
+                    <select id="maxprice" class="selectpicker" title="Max Price"> 
+                            <option value="">Max Price</option>
+                            <option *ngFor="let item of Price" value="{{item.START}}" [innerHTML] = "item.START"></option>                                               
+                    </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>For multiple LOT# use comma separator.</label>
+                        <input id="lots" type="text" class="form-control" placeholder="LOT 1, LOT 2, LOT 3,..." />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input id="minlot" type="text" class="form-control" placeholder="Min Lot" />
+                    </div>
+                    <div class="col-md-6">
+                        <input id="maxlot" type="text" class="form-control" placeholder="Max Lot" />
+                    </div>
+
+                    <div class="space"></div>
+                    <button class="btn searchbtn form-control" (click) = "SearchData()">Search</button>                              
+                    <div class="spacebtn"></div>
+                    <button class="btn searchbtn form-control" (click)="ClearSearch()">Clear Search</button>
+                    <div class="spacebtn" *ngIf="loginCheck"></div>
+                    <button *ngIf="loginCheck" class="btn searchbtn form-control" data-toggle="modal" data-target="#myModal">Save Search</button>
+                    <div *ngIf="loginCheck" class="spacebtn"></div>
+                    <button *ngIf="loginCheck" class="btn searchbtn form-control" (click)="SavedSearch()">Saved Search</button>           
+                    </div>
+
+            </div>
+            <div class="col-md-8"> 
+            
+            <div class="container-fluid">
+                <div class="row borderbot">
+                    <div class="col-md-6">
+                        <i class="fas fa-th" (click) = "boxview()"></i>
+                        <i class="fas fa-th-list" (click) = "listview()"></i>                                              
+                    </div>
+                    <div class="col-md-6 text-right">
+                    <ul class="pagination">
+                            <li><a href="#" (click) = "changeSplice(1)"><<</a></li>
+                            <li><a href="#" (click) = "changeSplice(2)">Prev</a></li>
+                            <li><a href="#" (click) = "changeSplice(3)">Next</a></li>                        
+                            <li><a href="#" (click) = "changeSplice(4)">>></a></li>
+                    </ul> 
+                    </div>                                  
+                </div>
+                <div class="row" id="sorttable">
+                    <table class="table">
+                        <tr>
+                            <th (click) = "SortData($event,'LOT',1)">Lot # <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'AUCTION_DATE',0)">Auction Date <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'AUCTION',0)">Auction <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'YEAR',1)">Year <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'KUZOV',0)">Chassis Frame <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'ENG_V',1)">Engine CC <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'KPP',0)">Equipment <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'MILEAGE',1)">Mileage <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'RATE',1)">Auction Grade <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "SortData($event,'START',1)">Start <i class="fas fa-long-arrow-alt-up sup"></i><i class="fas fa-long-arrow-alt-down sdown"></i></th>
+                            <th (click) = "ClearSort()"><i class="fas fa-times crosshover"></i></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row" id="emptydataerror">
+                    <div class="col-md-12 text-center">
+                        <h2><i>No Data Found!</i></h2>
+                    </div>
+                </div>
+            </div>    
+      
+            <div class="container-fluid" id="listview">
+                <div class="row">
+                    <div class="col-md-12 topspace shadowbox" id="csl{{cnt}}" *ngFor="let car of AllVehicleData;let cnt = index">
+                            <div class="carlistbox">
+                            <a [routerLink]="['./prodetail', car.ID]" target="_blank"><div class="col-md-2 clbox">
+                                <img id="visited" src="./assets/16.png" class="img-responsive" />
+                                <div class="zoomer">         
+                                   <img id="ar1" class="img-responsive listimg" src="{{checkURL(sliceimages(car.IMAGES))}}"/>
+                                </div>
+                            </div></a>
+                            <div class="col-md-10 clbox">  
+                                <div class="col-md-6">
+                                    <h4 id="ar3">{{car.MODEL_NAME}} <input title="Save to Favourites" type="checkbox" id="clw{{cnt}}" *ngIf="loginCheck" (change) = "SaveWishlist1($event,cnt,car.ID)"/></h4>
+                                    <span id="ar2" class="badge badge-danger" style="background:#000;margin-bottom:10px;">Lot # {{car.LOT}}</span>
+                                    <span id="ar6" class="badge badge-primary" style="background:#000;margin-bottom:10px;">{{car.MARKA_NAME}}</span>
+                                    <span id="arid" class="badge badge-primary" style="background:#000;margin-bottom:10px;display:none;">{{car.ID}}</span>
+                                </div> 
+                                <a [routerLink]="['./prodetail', car.ID]" target="_blank">
+                                <div class="col-md-4">                                    
+                                    <h6>Auction: <span id="ar4">{{car.AUCTION}}</span></h6>
+                                    <h6>Auction Date: <span id="ar5">{{car.AUCTION_DATE| slice:0:10}}</span></h6>
+                                </div> 
+                                <div class="col-md-2">
+                                    <div class="text-center">                                    
+                                    <h4 id="ar0" class="mainprice">¥ {{car.START}}</h4>
+                                    </div>
+                                    <div class="text-right">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div>                            
+                                <div class="col-md-12 col-sm-12 col-xs-12 itemdetail">
+                                    <div class="col-md-2">
+                                        <h6>Reg Year: <span>{{car.YEAR}}</span></h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Mileage: <span>{{car.MILEAGE}}</span></h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Engine: <span>{{car.ENG_V}} CC</span></h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Chassis: <span id="ar12">{{car.KUZOV}}</span></h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Grade: <span [innerHTML]="car.GRADE"></span></h6>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6>Rate: <span>{{car.RATE}}</span></h6>
+                                    </div>
+
+                                </div>  
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div></a>                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container-fluid" id="boxview">
+                <div class="row">
+                        <div class="col-md-15 col-sm-6 col-xs-12 carsect" id="csb{{cnt + 0}}" *ngFor="let car of AllVehicleData | slice:0:5;let cnt = index">
+                                
+                                <div class="carbox">
+                                    <div class="col-md-12 topviewbox">
+                                        <div class="col-md-6">
+                                                <input title="Save to Favourites" type="checkbox" id="cbw{{cnt + 0}}" *ngIf="loginCheck" (change) = "SaveWishlist($event,cnt + 0,car.ID)"/> 
+                                                <!--<span class="newdesign">&nbsp;&nbsp;{{car.AUCTION_DATE | slice:0:10}}</span>-->
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                           <!--<span id="cbw{{cnt + 0}}" class="wishsavebtn" *ngIf="loginCheck" (click) = "SaveWishlist($event,cnt + 0,car.ID)"><i class="fa fa-save"></i></span>&nbsp;&nbsp;-->
+                                        </div>
+                                    </div> 
+                                    <a [routerLink]="['./prodetail', car.ID]" target="_blank">
+                                    <div class="col-md-12">                                   
+                                    <img id="visited" src="./assets/16.png" class="img-responsive" />
+                                    <div class="zoomer">         
+                                        <img id="ar1" class="mainimage img-responsive" src="{{checkURL(sliceimages(car.IMAGES))}}"/>
+                                    </div>
+                                    <div class="col-xs-12 dteauc">
+                                        <div class="text-right">
+                                            <span><i class="fa fa-calendar-alt"></i> {{car.AUCTION_DATE | slice:0:10}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="newdesign"><b>{{car.YEAR}} {{car.MARKA_NAME}} {{car.MODEL_NAME}}</b> 
+                                            <br/>
+                                            <span>Start: ¥ {{FormatCurr(car.START)}}</span> Cond: {{car.RATE}} 
+                                            <br/> 
+                                            {{car.AUCTION}} {{car.MILEAGE}}km {{car.ENG_V}}cc {{car.LOT}} {{car.KUZOV}} {{car.KPP}}
+                                        </p>
+                                    </div>
+                                    </div></a>
+                                </div>                     
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-15 col-sm-6 col-xs-12 carsect" id="csb{{cnt + 5}}" *ngFor="let car of AllVehicleData | slice:5:10;let cnt = index">
+                                
+                                <div class="carbox">
+                                    <div class="col-md-12 topviewbox">
+                                        <div class="col-md-6">
+                                            <input title="Save to Favourites" type="checkbox" id="cbw{{cnt + 5}}" *ngIf="loginCheck" (change) = "SaveWishlist($event,cnt + 5,car.ID)"/> 
+                                            <!--<span class="newdesign">&nbsp;&nbsp;{{car.AUCTION_DATE | slice:0:10}}</span>-->
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <!--<span id="cbw{{cnt + 5}}" class="wishsavebtn" *ngIf="loginCheck" (click) = "SaveWishlist($event,cnt + 5,car.ID)"><i class="fa fa-save"></i></span>&nbsp;&nbsp;-->
+                                        </div>
+                                    </div> 
+                                    <a [routerLink]="['./prodetail', car.ID]" target="_blank">
+                                    <div class="col-md-12">                                   
+                                    <img id="visited" src="./assets/16.png" class="img-responsive" />
+                                    <div class="zoomer">         
+                                        <img id="ar1" class="mainimage img-responsive" src="{{checkURL(sliceimages(car.IMAGES))}}"/>
+                                    </div>
+                                    <div class="col-xs-12 dteauc">
+                                        <div class="text-right">
+                                            <span><i class="fa fa-calendar-alt"></i> {{car.AUCTION_DATE | slice:0:10}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="newdesign"><b>{{car.YEAR}} {{car.MARKA_NAME}} {{car.MODEL_NAME}}</b> 
+                                            <br/>
+                                            <span>Start: ¥ {{FormatCurr(car.START)}}</span> Cond: {{car.RATE}} 
+                                            <br/> 
+                                            {{car.AUCTION}} {{car.MILEAGE}}km {{car.ENG_V}}cc {{car.LOT}} {{car.KUZOV}} {{car.KPP}}
+                                        </p>
+                                    </div>
+                                    </div></a>
+                                </div>                     
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-15 col-sm-6 col-xs-12 carsect" id="csb{{cnt + 10}}" *ngFor="let car of AllVehicleData | slice:10:15;let cnt = index">
+                                
+                                <div class="carbox">
+                                    <div class="col-md-12 topviewbox">
+                                        <div class="col-md-6">
+                                            <input title="Save to Favourites" type="checkbox" id="cbw{{cnt + 10}}" *ngIf="loginCheck" (change) = "SaveWishlist($event,cnt + 10,car.ID)"/> 
+                                            <!--<span class="newdesign">&nbsp;&nbsp;{{car.AUCTION_DATE | slice:0:10}}</span>-->
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                           <!--<span id="cbw{{cnt + 10}}" class="wishsavebtn" *ngIf="loginCheck" (click) = "SaveWishlist($event,cnt + 10,car.ID)"><i class="fa fa-save"></i></span>&nbsp;&nbsp;-->
+                                        </div>
+                                    </div> 
+                                    <a [routerLink]="['./prodetail', car.ID]" target="_blank">
+                                    <div class="col-md-12">                                   
+                                    <img id="visited" src="./assets/16.png" class="img-responsive" />
+                                    <div class="zoomer">         
+                                        <img id="ar1" class="mainimage img-responsive" src="{{checkURL(sliceimages(car.IMAGES))}}"/>
+                                    </div>
+                                    <div class="col-xs-12 dteauc">
+                                        <div class="text-right">
+                                            <span><i class="fa fa-calendar-alt"></i> {{car.AUCTION_DATE | slice:0:10}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="newdesign"><b>{{car.YEAR}} {{car.MARKA_NAME}} {{car.MODEL_NAME}}</b> 
+                                            <br/>
+                                            <span>Start: ¥ {{FormatCurr(car.START)}}</span> Cond: {{car.RATE}} 
+                                            <br/> 
+                                            {{car.AUCTION}} {{car.MILEAGE}}km {{car.ENG_V}}cc {{car.LOT}} {{car.KUZOV}} {{car.KPP}}
+                                        </p>
+                                    </div>
+                                    </div></a>
+                                </div>                     
+                        </div>
+                </div>               
+            </div>  
+            
+            <div class="container-fluid paginat">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Page {{numPages > 0 ? sliceEnd + 1 : sliceEnd}} of {{numPages}}</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <ul class="pagination" style="margin-top:5px;">
+                            <li><a href="#" (click) = "changeSplice(1)"><<</a></li>
+                            <li><a href="#" (click) = "changeSplice(2)">Prev</a></li>
+                            <li><a href="#" (click) = "changeSplice(3)">Next</a></li>                        
+                            <li><a href="#" (click) = "changeSplice(4)">>></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+      </div>
+      

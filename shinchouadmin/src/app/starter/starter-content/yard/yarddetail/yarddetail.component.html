@@ -1,0 +1,202 @@
+<section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+  <!-- Horizontal Form -->
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Yard Details</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <!--<form class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Name</label>
+  
+          <div class="col-sm-8">
+            <input name="name" [(ngModel)] = "model.name" type="text" class="form-control" placeholder="Name">
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Address</label>
+  
+          <div class="col-sm-8">
+            <textarea name="address"[(ngModel)] = "model.address" type="text" class="form-control" placeholder="Address"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Custom Clearance</label>
+  
+          <div class="col-sm-8">
+            <input name="clearance" [(ngModel)] = "model.clearance" type="text" class="form-control" placeholder="Custom Clearance">
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Ward</label>
+  
+          <div class="col-sm-8">
+            <input name="ward"[(ngModel)] = "model.ward" type="text" class="form-control" placeholder="Ward">
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">City</label>
+  
+          <div class="col-sm-8">
+            <input name="city" [(ngModel)] = "model.city" type="text" class="form-control" placeholder="City">
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Country</label>
+  
+          <div class="col-sm-8">
+            <input name="country" [(ngModel)] = "model.country" type="text" class="form-control" placeholder="Country">
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Postcode</label>
+  
+          <div class="col-sm-8">
+            <input name="pos" [(ngModel)] = "model.pos" type="text" class="form-control" placeholder="Postcode">
+          </div>
+        </div>
+        
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Telephone No.</label>
+  
+          <div class="col-sm-8">
+            <input name="tel" [(ngModel)] = "model.tel" type="text" class="form-control" placeholder="Telephone No.">
+          </div>
+        </div>     
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Fax No.</label>
+  
+          <div class="col-sm-8">
+            <input name="fax" [(ngModel)] = "model.fax" type="text" class="form-control" placeholder="Fax No.">
+          </div>
+        </div> 
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Prefacture</label>
+  
+          <div class="col-sm-8">
+            <input name="prefacture" [(ngModel)] = "model.prefacture" type="text" class="form-control" placeholder="Prefacture">
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Usage</label>
+  
+          <div class="col-sm-8">
+            <input name="yusage" [(ngModel)] = "model.yusage" type="text" class="form-control" placeholder="Usage">
+          </div>
+        </div>
+       
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Email</label>
+  
+          <div class="col-sm-8">
+            <input name="email" [(ngModel)] = "model.email" type="text" class="form-control" placeholder="Email">
+          </div>
+        </div>
+        
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Contact Person</label>
+  
+          <div class="col-sm-8">
+            <input name="cname" [(ngModel)] = "model.cname" type="text" class="form-control" placeholder="Contact Person">
+          </div>
+        </div>
+  
+        <div class="form-group col-xs-6">
+          <label class="col-sm-4 control-label">Mobile No.</label>
+  
+          <div class="col-sm-8">
+            <input name="cmob" [(ngModel)] = "model.cmob" type="text" class="form-control" placeholder="Contact Person No.">
+          </div>
+        </div>
+      </div>
+      
+      <div class="box-footer text-center">
+        <button class="btn btn-success" (click) = "SaveForm()">Submit</button>
+        <button class="btn btn-danger" (click) = "ResetForm()">Reset</button>      
+      </div>
+     
+    </form>-->
+
+    <div class="box-body">      
+      <div class="col-xs-12">
+        <table>
+          <tr>
+            <td>Name</td>
+            <td>{{model.name}}</td>
+            <td>Branch</td>
+            <td>{{model.branch}}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{{model.address}}</td>
+            <td>Billing Address</td>
+            <td>{{model.billingaddress}}</td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td>{{model.city}}</td>
+            <td>Country</td>
+            <td>{{model.country}}</td>
+          </tr>
+          <tr>
+            <td>Postal code</td>
+            <td>{{model.pos}}</td>
+            <td>Prefacture</td>
+            <td>{{model.prefacture}}</td>
+          </tr>
+          <tr>
+            <td>Telephone No.</td>
+            <td>{{model.tel}}</td>
+            <td>Fax</td>
+            <td>{{model.fax}}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{model.email}}</td>
+            <td>Status</td>
+            <td>{{model.status == 1 ? 'Active' : 'Inactive'}}</td>
+          </tr>
+          <tr>
+            <td>Origin Ports</td>
+            <td>
+              <p *ngFor="let p of ports">{{p.port}}, {{p.country}}</p>
+            </td>
+            <td>Yard Services</td>
+            <td>
+              <p *ngFor="let p of yardservice">{{p.servicename}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Representatives</td>
+            <td>
+              <p *ngFor="let p of reps">{{p.repname}}<br/> {{p.mob}}<br/> {{p.email}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>    
+     
+    </div>
+
+    <div class="box-footer text-center">
+      <!--<button class="btn btn-danger" (click) = "EditYard()">Edit</button>-->
+      <button class="btn btn-black" (click) = "ReturnBack()">Go Back</button>      
+    </div>
+
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>
+  
+  

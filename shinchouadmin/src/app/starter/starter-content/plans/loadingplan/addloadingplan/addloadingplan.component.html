@@ -1,0 +1,153 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Loading Plan Registration</h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Container Type</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="contype" (change) = "SelectContainerType($event)">
+                  <option value="">Select Type</option>
+                  <option value="40FTHQ">40FTHQ</option>
+                  <option value="20FTHQ">20FTHQ</option>
+                  <option value="40FT">40FT</option>
+                </select>
+              </div>
+            </div>    
+            
+            <div class="col-xs-12">
+                <hr/>
+            </div>
+  
+            <div class="col-xs-12">
+              <p><b>Registered Yards</b> <button class="btn btn-danger" (click)="senttoyard()">Add Yard</button></p>
+              <hr/>
+              <input type="text" id="filteryard" class="form-control" (keyup)="filterYard($event)" placeholder="Filter Yards"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Yard</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of yards; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.name}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectYard($event, vl.y_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>   
+
+          <div id="next2" class="nextgroup">
+            <div class="col-xs-12">
+              <p><b>Stock of Yard - {{model.yard}}</b></p>
+              <hr/>
+              <input type="text" id="filtervehicles" class="form-control" (keyup)="filterVehicles($event)" placeholder="Enter Chassis"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Chassis</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Apx Length</th>
+                <th>Apx Width</th>
+                <th>Apx Height</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of VehicleList; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.prefix}}</td>
+                <td>{{item.make}}</td>
+                <td>{{item.model}}</td>
+                <td>{{item.year}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectVehicles($event, item.p_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="box-footer">
+          <div class="col-xs-12 text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+          </div>
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+          <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Loading Plan Code</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.plancode}}</p>                
+              </div>
+           </div>
+
+           <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Container Type</label>
+  
+              <div class="col-sm-12">
+                <p>{{SelectedContainerType}}</p>                
+              </div>
+           </div> 
+
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Yard</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.yard}}</p>
+              </div>
+            </div>          
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

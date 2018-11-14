@@ -1,0 +1,126 @@
+<div class="modal modal-info fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Change Password for User "{{passuser}}"</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+            <div class="form-group col-xs-12">
+                <input type="password" name="pass" [(ngModel)] = "model.pass" placeholder="New Password" class="form-control" />
+             </div>
+             <div class="form-group col-xs-12">
+                <input type="password" name="cpass" [(ngModel)] = "model.cpass" placeholder="Confirm Password" class="form-control" />
+             </div>         
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline" (click) = "ChangePassword()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<section class="content">
+  <div class="row">
+
+    <!--<div class="col-xs-12">
+        <div class="box box-default box-solid collapsed-box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+             
+            </div>
+          
+            <div class="box-body" style="display: none;">                   
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="sname" [(ngModel)] = "model.sname" placeholder="Shipper Name" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="cperson" [(ngModel)] = "model.cperson" placeholder="Contact Person" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="tel" [(ngModel)] = "model.tel" placeholder="Telephone No." class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="mob" [(ngModel)] = "model.mob" placeholder="Mobile No." class="form-control" />
+                 </div>                   
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="fax" [(ngModel)] = "model.fax" placeholder="Fax No." class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="email" [(ngModel)] = "model.email" placeholder="Email" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                  <select class="form-control" id="statselect">
+                    <option>All</option>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                 </div> 
+            </div>
+          
+            <div class="box-footer text-center">
+                <button class="btn btn-success" (click) = "SaveForm()">Search</button>
+                <button class="btn btn-danger" (click) = "ResetForm()">Reset</button>      
+              </div>
+          </div>
+    </div>-->
+
+
+    <div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Staff List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Mobile No.</th>
+        <th>Email Address</th>          
+        <th>Country/City</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bs of BSUsers; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{bs.bname}}</td>
+        <td>{{bs.username}}</td>       
+        <td>{{bs.mob}}</td>       
+        <td>{{bs.email}}</td>
+        <td>{{bs.country}}/{{bs.city}}</td>
+        <td><label class="switch">
+          <input type="checkbox" [attr.checked]="bs.status == '1' ? 'checked' : null" (change) = "UpdateStatus($event,bs.username)">
+          <span class="slider round"></span>
+        </label></td>
+        <td><button class="btn btn-danger" (click) = "UpdateBSUsers(bs.username)">Edit</button>&nbsp;
+          <button class="btn btn-warning">Send Email</button>&nbsp;
+          <button class="btn btn-black" data-toggle="modal" data-target="#modal-info" (click) = "SelectUser(bs.username)">Reset Pwd</button></td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

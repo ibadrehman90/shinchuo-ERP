@@ -1,0 +1,327 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-12">
+  
+    <div id="summarybox" class="col-xs-6">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Edit Shipment Consignee</h3>
+          </div>  
+          
+          <div class="box-body">
+              <div class="form-group col-xs-6">
+                <label class="col-sm-12 control-label">Consignee Usage</label>
+    
+                <div class="col-sm-12">
+                  <p>{{model.shipmentusage}}</p>
+                </div>
+              </div>
+    
+              <div class="form-group col-xs-6">
+                <label class="col-sm-12 control-label">Name</label>
+    
+                <div class="col-sm-12">
+                  <p>{{model.cname}}</p>
+                </div>
+              </div>
+
+              <div *ngIf="model.shipmentusage != 'Default'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Address
+                    <span class="pull-right-container penciledit" (click) = "EditItem(1)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+    
+                <div class="col-sm-12">
+                  <p>{{model.caddress}}</p>
+                </div>
+              </div>
+
+              <div *ngIf="model.shipmentusage != 'Default'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Contact Details
+                    <span class="pull-right-container penciledit" (click) = "EditItem(2)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+    
+                <div class="col-sm-12">
+                  <p><b>Tel:</b> {{model.tel}}&nbsp;&nbsp;<b>Fax:</b> {{model.fax}}&nbsp;&nbsp;<b>Email:</b> {{model.email}}</p>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12">
+                <label *ngIf="model.shipmentusage != 'Single Use'" class="col-sm-12 control-label">Clients
+                    <span class="pull-right-container penciledit" (click) = "EditItem(3)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+                
+                <label *ngIf="model.shipmentusage == 'Single Use'" class="col-sm-12 control-label">Clients</label>
+    
+                <div class="col-sm-12">
+                  <div class="col-sm-12">
+                  <p *ngFor="let item of Clients; let ind = index">{{item.clid}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="model.shipmentusage == 'Default'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Destinations
+                    <span class="pull-right-container penciledit" (click) = "EditItem(4)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+    
+                <div class="col-sm-12">
+                  <p *ngFor="let item of Destinations; let ind = index">{{item.port}}, {{item.country}}</p>
+                </div>
+              </div>
+    
+              <div *ngIf="model.shipmentusage == 'Single Use'" class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Vehicles
+                    <span class="pull-right-container penciledit" (click) = "EditItem(5)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+    
+                <div id="vehiclesum" class="col-sm-12">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                      <th>S.No.</th>
+                      <th>Chassis</th>
+                      <th>Make</th>
+                      <th>Model</th>
+                      <th>Year</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of Vehicles; let ind = index">
+                        <td>{{ind + 1}}</td>
+                        <td>{{item.prefix}}</td>
+                        <td>{{item.make}}</td>
+                        <td>{{item.model}}</td>
+                        <td>{{item.year}}</td>                       
+                      </tr>                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+          </div>
+    
+         <!-- <div *ngIf="divId == maxdivId" class="box-footer text-right">
+            <button class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button class="btn btn-danger" (click) = "SaveForm()">Submit</button>      
+          </div>-->
+      </div>
+    
+    </div>
+  
+  
+    <div id="yardup" class="col-xs-6">
+  
+        <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add Route</h3>
+            </div>
+            
+          <div class="box-body">
+    
+          <div id="next1" class="nextgroup">
+             <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Address</label>
+  
+              <div class="col-sm-8">
+                <textarea name="caddress" [(ngModel)] = "model.caddress" type="text" class="form-control" placeholder="Enter Address"></textarea>
+              </div>
+            </div>         
+          </div>
+  
+          <div id="next2" class="nextgroup">           
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Telephone</label>
+  
+              <div class="col-sm-8">
+                <input name="tel" [(ngModel)] = "model.tel" type="text" class="form-control" placeholder="Enter Telephone">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Fax</label>
+  
+              <div class="col-sm-8">
+                <input name="fax" [(ngModel)] = "model.fax" type="text" class="form-control" placeholder="Enter Fax">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Email</label>
+  
+              <div class="col-sm-8">
+                <input name="email" [(ngModel)] = "model.email" type="text" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div>
+
+          <div id="next3" class="nextgroup">
+
+              <div class="col-xs-12">
+                <p class="wtmargin"><b>Clients</b></p>
+                <hr  class="wtmargin"/>
+                <div id="portsum" class="col-sm-12">
+                  <table class="table">
+                    <tr *ngFor="let p of Clients; let ind = index;">
+                        <td>{{ind + 1}}</td>
+                        <td>{{p.clid}}</td>
+                        <td><span class="penciledit" (click) = "deleteclient(p.c_id)">
+                            <i class="fa fa-trash pull-right"></i>
+                        </span></td>
+                    </tr>
+                  </table>
+                  
+                </div>
+              </div>
+    
+              <div class="col-xs-12">
+                <p><b>Add Clients</b>  <button class="btnself btn-danger" (click)="senttoclient()">Add New Client</button></p>
+                <hr  class="wtmargin"/>
+                <input type="text" id="filterClient" class="form-control" (keyup)="filterClient($event)" placeholder="Filter Clients"/>
+              </div>
+    
+              <div class="tabcontainer col-xs-12">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                  <th>S.No.</th>
+                  <th>Username</th>
+                  <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pt of Client; let ind = index">
+                  <td>{{ind + 1}}</td>
+                  <td>{{pt.username}}</td>                
+                  <td>
+                    <button class="btnself btn-danger" (click) = "AddClient($event, pt.username)">Select</button>      
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+
+          <div id="next4" class="nextgroup">
+
+            <div class="col-xs-12">
+              <p class="wtmargin"><b>Destinations</b></p>
+              <hr  class="wtmargin"/>
+              <div id="portsum" class="col-sm-12">
+                <table class="table">
+                  <tr *ngFor="let p of Destinations; let ind = index;">
+                      <td>{{ind + 1}}</td>
+                      <td>{{p.port}}</td>
+                      <td>{{p.country}}</td>
+                      <td><span class="penciledit" (click) = "deleteport(p.d_id)">
+                          <i class="fa fa-trash pull-right"></i>
+                      </span></td>
+                  </tr>
+                </table>
+                
+              </div>
+            </div>
+  
+            <div class="col-xs-12">
+              <p><b>Add Ports</b>  <button class="btnself btn-danger" (click)="senttoport()">Add New Port</button></p>
+              <hr  class="wtmargin"/>
+              <input type="text" id="filteryard" class="form-control" (keyup)="filterYard($event)" placeholder="Filter Ports"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Port</th>
+                <th>Country</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pt of ports; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{pt.port}}</td>
+                <td>{{pt.country}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addport($event, pt.port_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next5" class="nextgroup">
+
+              <div class="col-xs-12">
+                <p class="wtmargin"><b>Vehicles</b></p>
+                <hr  class="wtmargin"/>
+                <div id="portsum" class="col-sm-12">
+                  <table class="table">
+                    <tr *ngFor="let p of Vehicles; let ind = index;">
+                        <td>{{ind + 1}}</td>
+                        <td>{{p.prefix}}</td>
+                        <td>{{p.make}} - {{p.model}} <br/> {{p.year}}</td>
+                        <td><span class="penciledit" (click) = "deletevehicle(p.v_id)">
+                            <i class="fa fa-trash pull-right"></i>
+                        </span></td>
+                    </tr>
+                  </table>
+                  
+                </div>
+              </div>
+    
+              <div class="col-xs-12">
+                <p><b>Add Vehicles</b></p>
+                <hr  class="wtmargin"/>
+                <input type="text" id="filtervehicle" class="form-control" (keyup)="filterVehicle($event)" placeholder="Filter Chassis"/>
+              </div>
+    
+              <div class="tabcontainer col-xs-12">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                  <th>S.No.</th>
+                  <th>Chassis</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pt of Vehicle; let ind = index">
+                  <td>{{ind + 1}}</td>
+                  <td>{{pt.prefix}}</td>
+                  <td>{{pt.make}}</td>
+                  <td>{{pt.model}}</td>
+                  <td>{{pt.year}}</td>
+                  <td>
+                    <button class="btnself btn-danger" (click) = "Addvehicle($event, pt.s_id)">Select</button>      
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+    
+          </div>
+    
+          <div class="box-footer text-right">  
+            <button *ngIf="ValSelect <= 2" class="btn btn-danger" (click) = "Save()">Save</button>      
+          </div>
+        </div>  
+    
+    </div>
+  </div>
+  </div>
+  </section>
+  
+  

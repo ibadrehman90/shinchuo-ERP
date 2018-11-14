@@ -1,0 +1,95 @@
+<section class="content">
+  <div class="row">
+
+      <div class="col-xs-12">
+          <div class="box box-default box-solid collapsed-box">
+              <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                  </button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body" style="display: none;">   
+                    <div class="form-group col-xs-4">
+                        <input name="lot" [(ngModel)] = "model.lot" type="text" class="form-control" placeholder="Lot">
+                    </div>
+
+                    <div class="form-group col-xs-4">
+                        <input name="client" [(ngModel)] = "model.client" type="text" class="form-control" placeholder="Client">
+                    </div>
+
+                    <div class="form-group col-xs-4">
+                        <input name="port" [(ngModel)] = "model.port" type="text" class="form-control" placeholder="Port">
+                    </div>
+                   
+                   <div class="form-group col-xs-4">
+                     <select id="country" class="form-control">
+                      <option value="">Select Country</option>
+                      <option *ngFor="let country of Countries" value="{{country.name}}">{{country.name}}</option>
+                    </select>
+                   </div>   
+                    <div class="form-group col-xs-4">
+                     <select id="drop" class="form-control">
+                      <option value="">Select Yard</option>
+                      <option *ngFor="let tc of yards" value="{{tc.name}}">{{tc.name}}</option>
+                    </select>
+                   </div>                           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer text-center">
+                  <button class="btn btn-danger" (click) = "SearchOrder()">Search</button>
+                  <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                </div>
+            </div>
+      </div>
+
+<div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Yard Vehicles List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Client</th>
+        <th>Lot</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Chassis</th>  
+        <th>Yard</th>      
+        <th>Port</th>
+        <th>Country</th>
+      
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of VehicleList; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{vehicle.client}}</td>
+        <td>{{vehicle.lot}}</td>
+        <td>{{vehicle.make}} - {{vehicle.model}}</td>
+        <td>{{vehicle.year}}</td>
+        <td>{{vehicle.prefix}}</td>
+        <td>{{vehicle.yardname}}</td>    
+        <td>{{vehicle.port}}</td>    
+        <td>{{vehicle.country}}</td> 
+          
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

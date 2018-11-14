@@ -1,0 +1,98 @@
+<!--<div class="container-fluid homebg">
+
+    <nav class="navbar navbar-main">
+        <div class="container container-narrow">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="./assets/L.png" width="200"/></a>
+          </div>
+          
+          <ul class="nav navbar-nav navbar-right" *ngIf="loginCheck">
+            <li><a href="/">Dashboard</a></li>
+          </ul>
+        </div>
+    </nav>    
+</div>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger" id="mesg">
+        <p>{{errormsg}}</p>
+      </div>
+    </div>
+    <div class="col-md-4 space">
+      <h2>Sign In</h2>
+      <div class="login">
+        <form>
+        <label>Email</label>
+        <input name="lemail" [(ngModel)] = "model.lemail" type="email" class="form-control" placeholder="Enter Email Address"/>
+        <div class="space"></div>
+        <label>Password</label>
+        <input name="lpassword" type="password" [(ngModel)] = "model.lpassword" class="form-control" placeholder="Enter Password"/>
+
+        <p class="text-right">Forgot Password?</p>
+        <div class="space"></div>
+        <button class="form-control" (click) = "signin()">Sign In</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-8 space">
+        <h2>Sign Up</h2>
+        <div class="signup">         
+          <form>
+          <div class="col-md-6">
+          <label>First Name</label>
+          <input name="username" [(ngModel)] = "model.username" type="text" class="form-control" placeholder="Enter Username" required/>
+          </div>
+          <div class="col-md-6">
+          <label>Last Name</label>
+          <input name="name" [(ngModel)] = "model.name" type="text" class="form-control" placeholder="Enter Full Name" required/>
+          </div>
+          <div class="col-md-6 space"> 
+          <label>Email</label>
+          <input name="email" [(ngModel)] = "model.email" type="email" class="form-control" placeholder="Enter Email Address" required/>
+          </div>
+          <div class="col-md-6 space">
+          <label>Password</label>
+          <input  name="password" [(ngModel)] = "model.password" type="password" class="form-control" placeholder="Enter Password" required/>
+          </div>
+          <div class="col-md-6 space">
+          <label>Country</label>
+          <select name="country" class="form-control" [(ngModel)] = "model.country" (change) = "SelectCountry($event)" required>            
+            <option>Select Country</option>
+            <option *ngFor="let country of Countries">{{country.name}}</option>
+          </select>
+          </div>
+          <div class="col-md-6 space">
+          <label>City</label>
+          <input name="city" type="text" [(ngModel)] = "model.city" class="form-control" placeholder="Enter City Name" required/>
+          </div>
+          <div class="col-md-6 space">
+          <label>Address</label> 
+          <input name="address" type="text" [(ngModel)] = "model.address" class="form-control" placeholder="Enter Address" required/>
+          </div>
+          <div class="col-md-6 space">
+          <label>Port</label> 
+          <select name="port" class="form-control" [(ngModel)] = "model.port" required>            
+            <option *ngFor="let item of Ports" value="{{item.port}}">{{item.port}}</option>
+          </select>
+          </div>
+          <div class="col-md-6 space">
+          <label>Company</label>
+          <input name="company" type="text" [(ngModel)] = "model.company" class="form-control" placeholder="Enter Company Name" required/>
+          </div>
+          <div class="col-md-6 space">
+          <label>Phone #</label> 
+          <input name="phone" type="text" [(ngModel)] = "model.phone" class="form-control" placeholder="Enter Phone Number" pattern="^(0|[1-9][0-9]*)$" required/>
+          </div>
+         
+          <div class="col-md-12 space">
+
+          </div>
+          <input type="submit" class="form-control" value="Sign Up" (click) = "signup()"/>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>

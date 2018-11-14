@@ -1,0 +1,23 @@
+.control-label
+{
+    text-align: left;
+}
+
+.btn
+{
+    border-radius: 0px;
+    width:80px;
+    margin:10px;
+}
+
+.table td, .table th
+{
+    white-space: nowrap;
+}
+
+.box-footer .btn
+{
+    border-radius: 0px;
+    width:80px;
+    margin:10px;
+}

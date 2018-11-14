@@ -1,0 +1,192 @@
+<section class="content">
+  <div class="row">
+<div class="col-md-12">
+  <!-- Custom Tabs -->
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab_1" data-toggle="tab">Default</a></li>
+      <li><a href="#tab_2" data-toggle="tab">Other</a></li> 
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab_1">
+        <form class="form-horizontal">
+          <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Agent Fee</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input (keyup) = "FormatAmount($event)" name="agent" [(ngModel)] = "model.agent" type="text" class="form-control" placeholder="Japanese exchange rate">
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Exchange Rate</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input (keyup) = "FormatAmount($event)" name="exchange"[(ngModel)] = "model.exchange" type="text" class="form-control" placeholder="Exchange Rate">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">G.S.T (%)</label>
+      
+              <div class="col-sm-8">
+                <input name="gst" [(ngModel)] = "model.gst" type="text" class="form-control" placeholder="GST">
+              </div>
+            </div>
+      
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Freight in NZ$</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input (keyup) = "FormatAmount($event)" name="freight" [(ngModel)] = "model.freight" type="text" class="form-control" placeholder="Freight in newzealand">
+                </div>
+              </div>
+            </div> 
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer text-center">
+            <button class="btn btn-danger" (click) = "SaveForm()">Update</button>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Default Calculation</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              
+              <table id="example1" class="display table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Sno</th>
+                  <th>Calculation Name</th>
+                  <th>Agent Fee</th>
+                  <th>G.S.T</th>        
+                  <th>Exhange Rate</th>
+                  <th>Freight in NZ$</th>
+                  <th>Changed On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let calc of Calculations; let ind = index">
+                  <td>{{ind + 1}}</td>
+                  <td>{{calc.cname}}</td>
+                  <td>¥ {{FormatCurr(calc.agent)}}</td>
+                  <td>{{calc.gst}}%</td>
+                  <td>¥ {{FormatCurr(calc.exchange)}}</td>
+                  <td>NZ$ {{FormatCurr(calc.freight)}}</td>
+                  <td>{{calc.statustime}}</td>        
+                </tr>               
+                </tbody>       
+              </table>
+           
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+      <!-- /.tab-pane -->
+      <div class="tab-pane" id="tab_2">
+        <form class="form-horizontal">
+          <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Name</label>
+      
+              <div class="col-sm-8">
+                <input id="ctext" name="ocname" [(ngModel)] = "model.ocname" type="text" class="form-control" placeholder="Name">
+              </div>
+            </div>
+          
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Agent Fee</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input (keyup) = "FormatAmount($event)" name="oagent" [(ngModel)] = "model.oagent" type="text" class="form-control" placeholder="Japanese exchange rate">
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Exchange Rate</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">¥</span>
+                <input (keyup) = "FormatAmount($event)" name="oexchange"[(ngModel)] = "model.oexchange" type="text" class="form-control" placeholder="Exchange Rate">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">G.S.T (%)</label>
+      
+              <div class="col-sm-8">
+                <input name="ogst" [(ngModel)] = "model.ogst" type="text" class="form-control" placeholder="GST">
+              </div>
+            </div>
+      
+            <div class="form-group col-xs-6">
+              <label class="col-sm-4 control-label">Freight in NZ$</label>
+      
+              <div class="col-sm-8">
+                <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input (keyup) = "FormatAmount($event)" name="ofreight" [(ngModel)] = "model.ofreight" type="text" class="form-control" placeholder="Freight in newzealand">
+                </div>
+              </div>
+            </div> 
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer text-center">
+            <button class="btn btn-danger" (click) = "SaveOtherForm()">Save</button>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Other Calculation</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              
+              <table id="example2" class="display table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Sno</th>
+                  <th>Calculation Name</th>
+                  <th>Agent Fee</th>
+                  <th>G.S.T</th>        
+                  <th>Exhange Rate</th>
+                  <th>Freight in NZ$</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="othertabcalc">                               
+                </tbody>       
+              </table>
+           
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>     
+    </div>
+    <!-- /.tab-content -->
+  </div>
+  <!-- nav-tabs-custom -->
+</div>
+<!-- /.col -->
+</div>
+</section>

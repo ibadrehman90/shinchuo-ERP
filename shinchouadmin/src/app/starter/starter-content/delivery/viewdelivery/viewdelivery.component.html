@@ -1,0 +1,106 @@
+<section class="content">
+  <div class="row">
+
+      <div class="col-xs-12">
+          <div class="box box-default box-solid collapsed-box">
+              <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                  </button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body" style="display: none;">   
+                    <div class="form-group col-xs-4">
+                        <input name="orderno" [(ngModel)] = "model.orderno" type="text" class="form-control" placeholder="Tracking No">
+                    </div>
+                   <div class="form-group col-xs-4">
+                      <div class="input-group date">
+                          <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                          </div>
+                          <input name="ofrom" type="text" class="form-control pull-right" id="datepicker" placeholder="Order From">
+                      </div>
+                   </div>
+                   <div class="form-group col-xs-4">
+                      <div class="input-group date">
+                          <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                          </div>
+                          <input name="oto" type="text" class="form-control pull-right" id="datepicker1" placeholder="Order Until">
+                      </div>
+                   </div>
+                   <div class="form-group col-xs-4">
+                     <select id="trans" class="form-control">
+                      <option value="">Select Delivery Company</option>
+                      <option *ngFor="let tc of transporters" value="{{tc.sname}}">{{tc.sname}}</option>
+                    </select>
+                   </div>   
+                   <div class="form-group col-xs-4">
+                      <select id="pick" class="form-control">
+                       <option value="">Select From</option>
+                       <option *ngFor="let tc of auctions" value="{{tc.aname}}">{{tc.aname}}</option>
+                     </select>
+                    </div>                          
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer text-center">
+                  <button class="btn btn-danger" (click) = "SearchOrder()">Search</button>
+                  <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                </div>
+            </div>
+      </div>
+
+<div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Delivery Packages List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Delivery Date</th>
+        <th>From</th>
+        <th>Delivery Company</th>
+        <th>Tracking No</th>  
+        <th>Time Slot</th>      
+        <th>Remarks</th>
+        <th>Input By</th>
+        <th>Input Date</th>
+        <th>Input Time</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of Orders; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{order.deliverydate}}</td>
+        <td>{{order.aname}}</td>
+        <td>{{order.sname}}</td>
+        <td>{{order.trackingno}}</td>
+        <td>{{order.timeslot}}</td>
+        <td>{{order.remark}}</td>
+        <td>{{order.inputby}}</td> 
+        <td>{{order.inputdate}}</td> 
+        <td>{{order.inputtime}}</td>              
+        <td>
+          <button class="btn btn-danger" (click) = "UpdateOrders(order.deliveryno)">Detail</button>
+        </td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

@@ -1,0 +1,855 @@
+.navbar-brand
+{
+    font-size:24px;
+    font-weight: bold;
+}
+
+.navbar-main
+{
+    z-index: 9999;
+}
+
+.navbar-main li a
+{
+    background:white;
+    color:#153e4d;  
+    padding:10px 20px; 
+}
+
+.navbar-main li a:hover
+{
+    background:#153e4d;
+    color:white;
+}
+
+.container-narrow
+{
+    padding:5px 30px;
+}
+
+.searchsec
+{
+    margin-top:-70px;
+}
+
+.container-narrower
+{
+    padding:10px 30px;
+}
+
+.homebg
+{
+    background:url('../../assets/2.jpg');
+    background-repeat: no-repeat;
+    min-height:20px;
+}
+.nav-tabs
+{
+    border:none;
+}
+.nav-tabs li
+{
+    width:auto !important;
+}
+
+.nav-tabs li a
+{
+     background:#285363;
+    color:white;
+    border:none;
+}
+
+#tabcontrol li a
+{
+    padding:10px 50px;
+    font-size:20px;
+    font-weight:bold;
+    border-radius:0px;
+}
+
+.tab-content
+{
+    min-height:0px;
+    padding:20px 0px;
+    width:auto;
+    border:none;
+}
+
+.tab-content .selectpicker
+{
+    margin:0px;
+}
+
+#mainsearch .container
+{
+    margin:0px;
+    padding:5px;
+}
+
+#mainsearch input[type="text"]
+{
+    border-radius:0px;
+    height:40px;
+}
+
+.filtsec
+{
+    background:linear-gradient(to bottom right, #285363, rgb(21,62,77));/*rgba(21,62,77,1);*/
+}
+
+#make, #model{
+    padding:15px 50px;
+    overflow: scroll;
+    overflow-x:hidden;
+    height:200px;
+    overflow-y: auto;
+}
+
+#make .container, #model .container
+{
+    width:98%;
+}
+
+.makebox
+{
+    padding:5px;
+}
+
+.makebox p{
+    font-style:italic;
+    background:rgba(240, 239, 239,0.4);
+    margin:0px;
+    font-size:20px;
+    padding:10px;
+}
+
+.makebox p:hover
+{
+    background:rgb(199, 252, 75);
+    transition:0.5s;
+    cursor: pointer;
+}
+
+.nav-tabs li
+{
+    width:100px;
+    text-align: center;
+}
+
+.tab-content
+{
+    border-bottom:1px solid rgb(230, 228, 228);
+}
+
+.filterbox
+{
+    margin-top:25px;
+}
+
+.filterbox select
+{
+    border-radius:0px;
+    padding:10px;
+    height:auto;
+}
+
+.filterbox select option
+{
+    padding:10px;
+}
+
+.carsection
+{
+    margin-top:40px;
+}
+
+.probox
+{
+    width:90%;
+    box-shadow:1px 1px 5px #999;
+    margin-bottom:20px;
+}
+
+.probox table
+{
+    margin:0px;
+}
+
+.probox h4{
+    margin-top:20px;
+}
+
+.itemdet
+{
+    font-size:12px;
+    background:rgb(236, 226, 226);
+    padding:10px;
+}
+
+.price
+{
+    background:rgb(56, 56, 56);
+    width:120px;
+    padding:10px 10px;
+    color:white;
+    text-align: center;
+    margin-top:40px;
+    position: absolute;
+}
+
+#dayContainer h4{
+    text-align: center;
+    font-size:14px;
+    font-weight:500;
+    border-bottom:1px solid #999;
+    padding:10px;
+}
+
+#dayContainer ul
+{
+    list-style:none;
+    padding-left:0px;
+    margin-left:0px;
+}
+
+#dayContainer ul li
+{
+    padding:3px;
+    background:#cece99;
+    color:white;
+    padding-left:20px;
+    border-bottom:1px solid #999;
+}
+
+#dayContainer ul li:hover
+{
+    cursor:pointer;
+    background:maroon;
+}
+
+#dayContainer ul .active
+{
+    background:maroon;
+}
+
+#dayContainer ul .inactive
+{
+    background:#cece99;
+}
+
+#tab2
+{
+    display:none;
+}
+
+.searchbox h5
+{
+    padding:10px;
+    text-align: center;
+}
+
+#searchsection
+{
+    display:none;
+}
+
+.searchbtn
+{
+    border-radius: 0px;
+    background:#ed3338;
+    color:white;
+}
+
+.searchbtn:hover
+{
+    color:#ed3338;
+    background:white;
+}
+
+.carsection a:hover
+{
+    text-decoration: none;
+    color:black;
+}
+
+.carbox
+{
+    margin-top:5px;  
+}
+
+.carsect{
+padding:0px 2px;
+margin-bottom:0px;
+margin-top:0px;
+}
+
+.pricetag
+{
+    background:#ed3338;
+    padding:5px;
+    margin-top:20px;
+    position:absolute;
+    color:white;
+    font-size:12px;
+}
+
+.carbox div
+{
+    padding:0px;
+    margin:0px;
+}
+
+.pricetag h5
+{
+    margin:10px;
+}
+
+.carbox hr{
+    margin:10px;
+}
+
+.carbox p
+{
+    color:#999;
+}
+
+.carbox .badge
+{
+border-radius:0px;
+font-size:10px;
+}
+
+.wishlist
+{
+    margin:0px;
+    margin-top:6px;
+}
+
+.carlistbox .wishlist
+{
+    margin-top:0px;
+    margin-bottom: 2px;
+}
+
+.wishlist p
+{
+    border:1px solid #ed3338;
+    padding: 2px 5px;
+    margin-top:10px;
+    float:left;
+    margin-right:5px;
+}
+
+.zoomer
+{
+    overflow:hidden;
+}
+
+.zoomer img:hover
+{
+    transform:scale(1.5);
+    transition:2s;
+}
+
+.tspace
+{
+    margin-bottom: 10px;
+}
+
+.vleft
+{
+    padding-right:2px;
+}
+
+.vright
+{
+    padding-left:2px;
+}
+
+.topspace
+{
+margin-bottom:20px;
+}
+
+.filters
+{
+    background:#333333;
+    height:auto;
+    padding:15px;
+    margin:0px;
+}
+
+.filters .space
+{
+    margin:20px;
+}
+
+.filters h4
+{
+    color:white;
+    font-weight: bold;
+    font-size:16px;
+    margin-bottom:25px;
+    border-bottom:1px solid white;
+    padding-bottom:10px;
+}
+
+.filters label
+{
+    color:white;
+    font-size:14px;
+}
+
+.carlistbox .img-responsive
+{
+    width:100%;
+}
+
+.carlistbox .badge
+{
+    border-radius:0px;
+    font-size:10px;
+}
+
+.carlistbox h4
+{
+    font-size:16px;
+}
+
+.carlistbox .clbox{
+    margin:0px;
+    padding:0px;
+}
+
+.shadowbox
+{
+    box-shadow: 0 2px 3px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding:0px;
+}
+
+.carlistbox hr
+{
+    margin:0px;
+}
+
+.carlistbox .badge-primary
+{
+    background:#666 !important;
+}
+
+.carlistbox .mainprice
+{
+    background:#ed3338;
+    padding:10px;
+    width:100px;
+    right:0px;
+    color:white;
+}
+
+    #listview
+    {
+        display:none;
+    }
+
+    #boxview
+    {
+        display:block;
+    }
+
+
+
+@media (max-width: 768px) {
+    #listview
+    {
+        display:none;
+    }
+
+    #boxview
+    {
+        display:block;
+    }
+}
+
+.borderbot
+{
+    padding-bottom:10px;
+    border-bottom: 1px solid #333;
+}
+
+.borderbot i
+{
+    color:#666;
+    font-size:15px;
+    border:1px solid #999;
+    padding:10px;
+}
+
+.borderbot i:hover
+{
+    cursor:pointer;
+    border:1px solid #fd8929;
+    color:#153e4d;
+}
+
+.wishbadge
+{
+border:1px solid #ed3338; 
+background:white;
+color:black;
+font-size:10px;
+}
+
+.wishbadge:hover
+{
+    background:#ed3338;
+    color:white;
+    cursor:pointer;
+}
+
+.wishactive
+{
+    background:#ed3338;
+    color:white;
+}
+
+#emptydataerror
+{
+    display:none;
+}
+
+#visited
+{
+    position:absolute;
+    right:0;
+    margin-right:0px;
+    margin-top:-2px;
+    display: none;
+}
+
+.clbox #visited
+{
+    width:50px;
+    margin-right:0px;    
+}
+
+.pagination
+{
+    margin:0px;
+}
+
+#boxview
+{
+    height:auto;/*565px*/
+    min-height:500px;
+    overflow: hidden;
+}
+
+#listview{
+    height:auto;
+    min-height:500px;
+    overflow:hidden;
+}
+
+.clrfilter
+{
+    position: absolute;
+    color:white;
+    right:25px;
+    margin-top:-30px;
+    font-size:12px;
+}
+
+.clrfilter:hover
+{
+    cursor: pointer;
+    color:#fd8929;
+}
+
+/** radio control */
+
+.radcontainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radcontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radcontainer input:checked ~ .checkmark {
+    border:2px solid #ed3338;
+    background: white;
+}
+
+.toprow
+{
+    margin-top:10px;
+}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radcontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radcontainer .checkmark:after {
+     top:4px;
+     left:4px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #ed3338;
+}
+/** */
+
+#sorttable th
+{
+    font-size:12px;
+    font-weight: 300;
+    border-bottom:1px solid #333;
+    background: white;
+}
+
+#sorttable table
+{
+    margin:0px;
+}
+
+.filters input[type="text"]
+{
+    border-radius:0px;
+    background:black;
+    border:1px solid white;
+    color:white;
+    margin-bottom:10px;
+}
+
+.filters select
+{
+    border-radius: 0px;
+    margin-bottom:10px;
+    background:transparent;
+    color:white;
+}
+
+.filters label
+{
+    font-size:12px;
+    font-weight: 100;
+}
+
+.filters .radcontainer
+{
+    font-size:14px;
+}
+
+.spacebtn
+{
+    margin-top:10px;
+}
+
+.mainimage
+{
+    width:100%;
+    height:110px;
+}
+
+.mdlclass
+{
+    font-size:12px;
+}
+
+.listimg
+{
+
+}
+.itemboxdetail h6
+{
+    font-size:10px;
+}
+
+.itemboxdetail td
+{
+    font-size:10px;
+}
+
+.itemboxdetail tr td:last-child
+{
+    color:#ed3338;
+}
+
+.itemboxdetail tr td:first-child
+{
+    width:50%;
+}
+
+.itemdetail h6
+{
+    font-size:12px;
+}
+
+.itemdetail
+{
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+.itemdetail span{
+    color:#ed3338;
+}
+
+.carlistbox hr
+{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.paginat
+{
+    border-top:1px solid #dedede;
+    margin-bottom:10px;
+}
+
+.paginat p{
+    font-size:12px;
+    padding-top:5px;
+}
+
+.newdesign
+{
+    font-size:12px;
+    color:black !important;
+}
+
+.newdesign span
+{
+    color:#ed3338;
+}
+
+.wishsavebtn
+{
+    border:1px solid #ed3338;
+    color:#ed3338;
+    padding:1px 4px;
+    background:#ffffff;
+}
+
+.wishsavebtn:hover
+{
+    background: #ed3338;
+    color:#fff;
+    cursor: pointer; 
+}
+
+.checkedwish
+{
+    background: #ed3338;
+    color:#fff;
+}
+
+.topviewbox
+{
+    margin-bottom:5px !important;
+    padding:0px 5px;
+}
+
+/** */
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+option.popularcl
+{
+    color:#ed3338 !important;
+}
+
+.dteauc
+{
+    margin-top:-18px !important;
+}
+
+.dteauc span{
+    font-size:11px;
+    color:white;
+    background:#ed3338;
+    padding:0px 2px;
+}
+
+.crosshover
+{
+    background:#ed3338;
+    color:white;
+    padding:2px;
+}
+
+.crosshover:hover{
+    background:black;
+    color:white;
+    cursor:pointer;
+}

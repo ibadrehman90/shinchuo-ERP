@@ -1,0 +1,15 @@
+th
+{
+    text-align: center;
+}
+
+.table td, .table th
+{
+    white-space: nowrap;
+}
+
+.img-responsive
+{
+    height:70px;
+    margin:0 auto;
+}

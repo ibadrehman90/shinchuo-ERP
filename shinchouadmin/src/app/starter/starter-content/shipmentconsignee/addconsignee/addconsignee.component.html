@@ -1,0 +1,288 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-7">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Shipment Consignee &nbsp;&nbsp;
+              <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+          </h3>
+          </div>
+          
+        <div class="box-body">
+
+
+          <div id="next1" class="nextgroup">
+
+              <div class="col-xs-12">
+                <h3>Select Consignee Usage</h3>
+                <hr/>
+              </div>
+    
+              <div class="col-xs-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Action</th>                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Single Use</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectUsage($event, 'Single Use')">Select</button>      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Multi Use</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectUsage($event, 'Multi Use')">Select</button>      
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Default</td>
+                      <td>
+                          <button class="btnself btn-danger" (click) = "SelectUsage($event, 'Default')">Select</button>      
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>   
+              
+          </div>
+
+          <div id="next2" class="nextgroup">
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Name</label>
+
+              <div class="col-sm-8">
+                <input name="cname" [(ngModel)] = "model.cname" type="text" class="form-control" placeholder="Enter Name">
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Address</label>
+
+              <div class="col-sm-8">
+                <textarea name="caddress" [(ngModel)] = "model.caddress" type="text" class="form-control" placeholder="Enter Address"></textarea>
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Telephone</label>
+
+              <div class="col-sm-8">
+                <input name="tel" [(ngModel)] = "model.tel" type="text" class="form-control" placeholder="Enter Telephone">
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Fax</label>
+
+              <div class="col-sm-8">
+                <input name="fax" [(ngModel)] = "model.fax" type="text" class="form-control" placeholder="Enter Fax">
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Email</label>
+
+              <div class="col-sm-8">
+                <input name="email" [(ngModel)] = "model.email" type="email" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div>
+
+          <div id="next3" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Destinations</b> <button class="btn btn-danger" (click)="senttoport()">Add Port</button></p>
+              <hr/>
+              <input type="text" id="filterport" class="form-control" (keyup)="filterPort($event)" placeholder="Filter Ports"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Port</th>
+                <th>Country</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of ports; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.port}}</td>
+                <td>{{vl.country}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "SelectDestination($event, vl.port_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next4" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Registered Clients</b> <button class="btn btn-danger" (click)="senttoclient()">Add Client</button></p>
+              <hr/>
+              <input type="text" id="filtervessel" class="form-control" (keyup)="filterClient($event)" placeholder="Filter Clients"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Client</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vl of Clients; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{vl.username}}</td>
+                <td>
+                  <button *ngIf="selectedUsage != 'Single Use'" class="btnself btn-danger" (click) = "AddClient($event, vl.username)">Select</button>      
+                  <button *ngIf="selectedUsage == 'Single Use'" class="btnself btn-danger" (click) = "SelectClient($event, vl.username)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <div id="next5" class="nextgroup">
+  
+            <div class="col-xs-12">
+              <p><b>Purchased Vehicles for Client - {{selectedclient}}</b></p>
+              <hr/>
+              <input type="text" id="filtervehicle" class="form-control" (keyup)="filterVehicles($event)" placeholder="Enter Chassis"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Chassis</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of Vehicle; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{item.prefix}}</td>
+                <td>{{item.make}}</td>
+                <td>{{item.model}}</td>
+                <td>{{item.year}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "AddVehicles($event, item.s_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="box-footer text-right">
+            <button  *ngIf="divId > 1" class="btn btn-black" (click) = "BackForm()">Back</button>
+            <button *ngIf="divId <= maxdivId - 1" class="btn btn-danger" (click) = "NextForm()">Next</button> 
+            
+            <button *ngIf="divId == maxdivId" class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button *ngIf="divId == maxdivId" class="btn btn-danger" (click) = "SaveForm()">Submit</button>          
+        </div>
+      </div>  
+  
+  </div>
+  
+  <div id="summarybox" class="col-xs-5">
+  
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Summary</h3>
+        </div>  
+        
+        <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Consignee Usage</label>
+  
+              <div class="col-sm-12">
+                <p>{{selectedUsage}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Name</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.cname}}</p>
+              </div>
+            </div>
+  
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Address</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.caddress}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Telephone</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.tel}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Fax</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.fax}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage != 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Email</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.email}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="selectedUsage == 'Default'" class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Destinations</label>
+  
+              <div id="selports" class="col-sm-12">
+                
+              </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Clients</label>
+  
+              <div id="selclient" class="col-sm-12">
+                
+              </div>
+            </div>
+            
+        </div>
+    </div>
+  
+  </div>
+  </div>
+  </section>
+  
+  

@@ -1,0 +1,306 @@
+<section class="content">
+<div class="row">
+<div class="col-xs-12">
+
+  <div id="summarybox" class="col-xs-6">
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Edit Yard - {{model.yardname}}</h3>
+        </div>  
+        
+        <div class="box-body">
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Yard Name</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.yardname}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Branch</label>
+  
+              <div class="col-sm-12">
+                <p>{{model.branch}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Address
+                  <span class="pull-right-container penciledit" (click) = "EditItem(1)">
+                      <i class="fa fa-pencil pull-right"></i>
+                  </span></label>
+  
+              <div class="col-sm-12">
+                <p>{{model.streetaddress}}</p>
+                <p>{{model.billingaddress}}</p>
+                <p>{{model.postalcode}} {{model.city}} {{model.prefacture}} {{model.country}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Contact
+                  <span class="pull-right-container penciledit" (click) = "EditItem(2)">
+                      <i class="fa fa-pencil pull-right"></i>
+                  </span></label>
+  
+              <div class="col-sm-12">
+                <p>Tel : {{model.tel}} &nbsp;&nbsp;&nbsp;&nbsp;
+                Fax : {{model.fax}} &nbsp;&nbsp;&nbsp;&nbsp;
+                Email: {{model.email}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-12 control-label">Representative
+                  <span class="pull-right-container penciledit" (click) = "EditItem(3)">
+                      <i class="fa fa-pencil pull-right"></i>
+                  </span></label>
+  
+              <div id="represent" class="col-sm-12">
+                <div class="col-xs-6" *ngFor="let p of reps">
+                  <p>{{p.repname}}<br/> {{p.mob}}<br/> {{p.email}}</p>
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Origin Ports
+                  <span class="pull-right-container penciledit" (click) = "EditItem(4)">
+                      <i class="fa fa-pencil pull-right"></i>
+                  </span></label>
+  
+              <div id="portsum" class="col-sm-12">
+                <p *ngFor="let p of yardports">{{p.port}}, {{p.country}}</p>
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-6">
+              <label class="col-sm-12 control-label">Yard Services
+                  <span class="pull-right-container penciledit" (click) = "EditItem(5)">
+                      <i class="fa fa-pencil pull-right"></i>
+                  </span></label>
+  
+              <div id="yardservicesum" class="col-sm-12">
+                <p *ngFor="let p of yardyardservice">{{p.servicename}}</p>
+              </div>
+            </div>
+            
+        </div>
+  
+       <!-- <div *ngIf="divId == maxdivId" class="box-footer text-right">
+          <button class="btn btn-black" (click) = "ResetForm()">Reset</button>
+          <button class="btn btn-danger" (click) = "SaveForm()">Submit</button>      
+        </div>-->
+    </div>
+  
+  </div>
+
+
+  <div id="yardup" class="col-xs-6">
+
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Yard</h3>
+          </div>
+          
+        <div class="box-body">
+  
+          <div id="next1" class="nextgroup">
+             <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Street Address</label>
+  
+              <div class="col-sm-8">
+                <input name="streetaddress" [(ngModel)] = "model.streetaddress" type="text" class="form-control" placeholder="Enter Street Address">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Billing Address</label>
+  
+              <div class="col-sm-8">
+                <input name="billingaddress" [(ngModel)] = "model.billingaddress" type="text" class="form-control" placeholder="Enter Billing Address">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Postal Code</label>
+  
+              <div class="col-sm-8">
+                <input name="postalcode" [(ngModel)] = "model.postalcode" type="text" class="form-control" placeholder="Enter Postal Code">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">City</label>
+  
+              <div class="col-sm-8">
+                <input name="city" [(ngModel)] = "model.city" type="text" class="form-control" placeholder="Enter City">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">State/Prefacture</label>
+  
+              <div class="col-sm-8">
+                <input name="prefacture" [(ngModel)] = "model.prefacture" type="text" class="form-control" placeholder="Enter State/Prefacture">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Country</label>
+  
+              <div class="col-sm-8">
+                <select class="form-control" id="cntry" [(ngModel)]="model.country">
+                  <!--<option value="">Select Country</option>-->
+                  <option *ngFor="let country of Countries" value="{{country.name}}">{{country.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+  
+          <div id="next2" class="nextgroup">           
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Telephone</label>
+  
+              <div class="col-sm-8">
+                <input name="tel" [(ngModel)] = "model.tel" type="text" class="form-control" placeholder="Enter Telephone">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Fax</label>
+  
+              <div class="col-sm-8">
+                <input name="fax" [(ngModel)] = "model.fax" type="text" class="form-control" placeholder="Enter Fax">
+              </div>
+            </div>
+  
+            <div class="form-group col-xs-12">
+              <label class="col-sm-4 control-label">Email</label>
+  
+              <div class="col-sm-8">
+                <input name="email" [(ngModel)] = "model.email" type="text" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div>
+  
+          <div id="next3" class="nextgroup">
+  
+            <div id="yardcontact">
+            
+            </div>
+          </div>
+  
+          <div id="next4" class="nextgroup">
+
+            <div class="col-xs-12">
+              <p class="wtmargin"><b>Origin Ports available to Yard</b></p>
+              <hr  class="wtmargin"/>
+              <div id="portsum" class="col-sm-12">
+                <table class="table">
+                  <tr *ngFor="let p of yardports; let ind = index;">
+                      <td>{{ind + 1}}</td>
+                      <td>{{p.port}}</td>
+                      <td>{{p.country}}</td>
+                      <td><span class="penciledit" (click) = "deleteyardport(p.yp_id)">
+                          <i class="fa fa-trash pull-right"></i>
+                      </span></td>
+                  </tr>
+                </table>
+                
+              </div>
+            </div>
+  
+            <div class="col-xs-12">
+              <p><b>Add Ports</b>  <button class="btnself btn-danger" (click)="senttoport()">Add New Port</button></p>
+              <hr  class="wtmargin"/>
+              <input type="text" id="filteryard" class="form-control" (keyup)="filterYard($event)" placeholder="Filter Ports"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Port</th>
+                <th>Country</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pt of ports; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{pt.port}}</td>
+                <td>{{pt.country}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addport($event, pt.port_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+          <div id="next5" class="nextgroup">
+
+            <div class="col-xs-12">
+              <p class="wtmargin"><b>Yard Services</b></p>
+              <hr  class="wtmargin"/>
+              <div id="portsum" class="col-sm-12">
+                <table class="table">
+                  <tr *ngFor="let p of yardyardservice; let ind = index;">
+                      <td>{{ind + 1}}</td>
+                      <td>{{p.servicename}}</td>
+                      <td><span class="penciledit" (click) = "deleteyardservice(p.ys_id)">
+                          <i class="fa fa-trash pull-right"></i>
+                      </span></td>
+                  </tr>
+                </table>
+                
+              </div>
+            </div>
+  
+            <div class="col-xs-12">
+              <p><b>Add Services</b> <button class="btnself btn-danger" (click)="senttoyardservice()">Add New Service</button></p>
+              <hr/>
+              <input type="text" id="filteryardservice" class="form-control" (keyup)="filterYardService($event)" placeholder="Filter Services"/>
+            </div>
+  
+            <div class="tabcontainer col-xs-12">
+            <table class="table table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                <th>S.No.</th>
+                <th>Service</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pt of yardservice; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{pt.servicename}}</td>
+                <td>
+                  <button class="btnself btn-danger" (click) = "Addservice($event, pt.ys_id)">Select</button>      
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="box-footer text-right">
+          <button *ngIf="ValSelect == 3" class="btn btn-danger" (click) = "Addrep()">Add Rep</button>  
+          <button *ngIf="ValSelect <= 3" class="btn btn-danger" (click) = "Save()">Save</button>      
+        </div>
+      </div>  
+  
+  </div>
+</div>
+</div>
+</section>
+

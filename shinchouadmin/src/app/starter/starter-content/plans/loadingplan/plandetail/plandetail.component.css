@@ -1,0 +1,46 @@
+.control-label
+{
+    text-align: left;
+}
+
+.btn
+{
+    border-radius: 0px;
+    width:80px;
+    margin:10px;
+}
+
+table
+{
+    width:100%;
+}
+
+table tr td
+{
+    width:25%;
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+table tr td:first-child
+{
+    font-weight: bold;
+}
+
+table tr td:nth-child(3)
+{
+    font-weight: bold;
+}
+
+#filterVehicle
+{
+    margin-bottom:10px;
+}
+
+.tabcontainer
+{
+    height:250px;
+    overflow: scroll;
+    overflow-y:auto;
+    overflow-x: hidden;
+}

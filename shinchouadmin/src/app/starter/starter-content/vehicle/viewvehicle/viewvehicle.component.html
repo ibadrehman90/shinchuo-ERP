@@ -1,0 +1,83 @@
+<section class="content">
+  <div class="row">
+
+    <div class="col-xs-12">
+        <div class="box box-default box-solid collapsed-box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: none;">                   
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="make" [(ngModel)] = "model.make" placeholder="Make" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="mod" [(ngModel)] = "model.mod" placeholder="Model" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="prefix" [(ngModel)] = "model.prefix" placeholder="Prefix" class="form-control" />
+                 </div>                                
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <button class="btn btn-danger" (click) = "SaveForm()">Search</button>
+                <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+              </div>
+          </div>
+    </div>
+
+
+    <div class="col-xs-12">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Vehicles List</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    
+    <table id="example1" class="display table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Prefix</th>        
+        <th>Year</th>
+        <th>Width</th>
+        <th>Length</th>          
+        <th>Height</th>
+        <th>M3</th>
+        <th>KGS</th>        
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of Vehicles; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{vehicle.make}}</td>
+        <td>{{vehicle.mod}}</td>
+        <td>{{vehicle.prefix}}</td>
+        <td>{{vehicle.year}}</td>
+        <td>{{vehicle.width}}</td>
+        <td>{{vehicle.length}}</td>
+        <td>{{vehicle.height}}</td> 
+        <td>{{vehicle.m3}}</td>
+        <td>{{vehicle.kgs}}</td>        
+        <td><button class="btn btn-black" (click) = "UpdateVehicles(vehicle.v_id)">Edit</button></td>
+      </tr>               
+      </tbody>       
+    </table>
+ 
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>

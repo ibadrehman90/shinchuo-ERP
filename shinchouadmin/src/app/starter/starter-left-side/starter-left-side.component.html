@@ -1,0 +1,464 @@
+<aside class="main-sidebar">
+
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+
+    <!-- Sidebar user panel (optional) 
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+      </div>
+      <div class="pull-left info">
+        <p>Alexander Pierce</p>-->
+        <!-- Status -->
+        <!--<a routerLink="/#"><i class="fa fa-circle text-success"></i> Online</a>-->
+      <!-- </div>
+    </div>-->
+
+    <!-- search form (Optional)
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+      </div>
+    </form>
+     /.search form -->
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu">
+      <li class="header">Modules</li>
+      <!-- Optionally, you can add icons to the links -->
+
+      <li class="treeview"   *ngIf = "userrole != 'staff'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Bids</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li><a routerLink="/latest_bids">Latest</a></li>
+          <li><a routerLink="/archived_bids">Old</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin' || userrole == 'buyer'">
+        <a routerLink="/purchasedlist"><i class="fa fa-user"></i> <span>Purchased List</span></a>        
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin'">
+        <a routerLink="/auctionvehicles"><i class="fa fa-user"></i> <span>Auction Vehicles</span></a>        
+      </li>
+
+      <li class="treeview" *ngIf = "userrole == 'salesuser'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Purchased List</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li><a routerLink="/purchasedlist">Client</a></li>
+          <li><a routerLink="/stocklist">Stock</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin'">
+        <a routerLink="/sales_stock"><i class="fa fa-user"></i> <span>Sales Stock</span></a>        
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'salesuser' || userrole == 'admin'">
+        <a routerLink="/soldlist"><i class="fa fa-user"></i> <span>Sold List</span></a>        
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'salesuser'">
+        <a routerLink="/clientgroup"><i class="fa fa-user"></i> <span>Group</span></a>        
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin'">
+        <a routerLink="/orders_list"><i class="fa fa-user"></i> <span>In-Land Transport</span></a>        
+      </li>
+
+      <!--<li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Orders</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li><a routerLink="/neworder">New Order</a></li>
+          <li><a routerLink="/orders_list">View Order</a></li>
+        </ul>
+      </li>-->
+
+      <li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Deliveries</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li><a routerLink="/newdelivery">New Delivery</a></li>
+          <li><a routerLink="/delivery_list">View Deliveries</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin'">
+        <a routerLink="/vehicleshistory"><i class="fa fa-user"></i> <span>Vehicles History</span></a>        
+      </li>
+
+      <li class="treeview"  *ngIf = "userrole == 'admin'">
+        <a routerLink="/yardvehicles"><i class="fa fa-user"></i> <span>Yard Vehicles</span></a>        
+      </li>
+
+      <li class="treeview" *ngIf = "userrole == 'admin' || userrole == 'staff'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Inspection</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink="/add_inspection">Inspection</a></li>
+            <li><a routerLink="/view_inspectionorder">Inspection Order</a></li>
+          </ul>
+      </li>    
+
+      <li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Booking</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink="/add_booking">Add</a></li>
+            <li><a routerLink="/view_booking">View/Edit</a></li>
+          </ul>
+      </li>
+
+      <li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Shipment Schedule</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink="/add_shipmentschedule">Add</a></li>
+            <li><a routerLink="/view_shipmentschedule">View/Edit</a></li>
+          </ul>
+      </li>
+
+      <li class="treeview">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Registrations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="treeview" *ngIf = "userrole == 'admin' || userrole == 'salesuser'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Client</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+                <li><a routerLink="/add_client">Add</a></li>
+                <li><a routerLink="/client_list">View/Edit</a></li>
+                <li><a routerLink="/userview">Front View</a></li>
+                <li  *ngIf = "userrole == 'salesuser' && showlcc == 1"><a routerLink="/lccclientrequest">LCC Setting</a></li>
+              </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Sales</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+                <li><a routerLink="/add_salesuser">Add</a></li>
+                <li><a routerLink="/salesuser_list">View/Edit</a></li>
+                <li><a routerLink="/lccrequest">LCC Requests</a></li>
+              </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Buyers</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+                <li><a routerLink="/add_buyer">Add</a></li>
+                <li><a routerLink="/buyer_list">View/Edit</a></li>
+                <li><a routerLink="/auction_assignment">Auction Assignment</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Staff</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+                <li><a routerLink="/add_staff">Add</a></li>
+                <li><a routerLink="/staff_list">View/Edit</a></li>
+              </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Vehicle</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+                <li><a routerLink="/add_vehicle">Add</a></li>
+                <li><a routerLink="/vehicle_list">View/Edit</a></li>
+              </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Yard</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_yard">Add</a></li>
+                  <li><a routerLink="/yard_list">View/Edit</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_yard"><i class="fa fa-user"></i> <span>Yard</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Yard Services</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_yardservice">Add</a></li>
+                  <li><a routerLink="/view_yardservices">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_yardservice"><i class="fa fa-user"></i> <span>Yard Services</span></a>        
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Auction</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_auction">Add</a></li>
+                  <li><a routerLink="/auction_list">View/Edit</a></li>
+                </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Transport Company</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_transportcompany">Add</a></li>
+                  <li><a routerLink="/transportcompany_list">View/Edit</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_booking"><i class="fa fa-user"></i> <span>Booking</span></a>        
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Booking Agency</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_bookingagent">Add</a></li>
+                  <li><a routerLink="/bookingagent_list">View/Edit</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_bookingagent"><i class="fa fa-user"></i> <span>Booking Agency</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Booking Agency Services</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_bookingservice">Add</a></li>
+                  <li><a routerLink="/view_bookingservices">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_bookingservice"><i class="fa fa-user"></i> <span>Booking Agency Services</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin' || userrole == 'staff'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Booking Charges</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_containercharge">Container Booking Charge</a></li>
+                  <li><a routerLink="/add_rorocharge">RORO Booking Charge</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_shipmentschedule"><i class="fa fa-user"></i> <span>Shipment Schedule</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Shipment Consignee</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_consignee">Add</a></li>
+                  <li><a routerLink="/view_consignee">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_consignee"><i class="fa fa-user"></i> <span>Shipment Consignee</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Loading Plan</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_loadingplan">Add</a></li>
+                  <li><a routerLink="/view_loadingplan">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_loadingplan"><i class="fa fa-user"></i> <span>Loading Plan</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Shipment Plan</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_shipmentplan">Add</a></li>
+                  <li><a routerLink="/view_shipmentplan">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_shipmentplan"><i class="fa fa-user"></i> <span>Shipment Plan</span></a>        
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Shipper</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_shipper">Add</a></li>
+                  <li><a routerLink="/shipper_list">View/Edit</a></li>
+                </ul>
+            </li>
+      
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Vessel</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_vessel">Add</a></li>
+                  <li><a routerLink="/vessel_list">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_vessel"><i class="fa fa-user"></i> <span>Vessel</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Voyage</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_voyage">Add</a></li>
+                  <li><a routerLink="/view_voyages">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_voyage"><i class="fa fa-user"></i> <span>Voyage</span></a>        
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'admin'">
+              <a routerLink="/#"><i class="fa fa-user"></i> <span>Ports</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a routerLink="/add_ports">Add</a></li>
+                  <li><a routerLink="/view_ports">View</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview" *ngIf = "userrole == 'staff'">
+              <a routerLink="/add_ports"><i class="fa fa-user"></i> <span>Ports</span></a>        
+            </li>
+
+
+      
+          </ul>
+      </li>
+
+      
+      <li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/lcc_setting"><i class="fa fa-user"></i> <span>LCC Settings</span></a>        
+      </li>
+
+      <li class="treeview" *ngIf = "userrole == 'admin'">
+        <a routerLink="/#"><i class="fa fa-user"></i> <span>Custom Settings</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink="/custom_make">Custom Make</a></li>
+            <li><a routerLink="/custom_model">Custom Model</a></li>
+          </ul>
+      </li>
+
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

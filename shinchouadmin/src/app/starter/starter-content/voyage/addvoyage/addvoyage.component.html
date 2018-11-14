@@ -1,0 +1,89 @@
+<section class="content">
+
+  <div class="row">
+  <div class="col-md-12 form-group">
+
+      <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Voyage Registration&nbsp;&nbsp;
+                <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+            </h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            
+            <div class="row">
+              <div class="col-md-2">
+                  <label class="form-control">Select Vessel</label>
+              </div>
+              <div class="col-md-4">      
+                <select class="form-control" (change) = "SelectVessel($event)" id="cntry">
+                  <option value="">Select Vessel</option>
+                  <option *ngFor="let vessel of Vessels" value="{{vessel.ys_id}}">{{vessel.vesselname}}</option>
+                </select>
+              </div>
+            </div>            
+          </div>
+          <!-- /.box-body -->
+        </div>
+  </div>
+  </div>
+
+
+  <div class="row" id="forCountry">
+
+
+      <div class="col-md-12 form-group">
+
+          <div class="box">
+              <div class="box-header">
+                <h3 class="box-title"><b>For Vessel:</b> &nbsp; {{SelectedVesselname}}</h3>
+                <hr/>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+
+                  <div class="col-xs-6">
+                      <label class="col-sm-12 control-label">Registered Voyages</label>
+                      <div class="tablecontainer1 col-sm-12">
+                      <table id="example1" class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.No.</th>
+                            <th>Voyage</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pt of Voyage; let ind = index">
+                            <td>{{ind + 1}}</td>
+                            <td>{{pt.voyage}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="form-group col-xs-12 topdivspace">
+                      <label class="col-sm-12 control-label">Voyage</label>
+  
+                      <div class="col-sm-12">
+                        <input name="voyagename" [(ngModel)] = "model.voyagename" type="text" class="form-control" placeholder="Enter Voyage">
+                      </div>
+  
+                     
+                      <div class="col-sm-12 text-right topspace">
+                        <button class="btn btn-danger" (click)="addvoyage()">Save</button>
+                      </div>
+  
+                    </div>
+                  </div>
+                          
+              </div>
+              <!-- /.box-body -->
+            </div>
+      </div>
+
+
+    
+    </div>
+</section>

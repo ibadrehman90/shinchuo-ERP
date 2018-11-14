@@ -1,0 +1,49 @@
+.topspace
+{
+    margin-top:10px;
+}
+
+.topdivspace
+{
+    margin-top:25px;
+}
+
+#forCountry
+{
+    display: none;
+}
+
+.table td, .table th
+{
+    white-space: nowrap;
+}
+
+#example1
+{
+    overflow:scroll;
+}
+
+.tablecontainer1
+{
+    height:200px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#cancelbtn
+{
+    display:none;
+}
+
+#filterplan
+{
+    margin-bottom:10px;
+}
+
+.tabcontainer
+{
+    height:250px;
+    overflow: scroll;
+    overflow-y:auto;
+    overflow-x: hidden;
+}

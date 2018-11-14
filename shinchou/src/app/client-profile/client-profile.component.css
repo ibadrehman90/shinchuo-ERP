@@ -1,0 +1,12 @@
+#savechanges{
+    background-color: #ed3338;
+}
+
+#cancel{
+    background-color: black;
+    color:white;
+}
+
+#alertmsg{
+    display: none;
+}

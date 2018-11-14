@@ -1,0 +1,88 @@
+<div class="modal modal-info fade" id="modal-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Request LCC Change for User '{{passuser}}'</h4>
+        </div>
+        <div class="modal-body">
+          <div class="box-body">
+              <div class="form-group col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">¥</span>
+                    <input (keyup) = "FormatAmount($event)" type="text" name="agent" [(ngModel)] = "model.agent" placeholder="New Agent Fee" class="form-control" />
+                  </div>                  
+              </div>
+              <div class="form-group col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">¥</span>
+                    <input (keyup) = "FormatAmount($event)" type="text" name="exchange" [(ngModel)] = "model.exchange" placeholder="Exchange Rate" class="form-control" />
+                  </div>
+              </div>
+              <div class="form-group col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="text" (keyup) = "FormatAmount($event)" name="freight" [(ngModel)] = "model.freight" placeholder="Freight in NZ$" class="form-control" />
+                  </div>
+              </div>    
+              <div class="form-group col-xs-12 text-center">
+                <p>NOTE: Changes in fee is the subject of Admin and Client confirmation.</p>
+              </div>     
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-black pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click) = "addRequest()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  
+  <section class="content">
+    <div class="row">
+  
+      <div class="col-xs-12">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Client LCC Setting</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      
+      <table id="example1" class="display table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Sno</th>
+          <th>Username</th>          
+          <th>Email Address</th>
+          <th>Agent Fee</th>
+          <th>GST</th>          
+          <th>Exchange Rate</th>
+          <th>Frieght in NZ$</th>          
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cl of Clients; let ind = index">
+          <td>{{ind + 1}}</td>
+          <td>{{cl.username}}</td>          
+          <td>{{cl.email}}</td>       
+          <td>¥ {{FormatCurr(cl.agentfee)}}</td>       
+          <td>{{cl.gst}}%</td>
+          <td>¥ {{FormatCurr(cl.exchange)}}</td>
+          <td>NZ$ {{FormatCurr(cl.freight)}}</td>           
+          <td><button class="btn btn-danger" data-toggle="modal" data-target="#modal-info" (click) = "SelectUser(cl.username)">Edit</button></td>
+        </tr>               
+        </tbody>       
+      </table>
+   
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>

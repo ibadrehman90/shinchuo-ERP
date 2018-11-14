@@ -1,0 +1,164 @@
+<section class="content">
+  <div class="row">
+  <div class="col-xs-12">
+  
+    <div id="summarybox" class="col-xs-6">
+  
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Edit Shipment Schedule</h3>
+          </div>  
+          
+          <div class="box-body">
+              <div class="form-group col-xs-6">
+                <label class="col-sm-12 control-label">Vessel</label>
+    
+                <div class="col-sm-12">
+                  <p>{{model.vesselname}}</p>
+                </div>
+              </div>
+    
+              <div class="form-group col-xs-6">
+                <label class="col-sm-12 control-label">Voyage</label>
+    
+                <div class="col-sm-12">
+                  <p>{{model.voyagename}}</p>
+                </div>
+              </div>
+    
+              <div class="form-group col-xs-12">
+                <label class="col-sm-12 control-label">Routes
+                    <span class="pull-right-container penciledit" (click) = "EditItem(1)">
+                        <i class="fa fa-pencil pull-right"></i>
+                    </span></label>
+    
+                <div id="yardservicesum" class="col-sm-12">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                      <th>S.No.</th>
+                      <th>Origin</th>
+                      <th>Destination</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let p of shipsch; let ind = index">
+                        <td>{{ind + 1}}</td>
+                        <td>{{p.originport}} <br/> {{p.etd}}</td>
+                        <td>{{p.destport}} <br/> {{p.eta}}</td>
+                      </tr>                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+          </div>
+    
+         <!-- <div *ngIf="divId == maxdivId" class="box-footer text-right">
+            <button class="btn btn-black" (click) = "ResetForm()">Reset</button>
+            <button class="btn btn-danger" (click) = "SaveForm()">Submit</button>      
+          </div>-->
+      </div>
+    
+    </div>
+  
+  
+    <div id="yardup" class="col-xs-6">
+  
+        <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add Route</h3>
+            </div>
+            
+          <div class="box-body">
+    
+            <div id="next1" class="nextgroup">
+  
+              <div class="col-xs-12">
+                <p class="wtmargin"><b>Shipment Schedules</b></p>
+                <hr  class="wtmargin"/>
+                <div id="portsum" class="col-sm-12">
+                  <table class="table">
+                    <tr *ngFor="let p of shipsch; let ind = index;">
+                        <td>{{ind + 1}}</td>
+                        <td>{{p.originport}} <br/> {{p.etd}}</td>
+                        <td>{{p.destport}} <br/> {{p.eta}}</td>
+                        <td><span class="penciledit" (click) = "deleteroute(p.r_id)">
+                            <i class="fa fa-trash pull-right"></i>
+                        </span></td>
+                    </tr>
+                  </table>
+                  
+                </div>
+              </div>
+    
+              <div class="col-xs-12">
+                <p><b>Add Route</b> <button class="btnself btn-danger" (click)="senttoport()">Add New Port</button></p>
+                <hr/>
+                <br/>
+              </div>
+    
+              <div class="tabcontainer col-xs-12">
+                <div class="form-group col-xs-12">
+                  <label class="col-sm-4 control-label">Origin Port</label>
+      
+                  <div class="col-sm-8">
+                    <select class="form-control" id="origin1">
+                      <option value="">Select Port</option>
+                      <option *ngFor="let pt of ports" value="{{pt.port_id}}">{{pt.port}}</option>
+                    </select>
+                  </div>
+                </div>
+      
+                <div class="form-group col-xs-12">
+                  <label class="col-sm-4 control-label">ETD</label>
+      
+                  <div class="col-sm-8">
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                        </div>
+                        <input id="etd1" name="bto" type="text" class="form-control pull-right" placeholder="ETD">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                  <label class="col-sm-4 control-label">Destination Port</label>
+      
+                  <div class="col-sm-8">
+                    <select class="form-control" id="dest1">
+                      <option value="">Select Port</option>
+                      <option *ngFor="let pt of ports" value="{{pt.port_id}}">{{pt.port}}</option>
+                    </select>
+                  </div>
+                </div>
+      
+                <div class="form-group col-xs-12">
+                  <label class="col-sm-4 control-label">ETA</label>
+      
+                  <div class="col-sm-8">
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                        </div>
+                        <input id="eta1" name="bto" type="text" class="form-control pull-right" placeholder="ETA">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+          <div class="box-footer text-right">  
+            <button *ngIf="ValSelect == 1" class="btn btn-danger" (click) = "Save()">Save</button>      
+          </div>
+        </div>  
+    
+    </div>
+  </div>
+  </div>
+  </section>
+  
+  

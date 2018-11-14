@@ -1,0 +1,477 @@
+<!--<div class="container-fluid homebg">
+
+    <nav class="navbar navbar-main">
+        <div class="container container-narrow">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img src="./assets/L.png" width="200"/></a>
+          </div>
+          
+          <ul class="nav navbar-nav navbar-right" *ngIf="loginCheck">
+            <li><a href="/prodetail">Dashboard</a></li>
+          </ul>
+        </div>
+    </nav>    
+</div>-->
+
+<div id="msgconfirm">
+    <div id="msgc">
+      <p>Your Bid Amount is </p>
+      <h3>¥ {{FormatCurr(model.estprice)}}</h3>
+      <!--<small>Note: You can cancel your bid upto 7:30 AM(JPY time) on the day of auction after that cancellation is based on circumstances.</small>
+      <br/>-->
+      <button class="btn" (click) = "Confirm()">Yes</button><button class="btn" (click) = "ConfirmClose()">No</button>
+    </div>
+</div>
+
+<div id="bidsuccess">
+    <div id="bsc">
+      <p>Your bid has been placed successfully. We have also send confirmation to your email.</p>
+      <table class="table">
+        <tr>
+          <th *ngIf="statArray.lot == 1 || userrole == 'salesuser'">Lot #</th>
+          <th>Model</th>
+          <th *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">Chassis</th>
+          <th *ngIf="statArray.auctiondate == 1 || userrole == 'salesuser'">Auction Date</th>
+          <th>Bidding Amt.</th>
+        </tr>
+        <tr>
+          <td *ngIf="statArray.lot == 1 || userrole == 'salesuser'">{{Lot}}</td>
+          <td>{{Model}} - {{Make}}</td>
+          <td *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">{{Chassis}}</td>
+          <td *ngIf="statArray.auctiondate == 1 || userrole == 'salesuser'">{{AuctionDate}}</td>
+          <td>¥ {{FormatCurr(model.estprice)}}</td>
+        </tr>
+      </table>
+      <!--<small>Note: You can cancel your bid upto 7:30 AM(JPY time) on the day of auction after that cancellation is based on circumstances.</small>
+      <br/>-->
+      <button class="btn" (click) = "ConfirmBClose()">Ok</button>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Price Calculator</h4>
+      </div>
+      <div class="modal-body">
+        <div class="filters">
+          <select id="clientselect" class="form-control" *ngIf="userrole == 'salesuser'">
+            <option value="{{loggedinuser}}">Stock</option>
+            <option *ngFor="let cl of Clients" value="{{cl.username}}">{{cl.username}} ({{cl.email}})</option>
+          </select>
+          <div class="space" *ngIf="userrole == 'salesuser'"></div>
+          <div class="input-group">
+            <span class="input-group-addon">¥</span>
+            <input (keyup) = "FormatAmount($event)" type="text" class="form-control" [(ngModel)] = "model.estprice" placeholder="Enter Price" />
+          </div>
+          <p id="lessbidmsg"></p>
+          <div class="space"></div>
+          <textarea rows="6" class="form-control" [(ngModel)] = "model.bidmsg" placeholder="Enter Message"></textarea>
+          <div class="space"></div>            
+          <button class="btn form-control" (click) = "PlaceBid()">Place Bid</button>           
+        </div>
+      </div>      
+    </div>
+
+  </div>
+</div>
+
+<div class="topSpaces"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+        <input title="Save to Favourites" type="checkbox" id="prodwish" *ngIf="loginCheck" (change) = "SaveWishlist($event,productID)"/>  
+      <!--<span id="prodwish" class="wishsavebtn" *ngIf="loginCheck" (click) = "SaveWishlist($event,productID)"><i class="fa fa-save"></i></span>-->
+    </div>
+    <div class="col-md-6 text-right">
+        <div class="col-md-12 text-right btncalc" id="btncalcid">
+            <div id="NextPrev">
+              <!--<a id="btncalcbtn" (click) = "showCalculator()">Place Bid</a>-->
+              <a id="btncalcbtn" data-toggle="modal" data-target="#myModal">Place Bid</a>
+              <a (click) = "CloseWin()">Close</a>
+              <a (click) = "NavigateID(prevStr)">Prev</a>
+              <a (click) = "NavigateID(nextStr)">Next</a>
+            </div>
+        </div>
+        <!--<div class="col-md-12 pricecalc" id="calcdiv">          
+            <div class="filters">
+              
+              <h4>Price Calculator</h4>
+              <select id="clientselect" class="form-control" *ngIf="userrole == 'salesuser'">
+                <option *ngFor="let cl of Clients" value="{{cl.username}}">{{cl.username}} ({{cl.email}})</option>
+              </select>
+              <div class="space" *ngIf="userrole == 'salesuser'"></div>
+              <input type="text" class="form-control" [(ngModel)] = "model.estprice" placeholder="Enter Price" />
+              <div class="space"></div>
+              <textarea rows="6" class="form-control" [(ngModel)] = "model.bidmsg" placeholder="Enter Message"></textarea>
+              <div class="space"></div>            
+              <button class="btn form-control" (click) = "PlaceBid()">Place Bid</button>           
+            </div>
+        </div> --> 
+        <div class="col-md-12 text-center" id="bidplaced">
+            <p><b>Bid Already Placed!</b></p>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table text-center table-bordered table-striped">
+        <tr>
+          <td *ngIf="statArray.lot == 1 || userrole == 'salesuser'">Lot #</td>
+          <td *ngIf="statArray.auctiondate == 1 || statArray.auction == 1 || userrole == 'salesuser'"><span *ngIf="statArray.auctiondate == 1 || userrole == 'salesuser'">Auction date</span> <span *ngIf="statArray.auction == 1 || userrole == 'salesuser'">& Auction</span></td>
+          <td><span>Model</span> <span>& Year</span> <span *ngIf="statArray.color == 1 || userrole == 'salesuser'">& Color</span></td>
+          <td *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">Chassis Frame</td>
+          <td *ngIf="statArray.enginecc == 1 || statArray.equipment == 1 || userrole == 'salesuser'"><span *ngIf="statArray.enginecc == 1 || userrole == 'salesuser'">Engine CC</span> <span *ngIf="statArray.equipment == 1 || userrole == 'salesuser'">& Equipment</span></td>
+          <td *ngIf="statArray.mileage == 1 || statArray.grade == 1 || userrole == 'salesuser'"><span *ngIf="statArray.mileage == 1 || userrole == 'salesuser'">Mileage</span> <span *ngIf="statArray.grade == 1 || userrole == 'salesuser'">& Auction Grade</span></td>
+          <td *ngIf="statArray.startprice == 1 || userrole == 'salesuser'">Start</td>
+        </tr>
+        <tr>
+          <td *ngIf="statArray.lot == 1 || userrole == 'salesuser'">{{Lot}}</td>
+          <td *ngIf="statArray.auctiondate == 1 || statArray.auction == 1 || userrole == 'salesuser'"><span *ngIf="statArray.auctiondate == 1 || userrole == 'salesuser'">{{AuctionDate}}</span> <br/> <span *ngIf="statArray.auction == 1 || userrole == 'salesuser'">{{Auction}}</span></td>
+          <td><span>{{Model}} - {{Make}}</span> <br/> <span>{{Year}}</span> <span *ngIf="statArray.color == 1 || userrole == 'salesuser'">& {{Color}}</span></td>
+          <td *ngIf="statArray.chassis == 1 || userrole == 'salesuser'">{{Chassis}}</td>
+          <td *ngIf="statArray.enginecc == 1 || statArray.equipment == 1 || userrole == 'salesuser'"><span *ngIf="statArray.enginecc == 1 || userrole == 'salesuser'">{{Engine}} cc</span> <span *ngIf="statArray.equipment == 1 || userrole == 'salesuser'">& {{Transmission}}</span></td>
+          <td *ngIf="statArray.mileage == 1 || statArray.grade == 1 || userrole == 'salesuser'"><span *ngIf="statArray.mileage == 1 || userrole == 'salesuser'">{{Mileage}} km</span> <br/> <span *ngIf="statArray.grade == 1 || userrole == 'salesuser'">{{Rate}}</span></td>
+          <td *ngIf="statArray.startprice == 1 || userrole == 'salesuser'">¥ {{FormatCurr(Price)}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="topSpaces"></div>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">         
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="topimg">                    
+                    <a href="{{imageData[0]}}" data-lightbox="image" data-title="{{Make}} - {{Model}}">
+                      <img id="mainimg" src="{{imageData[0]}}" />
+                    </a>
+                    </div>
+                </div>
+                <!--<div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="col-md-2 col-xs-2 col-sm-2 thumbbox" *ngFor = "let imag of imageData">
+                    <img class="img_s" src="{{imag}}" (click) = "SelectPic($event)" />
+                  </div>                
+                </div>-->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                 <div class="well">           
+            
+                  <div id="myCarousel" class="carousel slide">                
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                      <div class="item active">
+                          <div class="row">
+                              <div class="col-sm-3 col-xs-3" *ngFor = "let imag of imageData | slice:0:4;"><a href="{{imag}}" data-lightbox="image" data-title="{{Make}} - {{Model}}"><img src="{{imag}}" alt="Image" class="img_s" (mouseenter) = "SelectPic($event)"></a>
+                              </div>                                                       
+                          </div>
+                          <!--/row-->
+                      </div>
+                      <div class="item" *ngIf="img4">
+                          <div class="row">
+                              <div class="col-sm-3 col-xs-3" *ngFor = "let imag of imageData | slice:5:9"><a href="{{imag}}" data-lightbox="image" data-title="{{Make}} - {{Model}}"><img src="{{imag}}" alt="Image" class="img_s" (mouseenter) = "SelectPic($event)"></a>
+                              </div>                                                       
+                          </div>
+                          <!--/row-->
+                      </div> 
+                       <div class="item" *ngIf="img8">
+                          <div class="row">
+                              <div class="col-sm-3 col-xs-3" *ngFor = "let imag of imageData | slice:9:13"><a href="{{imag}}" data-lightbox="image" data-title="{{Make}} - {{Model}}"><img src="{{imag}}" alt="Image" class="img_s" (mouseenter) = "SelectPic($event)"></a>
+                              </div>                                                       
+                          </div>
+                          <!--/row-->
+                      </div>  
+                      <!--/item-->
+                  </div>
+                  <!--/carousel-inner--> 
+                  <a *ngIf="img4" class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+
+                  <a *ngIf="img4" class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                  </div>
+                  <!--/myCarousel-->
+                 </div>
+                </div>                          
+      </div>
+      <div class="col-md-6 lesspadd">        
+        <div class="col-md-12" *ngIf="statArray.sheet == 1 || userrole == 'salesuser'">
+          <a href="{{imagethumbs}}" data-lightbox="imgsheet" data-title="{{Make}} - {{Model}} Auction Sheet"><img class="img-responsive" src={{imagethumbs}} style="margin:0 auto;margin-bottom:5px;"/></a>
+        </div>  
+      </div>
+  </div>
+
+  <div class="row" *ngIf="statArray.sheetdetail == 1 && statArray.sheet == 1 || userrole == 'salesuser'">
+      <div class="col-md-12">
+        <h4 style="margin-left:20px;">Understanding the Japanese Auction Sheet</h4>
+      </div>
+      <div class="col-md-12">
+                   
+          <div class="col-md-12">    
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">A1</span></td>
+                     <td>Small Scratch</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">A2</span></td>
+                     <td>Scratch</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">A3</span></td>
+                     <td>Big Scratch</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">B1</span></td>
+                     <td>Small dent with scratch (size like a thumb)</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">B2</span></td>
+                     <td>Dent with scratch (size like flat of the hand)</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">B3</span></td>
+                     <td>Big Dent with scratch (size like elbow)</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">C1</span></td>
+                     <td>Corrosion</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">C2</span></td>
+                     <td>Heavy Corrosion</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">E1</span></td>
+                     <td>Few Dimples</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">E2</span></td>
+                     <td>Several Dimples</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">E3</span></td>
+                     <td>Many Dimples</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">G</span></td>
+                     <td>Stone chip in glass</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">H</span></td>
+                     <td>Paint faded</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">P</span></td>
+                     <td>Paint marked</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">R</span></td>
+                     <td>Repaired Crack on Windshield</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">RX</span></td>
+                     <td>Repaired Crack on Windshield (needs to be replaced)</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">S1</span></td>
+                     <td>Rust</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">S2</span></td>
+                     <td>Heavy Rust</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">U1</span></td>
+                     <td>Small Dent</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">U2</span></td>
+                     <td>Dent</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">U3</span></td>
+                     <td>Big Dent</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">W1</span></td>
+                     <td>Repair Mark/Wave (hardly detectable)</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">W2</span></td>
+                     <td>Repair Mark/Wave</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">W3</span></td>
+                     <td>Obvious Repair Mark/Wave (needs to be repainted)</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">X</span></td>
+                     <td>Need to be replaced</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">XX</span></td>
+                     <td>Replaced</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">X1</span></td>
+                     <td>Small Crack on Windshield (approximately 1cm)</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">Y1</span></td>
+                     <td>Small Hole or Crack</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">Y2</span></td>
+                     <td>Hole or Crack</td>
+                   </tr>
+                 </table>
+             </div>
+             <div class="col-md-4 auctionbox">
+                 <table class="table">
+                   <tr>
+                     <td><span class="badge badge-primary">Y3</span></td>
+                     <td>Big Hole or Crack</td>
+                   </tr>
+                 </table>
+             </div>
+           </div>                      
+      </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<section class="content">
+
+  <div class="row">
+
+
+      <div class="col-md-12 form-group">
+
+          <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Booking Charge Registration - Container &nbsp;&nbsp;
+                  <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+              </h3>
+                <hr/>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+
+                  <div class="col-xs-6">
+                      <label class="col-sm-12 control-label">Registered Charges</label>
+                      <div class="tablecontainer1 col-sm-12">
+                      <table id="example1" class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.No.</th>
+                            <th>Charges</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let ch of charges; let ind = index">
+                            <td>{{ind + 1}}</td>
+                            <td>{{ch.charge}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                  </div>
+                
+              <div class="col-xs-6">
+                <div class="form-group col-xs-12 topdivspace">
+                  <label class="col-sm-12 control-label">Booking Charge</label>
+
+                  <div class="col-sm-12">
+                    <input name="chargename" [(ngModel)] = "model.chargename" type="text" class="form-control" placeholder="Enter Container Booking Charge">
+                  </div>
+
+                 
+                  <div class="col-sm-12 text-right topspace">
+                    <button class="btn btn-danger" (click)="addcharge()">Save</button>
+                  </div>
+
+                </div>
+              </div>
+
+                
+                          
+              </div>
+              <!-- /.box-body -->
+            </div>
+      </div>
+
+
+    
+    </div>
+</section>

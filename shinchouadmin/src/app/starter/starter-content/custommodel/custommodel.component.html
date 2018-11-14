@@ -1,0 +1,106 @@
+<section class="content">
+
+<div class="row">
+  <div class="col-md-12 form-group">
+    <div class="col-md-2">
+        <label class="form-control">Select Country</label>
+    </div>
+    <div class="col-md-4">      
+      <select class="form-control" (change) = "SelectCountry($event)" id="cntry">
+        <option value="">Select Country</option>
+        <option *ngFor="let country of Countries" value="{{country.name}}">{{country.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-control">Select Make</label>
+    </div>
+    <div class="col-md-4">      
+      <select id="mkes" class="form-control" (change) = "SelectMake($event)">
+        <option value="">Select Make</option>
+        <option *ngFor="let make of Makes" value="{{make}}">{{make}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+  
+<div class="row" *ngIf="selectedMake != ''">
+  <div class="col-sm-4 form-group">
+    <select class="form-control" id="apimakes">
+        <option value="">Select Model</option>
+        <option *ngFor="let item of Models" value="{{item.MODEL_NAME}}">{{item.MODEL_NAME}}</option>
+    </select>
+  </div>
+  <div class="col-sm-4 form-group">
+    <button class="btn btn-danger form-control" (click) = "Addmake()">Add Popular</button>
+  </div>
+  <div class="col-sm-4 form-group">
+    <button class="btn btn-black form-control" (click) = "Addother()">Add Other</button>
+  </div>
+</div>
+
+<div class="row" *ngIf="selectedMake != ''">
+  <div class="col-sm-4">
+    <label>Popular Models List - {{selectedMake}} | {{selectedCountry}}</label>
+    <ul class="list-group sortable" [sortablejs]="normalList2">
+      <li class="list-group-item" *ngFor="let item of normalList2; let cnt = index">{{ item }} <a (click) = "RemoveList(cnt)">Remove</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-4">
+    <label>Other Models List - {{selectedMake}} | {{selectedCountry}}</label>
+    <ul class="list-group sortable" [sortablejs]="normalList1">
+      <li class="list-group-item" *ngFor="let item of normalList1; let cnt = index">{{ item }} <a (click) = "RemoveList1(cnt)">Remove</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-danger form-control" (click) = "SendMake()">Save</button>
+  </div>
+</div>
+
+</section>
+
+
+
+<div class="pane pane--table1">
+  <div class="pane-hScroll">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sno</th>
+          <th>Company Name</th>
+          <th>Contact Person</th>
+          <th>Telephone No.</th>
+          <th>Mobile No.</th>
+          <th>Fax No.</th>
+          <th>Email</th>          
+          <th>Updated On</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+    </table>
+
+    <div class="pane-vScroll">
+      <table id="example1" class="display table table-bordered table-striped">
+        
+        <tbody>
+        <tr *ngFor="let shipper of Shippers; let ind = index">
+          <td>{{ind + 1}}</td>
+          <td>{{shipper.sname}}</td>
+          <td>{{shipper.cperson}}</td>
+          <td>{{shipper.tel}}</td>
+          <td>{{shipper.mob}}</td>
+          <td>{{shipper.fax}}</td>
+          <td>{{shipper.email}}</td>
+          <td>{{shipper.statustime}}</td>
+          <td><label class="switch">
+            <input type="checkbox" [attr.checked]="shipper.status == '1' ? 'checked' : null" (change) = "UpdateStatus($event,shipper.s_id)">
+            <span class="slider round"></span>
+          </label></td>
+          <td><button class="btn btn-black" (click) = "UpdateShippers(shipper.s_id)">Edit</button></td>
+        </tr>               
+        </tbody>       
+      </table>
+    </div>
+  </div>
+</div>

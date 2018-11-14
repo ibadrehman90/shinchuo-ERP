@@ -1,0 +1,34 @@
+
+#dan_msg
+{
+    display: none;
+}
+
+#suc_msg
+{
+    display: none;   
+}
+
+.smallLoader
+{
+    z-index: 809;
+    background:transparent; 
+    position:fixed;
+    width:100%;
+    opacity:0.5;
+    height:1500px;
+    overflow:hidden;    
+    display: none;
+}
+
+.smallDiv
+{
+    position: fixed;
+    top:40%;
+    left:50%;
+}
+
+.smallGif
+{
+    
+}

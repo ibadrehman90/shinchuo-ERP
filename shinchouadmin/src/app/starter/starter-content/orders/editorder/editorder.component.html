@@ -1,0 +1,583 @@
+<div class="modal modal-warning fade" id="modal-warning">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Select Orders List</h4>
+      </div>
+      <div class="modal-body">
+          <section class="content">
+              <div class="row">
+            
+                <div class="col-xs-12">
+                    <div class="box box-default box-solid collapsed-box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+            
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                          <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: none;">                  
+                             
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="client" [(ngModel)] = "model.client" placeholder="User" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="dst" [(ngModel)] = "model.dst" placeholder="DST" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="auction" [(ngModel)] = "model.auction" placeholder="Auction" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="adate" [(ngModel)] = "model.adate" placeholder="Auction Date" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="pos" [(ngModel)] = "model.pos" placeholder="POS" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="lot" [(ngModel)] = "model.lot" placeholder="LOT" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="prefix" [(ngModel)] = "model.prefix" placeholder="Prefix" class="form-control" />
+                             </div>                              
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="make" [(ngModel)] = "model.make" placeholder="Make" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="model" [(ngModel)] = "model.model" placeholder="Model" class="form-control" />
+                             </div>                              
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="noplate" [(ngModel)] = "model.noplate" placeholder="No Plate" class="form-control" />
+                             </div>                               
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="shaken" [(ngModel)] = "model.shaken" placeholder="Shaken" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <input type="text" name="fudosha" [(ngModel)] = "model.fudosha" placeholder="Fudosha" class="form-control" />
+                             </div>
+                             <div class="form-group col-xs-3">
+                                <select class="form-control" id="orderstatus">
+                                  <option value="0">Pending</option>
+                                  <option value="1">Confirmed</option>
+                                </select>
+                             </div>                                               
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <button class="btn btn-danger" (click) = "SearchPurchased()">Search</button>
+                            <button class="btn btn-black" (click) = "ResetForm()">Reset</button>      
+                          </div>
+                      </div>
+                </div>
+            
+            
+                <div class="col-xs-12">
+                  <div class="box">
+                  <div class="box-header">
+                    <h3 class="box-title">Purchased List</h3>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th></th>
+                        <th>S.NO</th>
+                        <th>USER</th>
+                        <th>DST</th>
+                        <th>AUCTION</th>
+                        <th>DATE</th>
+                        <th>POS</th>          
+                        <th>DAI</th>
+                        <th>LOT</th>
+                        <th>PREFIX</th>                         
+                        <th>MAKE</th>
+                        <th>MODEL</th>                          
+                        <th>NO PLATE</th>                          
+                        <th>SHAKEN</th>
+                        <th>FUDOSHA</th> 
+                        <th>Status</th>                         
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let p of purchased; let ind = index">
+                        <td>
+                          <label class="containerf" *ngIf="p.status == 0">
+                            <input type="checkbox" class="checkmarkS" (change) = "SelectList($event,p.s_id)">
+                            <span class="checkmark"></span>
+                          </label>
+                        </td>
+                        <td>{{ind + 1}}</td>                         
+                        <td>{{p.client}}</td>
+                        <td>{{p.dst}}</td>
+                        <td>{{p.auction}}</td>
+                        <td>{{p.adate | slice:0:10}}</td>
+                        <td>{{p.pos}}</td>
+                        <td>{{p.dai}}</td>
+                        <td>{{p.lot}}</td>
+                        <td>{{p.prefix}}</td>                          
+                        <td>{{p.make}}</td>
+                        <td>{{p.model}}</td>                         
+                        <td>{{p.noplate}}</td>                          
+                        <td>{{p.shaken}}</td>
+                        <td>{{p.fudosha}}</td>
+                        <td>{{p.status == 1 ? 'Confirmed' : 'Pending'}}</td>                          
+                      </tr>               
+                      </tbody>       
+                    </table>
+                
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
+            </div>
+            </section>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" (click) = "AddOrder(0)">Apply</button>
+          <button class="btn btn-black" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-warning fade" id="modal-yard">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Select Yard Vehicles</h4>
+        </div>
+        <div class="modal-body">
+            <section class="content">
+                <div class="row">
+              
+                  <div class="col-xs-12" style="display: none;">
+                      <div class="box box-default box-solid collapsed-box">
+                          <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+              
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                              </button>
+                            </div>
+                            <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body" style="display: none;">                  
+                               
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="client" [(ngModel)] = "model.client" placeholder="User" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="dst" [(ngModel)] = "model.dst" placeholder="DST" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="auction" [(ngModel)] = "model.auction" placeholder="Auction" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="adate" [(ngModel)] = "model.adate" placeholder="Auction Date" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="pos" [(ngModel)] = "model.pos" placeholder="POS" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="lot" [(ngModel)] = "model.lot" placeholder="LOT" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="prefix" [(ngModel)] = "model.prefix" placeholder="Prefix" class="form-control" />
+                               </div>                              
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="make" [(ngModel)] = "model.make" placeholder="Make" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="model" [(ngModel)] = "model.model" placeholder="Model" class="form-control" />
+                               </div>                              
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="noplate" [(ngModel)] = "model.noplate" placeholder="No Plate" class="form-control" />
+                               </div>                               
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="shaken" [(ngModel)] = "model.shaken" placeholder="Shaken" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <input type="text" name="fudosha" [(ngModel)] = "model.fudosha" placeholder="Fudosha" class="form-control" />
+                               </div>
+                               <div class="form-group col-xs-3">
+                                  <select class="form-control" id="orderstatus">
+                                    <option value="0">Pending</option>
+                                    <option value="1">Confirmed</option>
+                                  </select>
+                               </div>                                               
+                          </div>
+                          <!-- /.box-body -->
+                          <div class="box-footer text-center">
+                              <button class="btn btn-success" (click) = "SearchPurchased()">Search</button>
+                              <button class="btn btn-danger" (click) = "ResetForm()">Reset</button>      
+                            </div>
+                        </div>
+                  </div>
+              
+              
+                  <div class="col-xs-12">
+                    <div class="box">
+                    <div class="box-header">
+                      <h3 class="box-title">Yard Vehicles</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      
+                      <table id="example3" class="table">
+                        <thead>
+                        <tr>
+                          <th></th>
+                          <th>Sno</th>
+                          <th>Client</th>
+                          <th>Lot</th>
+                          <th>Model</th>
+                          <th>Year</th>
+                          <th>Chassis</th>  
+                          <th>Yard</th>      
+                          <th>Port</th>
+                          <th>Country</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let vehicle of VehicleList; let ind = index">
+                          <td>
+                            <label class="containerf">
+                              <input type="checkbox" class="checkmarkS" (change) = "SelectList($event,vehicle.p_id)">
+                              <span class="checkmark"></span>
+                            </label>
+                          </td>
+                          <td>{{ind + 1}}</td>
+                          <td>{{vehicle.client}}</td>
+                          <td>{{vehicle.lot}}</td>
+                          <td>{{vehicle.make}} - {{vehicle.model}}</td>
+                          <td>{{vehicle.year}}</td>
+                          <td>{{vehicle.prefix}}</td>
+                          <td>{{vehicle.yardname}}</td>    
+                          <td>{{vehicle.port}}</td>    
+                          <td>{{vehicle.country}}</td>              
+                        </tr>               
+                        </tbody>       
+                      </table>
+                  
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+              <!-- /.box -->
+              </div>
+              </div>
+              </section>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" data-dismiss="modal" (click) = "AddOrder(1)">Apply</button>
+            <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+<div class="modal modal-warning fade" id="modal-orderemail">
+  <div class="modal-dialog orderemail">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Send Mail</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" [(ngModel)] = "model.orderemail" placeholder="Enter Email"/>          
+        <br/>
+        <textarea class="form-control" [(ngModel)] = "model.emailremarks" placeholder="Enter Comments"></textarea>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" (click) = "SendOrderEmail()">Send Mail</button>
+          <button class="btn btn-black" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
+
+
+
+<section class="content">
+<div class="row">
+  <div class="col-xs-12">
+
+<div class="box box-info">
+<div class="box-header with-border">
+  <h3 class="box-title">Edit Transport Order</h3>
+</div>
+
+<form class="form-horizontal">
+  <div class="box-body">
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Order No.</label>
+
+      <div class="col-sm-8">
+        <input name="orderno" [(ngModel)] = "model.orderno" type="text" class="form-control" placeholder="Order No." disabled>
+      </div>
+    </div>
+    <div class="form-group col-xs-6">
+      <label style="visibility: hidden" class="col-sm-4 control-label">Order No.</label>
+
+      <div class="col-sm-8">
+        <input style="visibility: hidden" name="temp" [(ngModel)] = "model.temp" type="text" class="form-control" placeholder="Order No." disabled>
+      </div>
+    </div>
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Order Date</label>
+
+      <div class="col-sm-8">
+          <div class="input-group date">
+              <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+              </div>
+              <input name="bto" type="text" class="form-control pull-right" id="datepicker" placeholder="Order Date">
+          </div>
+      </div>  
+    </div>
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Order Status</label>
+
+      <div class="col-sm-8">
+        <select id="ostatus" class="form-control">
+          <option value="0">Pending</option>
+          <option value="1">Completed</option>           
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Pickup Date</label>
+
+      <div class="col-sm-8">
+          <div class="input-group date">
+              <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+              </div>
+              <input name="bto" type="text" class="form-control pull-right" id="datepicker2" placeholder="Pickup Date">
+          </div>
+      </div>  
+    </div>
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Dropoff Date</label>
+
+      <div class="col-sm-8">
+          <div class="input-group date">
+              <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+              </div>
+              <input name="bto" type="text" class="form-control pull-right" id="datepicker1" placeholder="Dropoff Date">
+          </div>
+      </div>  
+    </div> 
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Transporter</label>
+
+      <div class="col-sm-8">
+        <select id="tcomp" class="form-control" (change) = "SelectTransport($event)">
+          <option value="0">Select Transporter</option>
+          <option *ngFor="let tc of tcompany" value="{{tc.s_id}}">{{tc.sname}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label">Dropoff Location</label>
+
+      <div class="col-sm-8">
+        <select id="ycomp" class="form-control" (change) = "SelectYard($event)">
+          <option value="0">Select Yard</option>
+          <option *ngFor="let y of yards" value="{{y.y_id}}">{{y.name}}</option>
+        </select>
+      </div>
+    </div> 
+
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label"></label>
+
+      <div class="col-sm-8">
+        <p>{{selectedTransporter.cperson}}</p>
+        <p><b>Phone: </b>{{selectedTransporter.tel}}</p>
+        <p><b>Mobile: </b>{{selectedTransporter.mob}}</p>
+        <p><b>Fax: </b>{{selectedTransporter.fax}}</p>
+        <p><b>Email: </b>{{selectedTransporter.email}}</p>
+      </div>
+    </div>
+
+    <div class="form-group col-xs-6">
+      <label class="col-sm-4 control-label"></label>
+
+      <div class="col-sm-8">
+        <p>{{selectedDropoff.cname}}</p>
+        <p>{{selectedDropoff.address}}</p>
+        <p><b>Phone: </b>{{selectedDropoff.tel}}</p>
+        <p><b>Fax: </b>{{selectedDropoff.fax}}</p>
+        <p><b>Email: </b>{{selectedDropoff.email}}</p>
+      </div>
+    </div>
+          
+  </div>
+ 
+  <div class="box-footer text-center">
+    <button class="btn btn-danger" (click) = "NewOrder()">New Order</button>
+    <button id="ordlist1" class="btn btn-black"  data-toggle="modal" data-target="#modal-yard" (click) = "LoadVehicles()">Add More Orders (Yard)</button>
+    <button id="ordlist" class="btn btn-black"  data-toggle="modal" data-target="#modal-warning" (click) = "LoadPurchased()">Add More Orders (Purchased)</button>     
+    <button class="btn btn-danger" (click) = "SaveOrder()">Update Order</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<section class="content" id="orderLists">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default box-solid collapsed-box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-search"></i> Search</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: none;">   
+                <div class="form-group col-xs-4">
+                    <input type="text" name="opos" [(ngModel)] = "model.opos" placeholder="POS" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="odai" [(ngModel)] = "model.odai" placeholder="DAI" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="olot" [(ngModel)] = "model.olot" placeholder="LOT" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="oadate" [(ngModel)] = "model.oadate" placeholder="Auction Date" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="oauction" [(ngModel)] = "model.oauction" placeholder="Auction" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="oprefix" [(ngModel)] = "model.oprefix" placeholder="Prefix" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="omake" [(ngModel)] = "model.omake" placeholder="Make" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="omodel" [(ngModel)] = "model.omodel" placeholder="Model" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="onoplate" [(ngModel)] = "model.onoplate" placeholder="No Plate" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="ofudosha" [(ngModel)] = "model.ofudosha" placeholder="Fudosha" class="form-control" />
+                 </div>                 
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="oclient" [(ngModel)] = "model.oclient" placeholder="Client" class="form-control" />
+                 </div>
+                 <div class="form-group col-xs-4">
+                    <input type="text" name="odst" [(ngModel)] = "model.odst" placeholder="DST" class="form-control" />
+                 </div>             
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <button class="btn btn-danger" (click) = "SearchOrderList()">Search</button>
+                <button class="btn btn-black" (click) = "ResetOrderForm()">Reset</button>      
+              </div>
+          </div>
+    </div>
+
+  <div class="col-xs-12">
+      <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Order List</h3>
+            <div class="text-right">
+              <!--<button (click)='Export({ filename: "transportorder.csv" });' class="btn btn-danger">Export</button>
+              <button (click)='PDFOut()' class="btn btn-danger">PDF</button>-->
+              <a href="http://admin.shinchuo-test2.com/orderreport/{{productID}}?out=XLS" target="_blank"><button class="btn btn-danger">Export</button></a>
+              <a href="http://admin.shinchuo-test2.com/orderreport/{{productID}}?out=PDF"  target="_blank"><button class="btn btn-danger">PDF</button></a>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#modal-orderemail">Send Mail</button>
+            </div>
+          </div>
+    <table id="example2" class="table table-bordered table-striped">
+      <thead>
+      <tr>         
+        <th>S.NO</th>
+        <th>POS</th>          
+        <th>DAI</th>
+        <th>LOT #</th>
+        <th>AUCTION DATE</th>
+        <th>AUCTION</th>
+        <th>CHASSIS NO</th>                         
+        <th>CAR NAME</th>          
+        <th>NO PLATE</th> 
+        <th>FUDOSHA</th> 
+        <th>DST</th>
+        <th>CLIENT</th>
+        <th>CURRENT LOCATION</th>
+        <th>PICKEDUP</th>
+        <th>DELIVERED</th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of orderlists; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{list.pos}}</td>
+        <td>{{list.dai}}</td>
+        <td>{{list.lot}}</td>
+        <td>{{list.adate | slice:0:10}}</td>
+        <td>{{list.auction}}</td>
+        <td>{{list.serial}}</td>
+        <td>{{list.make}} {{list.model}}</td>
+        <td>
+          <p *ngIf="list.noplate == 'Yes'" (dblclick) = "editable($event)" [innerHTML] = "list.noplateaction" class="invsbleitem"></p>
+          <select *ngIf="list.noplate == 'Yes'" value="{{list.noplateaction}}" (blur) = "editselectremove($event,'noplateaction',list.s_id)">
+            <option value="">Select Action</option>
+            <option value="No Cut">No Cut</option>
+            <option value="Cut">Cut</option>
+            <option value="Send by Yard">Send by Yard</option>
+          </select>
+          <p *ngIf="list.noplate != 'Yes'">N/A</p>
+        </td>
+        <td>{{list.fudosha}}</td>
+        <td>{{list.dst}}</td>
+        <td>{{list.client}}</td>
+        <td>{{list.currentloc}}</td>
+        <td>
+          <input class="checksupdate" type="checkbox" [checked] = "list.pickedup == 1" (change) = "UpdateChecks($event, 'pickedup', list.o_id)"/>
+        </td>
+        <td>
+          <input class="checksupdate" type="checkbox" [checked] = "list.delivered == 1" (change) = "UpdateChecks($event, 'delivered', list.o_id)"/>
+        </td>
+        <td>
+          <button class="btn btn-black" (click) = "DeleteList(list.o_id, list.s_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+</section>

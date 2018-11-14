@@ -1,0 +1,110 @@
+<section class="content">
+
+  <div class="row">
+  <div class="col-md-12 form-group">
+
+      <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Port Registration &nbsp;&nbsp;
+              <button id="cancelbtn" class="btn btn-danger" (click)="cancelTransaction()">Cancel</button>
+          </h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            
+            <div class="row">
+              <div class="col-md-2">
+                  <label class="form-control">Select Country</label>
+              </div>
+              <div class="col-md-4">      
+                <select class="form-control" (change) = "SelectCountry($event)" id="cntry">
+                  <option value="">Select Country</option>
+                  <option *ngFor="let country of Countries" value="{{country.name}}">{{country.name}}</option>
+                </select>
+              </div>
+            </div>            
+          </div>
+          <!-- /.box-body -->
+        </div>
+  </div>
+  </div>
+
+
+  <div class="row" id="forCountry">
+
+
+      <div class="col-md-12 form-group">
+
+          <div class="box">
+              <div class="box-header">
+                <h3 class="box-title"><b>For Country:</b> &nbsp; {{SelectedCountry}}</h3>
+                <hr/>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+
+                  <div class="col-xs-6">
+                      <label class="col-sm-12 control-label">Registered Ports</label>
+                      <div class="tablecontainer1 col-sm-12">
+                      <table id="example1" class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.No.</th>
+                            <th>Port</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pt of ports; let ind = index">
+                            <td>{{ind + 1}}</td>
+                            <td>{{pt.port}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+
+                  <div class="form-group col-xs-12 topdivspace">
+                    <label class="col-sm-12 control-label">Port</label>
+
+                    <div class="col-sm-12">
+                      <input name="portname" [(ngModel)] = "model.portname" type="text" class="form-control" placeholder="Enter Port">
+                    </div>
+
+                   
+                    <div class="col-sm-12 text-right topspace">
+                      <button class="btn btn-danger" (click)="addport()">Save</button>
+                    </div>
+
+                  </div>
+                  </div>
+                
+              <div class="col-xs-6">
+                  <label class="col-sm-12 control-label">Ports - Pending Approval</label>
+                  <div class="tablecontainer1 col-sm-12">
+                  <table id="example1" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Port</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let pt of pendingports; let ind = index">
+                        <td>{{ind + 1}}</td>
+                        <td>{{pt.port}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+              </div>
+
+                
+                          
+              </div>
+              <!-- /.box-body -->
+            </div>
+      </div>
+
+
+    
+    </div>
+</section>

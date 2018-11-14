@@ -1,0 +1,33 @@
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
+
+.fa-fw {width: 2em;}
+.homebg
+{
+   
+    background-repeat: no-repeat;
+    min-height:80px;
+}
+
+
+
+
+
+.nav-pills>li>a{
+    background-color:#070707;
+    color:white;
+}
+
+.nav-pills>li>a:focus{
+    background-color: #ed3338;
+}
+
+.topsp
+{
+    margin-top:20px;
+}
+
+.jakmar
+{
+    margin:0 auto;
+}

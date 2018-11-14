@@ -1,0 +1,50 @@
+<div class="loader" id="Loader">
+    <img src="./assets/Loader-wait.PNG" />
+</div>
+
+<div class="errmsg" id="msgerr">
+  <p id="msger">Hi this is me</p>
+</div>
+
+<nav class="navbar navbar-top">
+  <div class="container"> 
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="./assets/L.png" width="100"/></a>
+    </div>   
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="loginCheck"><a>Welcome {{userid}} ({{userrole}})</a></li>
+      <li *ngIf="loginCheck"><a href="/admin">Dashboard</a></li>
+      <li *ngIf="loginCheck; else elseblck"><a (click) = "logout()">Logout</a></li>
+      <ng-template #elseblck><li><a routerLink="account">Login | Register</a></li></ng-template>    
+    </ul>
+  </div>
+</nav>
+
+ <router-outlet></router-outlet>
+
+ <div class="footer">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>SEARCH BY BRANDS</h2>
+      </div>
+     <div class="col-md-2" *ngFor="let vehicle of Vehicles" (click) = "SelectVehicle(vehicle.MARKA_NAME)">
+            <div class="project-list">
+                <p class="title">
+                 <a class="nombore">
+                     <span>{{vehicle.MARKA_NAME}}</span>
+                     <span class="slider"></span>  
+                 </a>                 
+                </p>
+            </div>
+      </div>
+    </div>
+    <div class="row copyrightstatus">
+      <div class="col-md-12 text-center">
+        <span>© Copyright 2018 <a href="http://www.rolvotech.com">RolvoTech</a>. All Rights Reserved</span>
+      </div>
+    </div>
+  </div>
+   
+ </div>

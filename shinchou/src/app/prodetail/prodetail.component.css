@@ -1,0 +1,564 @@
+.navbar-brand
+{
+    font-size:24px;
+    font-weight: bold;
+}
+
+.navbar-main li a
+{
+    background:white;
+    color:#153e4d;  
+    padding:10px 20px; 
+}
+
+.navbar-main li a:hover
+{
+    background:#153e4d;
+    color:white;
+}
+
+.homebg
+{
+    background:url('./../../assets/2.jpg');
+    background-repeat: no-repeat;
+    min-height:80px;
+} 
+
+.container-narrow
+{
+    padding:20px 30px;
+}
+
+#btncalcbtn
+{
+    background:#ed3338 !important;
+    color:white !important;
+    border:1px solid #ed3338 !important;
+}
+
+#btncalcbtn:hover
+{
+    background:white !important;
+    color:#ed3338 !important;
+}
+
+.btncalc .btn:hover
+{
+    color: #ed3338;
+    background:white;
+    border:1px solid #ed3338;
+}
+
+#pricecalculator
+{
+    border:1px solid #b6b5b5;
+}
+
+#pricecalculator h4
+{
+    background: #fd8929;
+    color:white;
+    padding:10px;
+    margin:0px;
+    border-radius: 0px;
+}
+
+#pricecalculator .form-control
+{
+    border-radius: 0px;
+}
+
+#pricecalculator textarea
+{
+    height:100px;
+}
+
+#pricecalculator .table td
+{
+    border:none;
+}
+
+#pricecalculator .table tr:first-child td:first-child
+{
+    padding:0px;
+}
+
+#pricecalculator .table tr:last-child td
+{
+    padding:2px;
+}
+
+#pricecalculator .table tr td
+{
+    padding:15px;
+}
+
+.btn-orange
+{
+    background:#fd8929;
+    color:white;
+}
+
+.btn-black
+{
+    background:#272727;
+    color:white;
+}
+
+.detailbox table td
+{
+    border:none;
+}
+
+.detailbox table tr:last-child td
+{
+    border-top:1px solid #fff;
+}
+
+.detailbox
+{
+    background:rgb(110, 110, 110);
+    text-align:center;
+    padding:0px;
+    color:white;
+    margin-bottom:10px;
+}
+
+.detailbox table
+{
+    margin:0px;
+}
+
+.proddetail
+{
+    background:rgba(63, 63, 63, 0.6);
+    color:#fd8929;
+    height:80px;
+    margin-top:-80px;
+    padding:10px;
+    z-index:999;
+    position:relative;
+}
+
+.proddetail #pr
+{
+    margin-top:-20px;
+}
+
+.AS_det span
+{
+    background:#272727;
+    padding:10px;
+    color:white;
+}
+
+.AS_det p
+{
+    background:#3d3d3d;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+    color:white;
+}
+
+/* new design */
+
+.topspace
+{
+    margin-top:20px;
+}
+
+.topimg
+{
+    width:100%;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+h3, h4
+{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.topimg img
+{
+    margin-top:-40px;
+    width:100%;
+}
+
+.img_s
+{
+    width:100%;
+    transition:1s;
+}
+
+.img_s:hover
+{
+    cursor:pointer;
+    transform:scale(1.1);
+    transition:1.2s;
+}
+
+.item .row div
+{
+    padding:0px;
+}
+
+.item .row
+{
+    padding:0px;
+    margin:0px;
+}
+
+.thumbbox
+{
+    padding:0px;
+    margin-top:15px;
+    margin-right:10px;
+}
+
+hr{
+    margin-top:10px;margin-bottom:10px;
+}
+
+.badge
+{
+border-radius:0px;
+background:#000;
+}
+
+.mainprice .badge
+{
+    background:#ed3338;
+    font-size:24px;
+    padding:10px;
+}
+
+.bighr
+{
+    border:2px solid #000;
+}
+
+.featurebox .table td:first-child
+{
+    color:#666;
+}
+
+.featurebox tr
+{
+    padding-bottom:0px;
+    margin:0px;
+}
+
+.well
+{
+    margin-bottom:0px;
+}
+
+.featurebox .table td
+{
+    border-top:none;
+    border-bottom:1px solid #ccc;
+    padding-bottom:2px;
+    padding-left:0px;
+}
+
+.headingfeature
+{
+    margin:10px;
+}
+
+.auctionbox .table td
+{
+    border:none;
+    margin:0px;
+    padding:2px;
+}
+
+.auctionbox .table td:first-child
+{
+    width:10%;
+}
+
+.auctionbox .table td:last-child
+{
+    width:90%;
+}
+
+.auctionbox
+{
+    padding:0px;
+    font-size:11px;
+}
+
+.auctionbox .badge
+{
+    width:30px;
+    text-align: center;
+    background:#ccc;
+    color:#333;
+}
+
+.auctionbox .table
+{
+    margin:0px;
+    padding:0px;
+}
+
+.pricecalc
+{
+    padding:0px;
+    margin:0px;
+    margin-top:20px;
+}
+
+#calcdiv
+{
+    display:none;
+}
+
+.modal-content
+{
+    border-radius: 0px;
+    background:#f1f1f1;
+}
+
+.filters
+{
+    height:auto;
+    padding:15px;
+}
+
+.filters .space
+{
+    margin-bottom:20px;
+}
+
+.filters h4
+{
+    color:white;
+    font-weight: bold;
+    font-size:16px;
+    margin-bottom:25px;
+    border-bottom:1px solid white;
+    padding-bottom:10px;
+}
+
+.filters input, .filters textarea,.filters .btn
+{
+    border-radius:0px;
+}
+
+.filters .btn
+{
+    background:#ed3338;
+    color:white;
+}
+
+.filters .btn:hover
+{
+    background:white;
+    color:#ed3338;
+    border:1px solid #ed3338;
+}
+
+.similarlist img
+{
+    width:100px;
+    float:left;
+    margin-right:10px;
+}
+
+.similarlisting
+{
+    padding:0px;
+}
+
+.similarlisting .headng
+{
+    border-bottom:2px solid #153e4d;
+    padding-bottom: 15px;
+}
+
+.sprice .badge
+{
+    background: #fd8929;
+    color:white;
+    font-size:16px;
+    margin-top:0px;
+    margin-bottom: 0px;
+}
+
+.similarlist h4{
+    float:left;
+}
+
+.similarlist span
+{
+    margin-top:10px;
+    margin-left:10px;
+}
+
+.similarlist .info
+{
+float:left;
+font-size:12px;
+color:#999;
+padding-top:10px;
+}
+
+.similarlist
+{
+    padding:0px;
+
+    border-bottom:1px solid #ccc;
+    margin-top:10px;
+}
+
+.carousel-control {
+  padding:6% 2%;
+  width:5px !important;
+  background:#ed3338;
+}
+
+#bidplaced
+{
+    display:none;
+    background: rgba(205,32,39,0.8);
+    color:white;
+    padding:10px;
+    margin:0px;
+    margin-top:5px;
+    padding-bottom:0px;
+    font-size:18px;
+}
+
+
+#msgconfirm, #bidsuccess
+{
+    position:fixed;
+    z-index: 9999;
+    text-align: center;
+    width:100%;
+    display: none;
+    margin-top:20px;
+}
+
+#msgconfirm #msgc, #bidsuccess #bsc
+{
+    color:white;
+    font-style: italic;
+    background: rgba(205,32,39,0.8);
+    padding:10px 20px; 
+    display:inline-block;
+}
+
+#msgconfirm #msgc h3
+{
+    margin-top:0px;
+}
+
+#msgconfirm .btn, #bidsuccess .btn
+{
+    margin:10px 10px 0px 10px;
+    width:100px;
+    color:black;
+}
+
+#msgconfirm .btn:hover, #bidsuccess .btn:hover
+{
+    color:rgba(205,32,39,1);
+    background: white;
+}
+
+#bidsuccess th{
+    text-align: center;
+}
+
+#NextPrev
+{
+    margin-top:10px;
+    margin-bottom: 20px;
+    display:none;
+}
+
+#NextPrev a
+{
+    padding:5px 10px;
+    border:1px solid #333;
+    text-decoration: none;
+}
+
+#NextPrev a:hover
+{
+    border:none;
+    background:#ed3338;
+    border:1px solid #ed3338;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#calcdiv select
+{
+    border-radius: 0px;
+}
+
+.lesspadd
+{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.wishbadge
+{
+border:1px solid #ed3338; 
+background:white;
+color:black;
+}
+
+.wishbadge:hover
+{
+    background:#ed3338;
+    color:white;
+    cursor:pointer;
+}
+
+.wishactive
+{
+    background:#ed3338;
+    color:white;
+}
+
+.wishsavebtn
+{
+    border:1px solid #ed3338;
+    color:#ed3338;
+    padding:1px 4px;
+    background:#ffffff;
+}
+
+.wishsavebtn:hover
+{
+    background: #ed3338;
+    color:#fff;
+    cursor: pointer; 
+}
+
+.checkedwish
+{
+    background: #ed3338;
+    color:#fff;
+}
+
+.topSpaces
+{
+    margin-top:20px;
+}
+
+#lessbidmsg
+{
+    display: none;
+    color:red;
+    font-style:italic;
+}
